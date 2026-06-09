@@ -293,6 +293,43 @@
   .rmb-card .btn-pill{align-self:flex-start}
   .rmb-bul{margin-top:18px;padding-top:16px;border-top:1px solid var(--line-2);color:#6B6B72;font-size:13px;line-height:2}
   .rmb-more{margin-top:auto;color:var(--link);font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+  .yyy-top{display:grid;grid-template-columns:1fr 360px;gap:28px}
+  .seg2{display:inline-flex;background:#F3F3F7;border-radius:10px;padding:4px;margin-bottom:24px}
+  .seg2 span{padding:8px 22px;border-radius:8px;font-size:14px;color:#6B6B72;cursor:pointer;font-weight:600}
+  .seg2 span.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .yyy-profit{font-size:30px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:28px}
+  .yyy-profit b{color:var(--red);font-size:40px;font-weight:800}
+  .yyy-row{display:flex;gap:14px;margin-bottom:6px}
+  .yyy-slider{height:8px;background:#F0F0F3;border-radius:5px;position:relative;margin:26px 0 12px}
+  .yyy-slider i{display:block;height:100%;width:78%;background:linear-gradient(90deg,#FFB3C8,#FF0051);border-radius:5px}
+  .yyy-knob{position:absolute;left:78%;top:-9px;transform:translateX(-50%);background:var(--red);color:#fff;font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px}
+  .yyy-quota{color:#9a9aa2;font-size:13px;display:flex;align-items:center;gap:5px}
+  .yyy-promo{background:linear-gradient(135deg,#FFF0F4,#FFE3EC);border-radius:16px;padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .yyy-ph{font-size:20px;font-weight:800;color:#E0004a}
+  .yyy-coin{margin:18px 0;color:var(--red)}
+  .yyy-checks{display:flex;flex-direction:column;gap:9px;color:#6B6B72;font-size:13px}
+  .yyy-by{color:#9a9aa2;font-size:12px;margin-top:18px}
+  .fl-rates{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  .fl-rate{border:1px solid var(--line);border-radius:14px;padding:18px}
+  .fl-rate-l{color:#6B6B72;font-size:12.5px;display:flex;align-items:center;gap:5px;margin-bottom:12px}
+  .fl-rate-v{font-size:26px;font-weight:800}
+  .fl-rate-s{color:#b7b7be;font-size:12px;margin-top:8px;text-decoration:line-through}
+  .fl-redeem{border-radius:14px;background:linear-gradient(135deg,#FFE3EC,#FFD0DF);padding:18px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+  .fl-redeem-t{font-size:17px;font-weight:800;color:#E0004a}
+  .fl-redeem .btn-pill{align-self:flex-start}
+  .fl-filt{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .fl-lbl{color:#6B6B72;font-size:13px;margin-right:6px}
+  .fl-chip{border:1px solid var(--line);border-radius:999px;padding:6px 16px;font-size:13px;color:#3a3a42;cursor:pointer}
+  .fl-chip.on{border-color:var(--red);color:var(--red);background:#FFF1F5;font-weight:600}
+  .fl-chip.dim{color:#c2c2c9}
+  .fl-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:18px}
+  .fl-card{border:1px solid var(--line);border-radius:14px;padding:20px;background:linear-gradient(120deg,#FFFBF3,#fff)}
+  .fl-card.red{background:linear-gradient(120deg,#FF5277,#FF0051);color:#fff;border:none}
+  .fl-card-l{font-size:13px;display:flex;align-items:center;gap:6px}
+  .fl-card-amt{font-size:30px;font-weight:800;margin-top:10px}
+  .fl-card-amt span{font-size:14px;font-weight:600;margin-left:5px;opacity:.8}
+  .fl-card-amt.dark{color:var(--ink)}
+  .fl-card-d{color:#9a9aa2;font-size:12px;line-height:1.6;margin-top:12px}
 
   /* FX / forex page */
   .fx-head{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:700;margin-bottom:24px}
@@ -613,6 +650,12 @@ function prodPage(title,items){return '<div class="page-h">'+title+'</div><div c
 
 /* ---------------- views ---------------- */
 function render(){ document.getElementById('content').innerHTML = (VIEWS[route]||VIEWS._generic)(); }
+const YYY_FUNDS=[
+  {flag:'us',cur:'美元',name:'华夏精选美元货币基金',tag:'NEW',apy:'4.52%',daily:'1.24'},
+  {flag:'us',cur:'美元',name:'摩根美元流动性货币基金',tag:'',apy:'4.38%',daily:'1.20'},
+  {flag:'us',cur:'美元',name:'汇添富美元货币市场基金',tag:'',apy:'4.21%',daily:'1.15'}
+];
+function flRate(label,val,std){return '<div class="fl-rate"><div class="fl-rate-l">'+label+' '+ri('iconinfo',12)+'</div><div class="fl-rate-v">'+val+'</div><div class="fl-rate-s">'+std+'</div></div>';}
 const PAYEES=[
   {name:'Shenzhen Lihua Electronics Co., Ltd',alias:'利华电子',cur:'离岸人民币',flag:'cn',acct:'6320 8422 005',bank:'招商银行 深圳分行'},
   {name:'Yiwu Sunshine Trading Co.',alias:'阳光义乌',cur:'离岸人民币',flag:'cn',acct:'6225 **** **** 4417',bank:'中国银行'},
@@ -769,19 +812,39 @@ const VIEWS = {
       KJB_BILLS.map(function(b){return '<tr><td><div style="font-weight:600">'+b.ty+'</div><div style="color:#9a9aa2;font-size:12px;margin-top:4px">'+b.sup+'</div><div style="color:#c2c2c9;font-size:12px;margin-top:2px">'+b.t+' · '+b.no+'</div></td><td>'+b.amt+' CNY</td><td>'+b.fee+' CNY</td><td>'+b.wf+' CNY</td><td class="right" style="font-weight:700">'+b.net+' CNH</td></tr>';}).join('')+
     '</tbody></table>';},
   savings(){return ''+
-    '<div class="page-h">万余盈</div>'+
-    '<div class="card" style="max-width:520px"><div class="at" style="font-size:17px;font-weight:700;margin-bottom:8px">闲置资金，自动增值</div>'+
-      '<div style="display:flex;align-items:flex-end;gap:8px;margin:10px 0"><span style="font-size:38px;font-weight:800;color:#FF0051">4.18%</span><span style="color:#9a9aa2;padding-bottom:8px">美元 7 日年化（参考）</span></div>'+
-      '<p style="color:#6B6B72;line-height:1.8">账户闲置外币一键转入万余盈，T+0 灵活申赎，收益每日可见。当前持有 <b>120,000.00 USD</b>，累计收益 <b style="color:#00B578">+1,284.36 USD</b>。</p>'+
-      '<button class="btn-pill" style="margin-top:18px" onclick="toast(\'演示环境，申购功能已禁用\')">转入资金</button></div>';},
+    '<div class="yyy-top"><div class="yyy-left">'+
+      '<div class="seg2"><span class="on">更稳健</span><span>更高收益</span></div>'+
+      '<div class="yyy-profit">您可以盈利约 <b>$359</b> '+ri('iconinfo',14)+'</div>'+
+      '<div class="yyy-row"><div class="fsel">货币基金 '+ri('icon-chevron-down',12)+'</div><div class="fsel">本金 <b style="color:#1A1A1A;margin:0 5px">10,000</b> USD '+ri('icon-chevron-down',12)+'</div></div>'+
+      '<div class="yyy-slider"><i></i><span class="yyy-knob">10,000</span></div>'+
+      '<div class="yyy-quota">参考可购额度 '+ri('iconinfo',12)+' &nbsp;10,000 '+ico(ICON.edit,12)+'</div>'+
+      '<button class="btn-pill" style="margin-top:24px" onclick="toast(\'演示环境，已记录您的意向\')">有兴趣 联系我</button>'+
+    '</div>'+
+    '<div class="yyy-promo"><div class="yyy-ph">万余盈 · 余额赚收益</div><div class="yyy-coin">'+ico('<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5h3.5a1.5 1.5 0 0 1 0 3H9.5h4M11.5 7.5v9"/>',56)+'</div><div class="yyy-checks"><span>✓ 多币种</span><span>✓ 全天候客服答疑解惑</span><span>✓ 期限多样</span></div><div class="yyy-by">由复星国际证券、AnextBank 提供服务</div></div></div>'+
+    '<div class="seg" style="margin-top:34px"><span class="on">货币基金</span><span>定期存款</span><span>短债基金</span></div>'+
+    '<div style="color:#9a9aa2;font-size:13px;margin:-8px 0 18px">货币基金由 <b style="color:#3a3a42">复星财富控股 FOSUN WEALTH</b> 提供</div>'+
+    '<div class="sp-tabs" style="border-bottom:none;margin:0 0 18px"><div class="sp-tab on">美元基金产品</div><div class="sp-tab">离岸人民币基金产品</div></div>'+
+    '<table class="tbl"><thead><tr><th>基金名称</th><th>近七日年化</th><th class="right">日均万元收益</th></tr></thead><tbody>'+
+      YYY_FUNDS.map(function(f){return '<tr><td><div style="display:flex;align-items:center;gap:11px"><img class="flag" src="'+flagUrl(f.flag)+'" style="width:24px;height:24px"/><div><b>'+f.name+'</b>'+(f.tag?' <span class="badge" style="background:#FFF1F5;color:#FF0051">'+f.tag+'</span>':'')+'<div style="color:#9a9aa2;font-size:12px;margin-top:3px">'+f.cur+' · 货币基金</div></div></div></td><td><b style="color:#00B578;font-size:16px">'+f.apy+'</b></td><td class="right">'+f.daily+' USD</td></tr>';}).join('')+
+    '</tbody></table>';},
   benefits(){return ''+
-    '<div class="page-h">我的权益</div>'+
-    '<div class="card" style="max-width:640px;background:linear-gradient(120deg,#EAF1FF,#F4ECFF);border:none">'+
-      '<div style="display:flex;align-items:center;gap:14px"><span class="pi" style="width:46px;height:46px;border-radius:12px;background:#fff;color:#FF0051;display:flex;align-items:center;justify-content:center">'+ico(ICON.gift,24)+'</span>'+
-      '<div><div style="font-size:20px;font-weight:800">VIP · 金牌商户</div><div style="color:#6B6B72">您已解锁全部 12 项专属权益</div></div></div>'+
-      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px">'+
-        ['专属客户经理','汇款手续费减免','优先汇率','提现加速','专属活动','信用额度上浮'].map(b=>'<div style="background:#fff;border-radius:10px;padding:14px 16px;font-weight:600">✓ '+b+'</div>').join('')+
-      '</div></div>';},
+    '<div class="page-h" style="margin-bottom:8px">福利中心</div>'+
+    '<div class="sec-h" style="margin-top:14px">我的费率</div>'+
+    '<div class="fl-rates">'+
+      flRate('您当前的结汇费率','0.10%','标准费率 0.4%')+
+      flRate('您的一般贸易结汇费率','0.40%','标准费率 0.4%')+
+      flRate('WorldTrade 卡交易服务费','2.9%','标准费率 2.9%')+
+      flRate('跨境宝费率','0.00%','跨境宝标准费率 0.4%')+
+      '<div class="fl-redeem"><div class="fl-redeem-t">权益兑换</div><button class="btn-pill" onclick="toast(\'演示环境，兑换功能已禁用\')">去兑换</button></div>'+
+    '</div>'+
+    '<div class="sec-h" style="margin-top:30px">我的权益 <a style="margin-left:auto;color:var(--link);font-size:13px;font-weight:400;cursor:pointer">查看更多</a></div>'+
+    '<div class="fl-filt"><span class="fl-lbl">状态</span><span class="fl-chip on">可使用</span><span class="fl-chip">待生效</span><span class="fl-chip">已失效</span><span class="fl-chip dim">全部</span></div>'+
+    '<div class="fl-filt"><span class="fl-lbl">类型</span><span class="fl-chip on">全部</span><span class="fl-chip">红包权益</span><span class="fl-chip">费率权益</span><span class="fl-chip">汇率权益</span><span class="fl-chip">免费权益</span><span class="fl-chip">万里汇金</span></div>'+
+    '<div class="fl-cards">'+
+      '<div class="fl-card red"><div class="fl-card-l">可使用红包金额 '+ri('iconinfo',12)+' <img class="flag" src="'+flagUrl('cn')+'" style="width:18px;height:18px;display:inline-block;vertical-align:middle"/></div><div class="fl-card-amt">128.00 <span>CNH</span></div><button class="btn-line" style="margin-top:14px;background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);color:#fff">去使用</button></div>'+
+      '<div class="fl-card"><div class="fl-card-l">万里汇金总额 '+ri('iconinfo',12)+'</div><div class="fl-card-amt dark">36.60<span>USD</span></div><div class="fl-card-d">万里汇金是万里汇以现金为奖励的营销活动，对参与并完成活动任务的客户发放现金奖励。</div></div>'+
+      '<div class="fl-card"><div class="fl-card-l">万里汇金总额 '+ri('iconinfo',12)+'</div><div class="fl-card-amt dark">212.20<span>CNH</span></div><div class="fl-card-d">万里汇金是万里汇以现金为奖励的营销活动，对参与并完成活动任务的客户发放现金奖励。</div></div>'+
+    '</div>';},
   _generic(){
     const label=(findLeaf(route)||{}).label||'功能页';
     return '<div class="page-h">'+label+'</div><div class="card"><div class="empty"><div class="ei">'+ico(ICON.plus,40)+'</div><div>'+label+' · 演示页面</div><div style="font-size:13px">该模块在演示环境中展示，操作已禁用</div></div></div>';
