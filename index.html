@@ -338,7 +338,13 @@
   .fx-head .remind{margin-left:auto;color:#3a3a42;font-size:14px;display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:400}
   .fx-grid{display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start}
   .fx-conv{display:grid;grid-template-columns:1fr 44px 1fr;gap:14px;align-items:end;margin-bottom:24px}
+  .fx-leg{position:relative}
   .fx-leg label{display:block;color:#3a3a42;font-size:14px;margin-bottom:10px}
+  .fx-dd{position:absolute;top:86px;left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.13);z-index:40;max-height:0;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .12s}
+  .fx-dd.open{max-height:300px;overflow-y:auto;opacity:1;pointer-events:auto;padding:6px}
+  .fx-dd-item{display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:14px}
+  .fx-dd-item:hover{background:var(--line-2)}
+  .fx-dd-item.sel{color:var(--red);background:#FFF1F5}
   .fx-box{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;height:54px;overflow:hidden;transition:border .15s}
   .fx-box:focus-within{border-color:var(--red)}
   .fx-box .cur{display:flex;align-items:center;gap:8px;padding:0 14px;border-right:1px solid var(--line);height:100%;font-weight:600;white-space:nowrap;cursor:pointer}
@@ -608,11 +614,20 @@ function fxChart(){
   const tx=(x1-3).toFixed(1);
   return '<svg viewBox="0 0 '+W+' '+H+'" class="fxchart"><text x="'+(x1+8)+'" y="'+(y0+4)+'" font-size="11" fill="#9a9aa2">汇率</text>'+grid+'<path d="'+path(blue)+'" fill="none" stroke="#AFC4F0" stroke-width="1.5"/><path d="'+path(red)+'" fill="none" stroke="#FF0051" stroke-width="1.8"/><line x1="'+tx+'" y1="'+y0+'" x2="'+tx+'" y2="'+y1+'" stroke="#F0A500" stroke-dasharray="4 3"/>'+xlab+'</svg>';
 }
-let fxRateVal=6.7741, fxFlipped=false;
-function fxNum(n){return isNaN(n)?'':n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
-function fxCalc(side){var s=document.getElementById('fx-sell'),b=document.getElementById('fx-buy');if(!s||!b)return;var r=fxFlipped?1/fxRateVal:fxRateVal;if(side===1){b.value=fxNum(parseFloat(s.value.replace(/,/g,''))*r);}else{s.value=fxNum(parseFloat(b.value.replace(/,/g,''))/r);}}
-function fxSwap(){var c=document.querySelectorAll('.fx-conv .cur');if(c.length<2)return;var t=c[0].innerHTML;c[0].innerHTML=c[1].innerHTML;c[1].innerHTML=t;fxFlipped=!fxFlipped;fxCalc(1);}
-function fxFlip(){fxFlipped=!fxFlipped;var t=document.getElementById('fx-rate-text'),sw=document.getElementById('fx-switch');if(t)t.textContent=fxFlipped?('1 CNH = '+(1/fxRateVal).toFixed(4)+' USD'):('1 USD = '+fxRateVal.toFixed(4)+' CNH');if(sw)sw.classList.toggle('on');fxCalc(1);}
+var FX_PERUSD={USD:1,EUR:0.9210,GBP:0.7840,CNH:6.7741,JPY:157.20,HKD:7.8012,AUD:1.5090,CAD:1.3640,SGD:1.3420};
+var FX_CURS=[{c:'USD',f:'us',n:'美元'},{c:'EUR',f:'eu',n:'欧元'},{c:'GBP',f:'gb',n:'英镑'},{c:'CNH',f:'cn',n:'离岸人民币'},{c:'JPY',f:'jp',n:'日元'},{c:'HKD',f:'hk',n:'港元'},{c:'AUD',f:'au',n:'澳大利亚元'},{c:'CAD',f:'ca',n:'加拿大元'},{c:'SGD',f:'sg',n:'新加坡元'}];
+var fxFrom='USD', fxTo='CNH';
+function fxFlagOf(c){for(var i=0;i<FX_CURS.length;i++)if(FX_CURS[i].c===c)return FX_CURS[i].f;return 'us';}
+function fxRate(){return FX_PERUSD[fxTo]/FX_PERUSD[fxFrom];}
+function fxDec(c){return c==='JPY'?0:2;}
+function fxNum(n,c){return isNaN(n)?'':n.toLocaleString('en-US',{minimumFractionDigits:fxDec(c),maximumFractionDigits:fxDec(c)});}
+function fxCalc(side){var s=document.getElementById('fx-sell'),b=document.getElementById('fx-buy');if(!s||!b)return;var r=fxRate();if(side===2){s.value=fxNum(parseFloat(b.value.replace(/,/g,''))/r,fxFrom);}else{b.value=fxNum(parseFloat(s.value.replace(/,/g,''))*r,fxTo);}}
+function fxPicker(code){return '<img class="flag" src="'+flagUrl(fxFlagOf(code))+'" style="width:22px;height:22px"/>'+code+' '+ri('icon-chevron-down',12);}
+function fxRender(){var cf=document.getElementById('fx-cur-from'),ct=document.getElementById('fx-cur-to');if(!cf||!ct)return;cf.innerHTML=fxPicker(fxFrom);ct.innerHTML=fxPicker(fxTo);var t=document.getElementById('fx-rate-text');if(t)t.textContent='1 '+fxFrom+' = '+fxRate().toFixed(4)+' '+fxTo;var sf=document.getElementById('fx-sub-from'),s2=document.getElementById('fx-sub-to');if(sf)sf.textContent=fxFrom;if(s2)s2.textContent=fxTo;fxCalc(1);}
+function fxOpenDD(which){var dd=document.getElementById('fx-dd-'+which);if(!dd)return;var wasOpen=dd.classList.contains('open');var all=document.querySelectorAll('.fx-dd');for(var i=0;i<all.length;i++){all[i].classList.remove('open');all[i].innerHTML='';}if(wasOpen)return;var sel=which==='from'?fxFrom:fxTo;dd.innerHTML=FX_CURS.map(function(o){return '<div class="fx-dd-item'+(sel===o.c?' sel':'')+'" onclick="fxPick(\''+which+'\',\''+o.c+'\')"><img class="flag" src="'+flagUrl(o.f)+'" style="width:20px;height:20px"/>'+o.c+'<span style="color:#9a9aa2;margin-left:8px;font-weight:400">'+o.n+'</span></div>';}).join('');dd.classList.add('open');}
+function fxPick(which,code){if(which==='from'){if(code===fxTo)fxTo=fxFrom;fxFrom=code;}else{if(code===fxFrom)fxFrom=fxTo;fxTo=code;}var all=document.querySelectorAll('.fx-dd');for(var i=0;i<all.length;i++){all[i].classList.remove('open');all[i].innerHTML='';}fxRender();}
+function fxSwap(){var t=fxFrom;fxFrom=fxTo;fxTo=t;fxRender();}
+function fxFlip(){var sw=document.getElementById('fx-switch');if(sw)sw.classList.toggle('on');fxSwap();}
 function fxRange(el){var sibs=el.parentElement.querySelectorAll('span');for(var i=0;i<sibs.length;i++)sibs[i].classList.remove('on');el.classList.add('on');}
 /* ---- live FX ticker: countdown ring + price fluctuation ---- */
 function cdRing(){return '<svg class="cd-ring" viewBox="0 0 28 28"><circle cx="14" cy="14" r="11" fill="none" stroke="#ECECEF" stroke-width="2.5"/><circle id="cd-arc" cx="14" cy="14" r="11" fill="none" stroke="#FF0051" stroke-width="2.5" stroke-linecap="round" transform="rotate(-90 14 14)" stroke-dasharray="69.12" stroke-dashoffset="69.12"/><text id="cd-num" x="14" y="17.6" text-anchor="middle" font-size="11" font-weight="600" fill="#9a9aa2">30</text></svg>';}
@@ -622,11 +637,9 @@ function onTick(){ cdRem--; if(cdRem<=0){ cdRem=30; fluctuate(); bumpTimes(); } 
 function flash(el,up){ if(!el) return; el.style.color=up?'#00B578':'#E0004a'; setTimeout(function(){el.style.color='';},700); }
 function fluctuate(){
   var up=Math.random()>0.48, d=(Math.random()*0.0035+0.0006)*(up?1:-1);
-  fxRateVal=+Math.max(6.745,Math.min(6.815,fxRateVal+d)).toFixed(4);
-  var t=document.getElementById('fx-rate-text');
-  if(t){ t.textContent=fxFlipped?('1 CNH = '+(1/fxRateVal).toFixed(4)+' USD'):('1 USD = '+fxRateVal.toFixed(4)+' CNH'); flash(t,up); }
+  FX_PERUSD.CNH=+Math.max(6.745,Math.min(6.815,FX_PERUSD.CNH+d)).toFixed(4);
+  if(document.getElementById('fx-cur-from')){ fxRender(); flash(document.getElementById('fx-rate-text'),up); }
   var ex=document.getElementById('fx-extra'); if(ex) ex.textContent=(70+Math.random()*30).toFixed(2);
-  fxCalc(1);
   var list=document.querySelectorAll('.rateval');
   for(var i=0;i<list.length;i++){ var el=list[i]; var cur=parseFloat(el.getAttribute('data-cur')), base=parseFloat(el.getAttribute('data-base')); var u=Math.random()>0.48; var nv=cur*(1+(Math.random()*0.0014+0.0002)*(u?1:-1)); nv=Math.max(base*0.985,Math.min(base*1.015,nv)); el.setAttribute('data-cur',nv.toFixed(4)); el.textContent=nv.toFixed(4); flash(el,u); }
 }
@@ -650,7 +663,7 @@ function fxPanel(){return '<div class="card fx">'+
 function prodPage(title,items){return '<div class="page-h">'+title+'</div><div class="prod-grid">'+items.map(it=>'<div class="prod"><span class="pi">'+ico(ICON.finance,22)+'</span><h4>'+it[0]+'</h4><p>'+it[1]+'</p><a class="det">了解更多 ›</a></div>').join('')+'</div>';}
 
 /* ---------------- views ---------------- */
-function render(){ document.getElementById('content').innerHTML = (VIEWS[route]||VIEWS._generic)(); }
+function render(){ document.getElementById('content').innerHTML = (VIEWS[route]||VIEWS._generic)(); if(route==='exchange'&&typeof fxRender==='function') fxRender(); }
 const YYY_FUNDS=[
   {flag:'us',cur:'美元',name:'华夏精选美元货币基金',tag:'NEW',apy:'4.52%',daily:'1.24'},
   {flag:'us',cur:'美元',name:'摩根美元流动性货币基金',tag:'',apy:'4.38%',daily:'1.20'},
@@ -750,12 +763,12 @@ const VIEWS = {
     '<div class="fx-head">汇兑中心 <span class="info">'+ri('iconinfo',16)+'</span><span class="remind">'+ri('iconnotifications',16)+'设置提醒</span></div>'+
     '<div class="fx-grid"><div>'+
       '<div class="fx-conv">'+
-        '<div class="fx-leg"><label>卖出</label><div class="fx-box"><div class="cur"><img class="flag" src="'+flagUrl('us')+'" style="width:22px;height:22px"/>USD '+ri('icon-chevron-down',12)+'</div><input id="fx-sell" oninput="fxCalc(1)" value="10,000.00"/></div></div>'+
+        '<div class="fx-leg"><label>卖出</label><div class="fx-box"><div class="cur" id="fx-cur-from" onclick="fxOpenDD(\'from\')"></div><input id="fx-sell" oninput="fxCalc(1)" value="10,000.00"/></div><div class="fx-dd" id="fx-dd-from"></div></div>'+
         '<button class="fx-swapbtn" onclick="fxSwap()">'+ico('<path d="M8 7h11l-3-3M16 17H5l3 3"/>',18)+'</button>'+
-        '<div class="fx-leg"><label>买入</label><div class="fx-box"><div class="cur"><img class="flag" src="'+flagUrl('cn')+'" style="width:22px;height:22px"/>CNH '+ri('icon-chevron-down',12)+'</div><input id="fx-buy" oninput="fxCalc(2)" value="67,741.00"/></div></div>'+
+        '<div class="fx-leg"><label>买入</label><div class="fx-box"><div class="cur" id="fx-cur-to" onclick="fxOpenDD(\'to\')"></div><input id="fx-buy" oninput="fxCalc(2)"/></div><div class="fx-dd" id="fx-dd-to"></div></div>'+
       '</div>'+
       '<div class="fx-rate"><span class="shield">'+ri('icona-dashboard_activities_FXtrade',20)+'</span><b id="fx-rate-text">1 USD = 6.7741 CNH</b><span class="flip" onclick="fxFlip()"><span class="switch" id="fx-switch"></span>翻转汇率</span><span class="stamp">2026/06/09, <span class="fx-time" data-sec="43516">12:05:16</span> '+ri('iconinfo',13)+cdRing()+'</span></div>'+
-      '<div class="fx-sub">每 <b>10000</b> USD 比市场参考价多换 <b id="fx-extra">83.02</b> CNH '+ri('iconinfo',12)+'<a>比价计算器</a></div>'+
+      '<div class="fx-sub">每 <b>10000</b> <span id="fx-sub-from">USD</span> 比市场参考价多换 <b id="fx-extra">83.02</b> <span id="fx-sub-to">CNH</span> '+ri('iconinfo',12)+'<a>比价计算器</a></div>'+
       '<div class="fx-hilo">最高 <b>6.81311</b><span class="bar">|</span>最低 <b>6.74763</b><span class="fx-range"><span onclick="fxRange(this)">1天</span><span onclick="fxRange(this)">7天</span><span onclick="fxRange(this)">14天</span><span class="on" onclick="fxRange(this)">30天</span></span></div>'+
       fxChart()+
       '<div class="fx-legend"><span><i style="background:#FF0051"></i>我的汇率</span><span><i style="background:#AFC4F0"></i>市场参考价</span><span><i style="background:#D9D9DE"></i>CNY汇率</span><a class="decl">汇率声明</a></div>'+
