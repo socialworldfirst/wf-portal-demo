@@ -72,7 +72,7 @@ function b64(buf) { return Buffer.from(buf).toString('base64'); }
 <style>
 #wf-gate{position:fixed;inset:0;z-index:99999;display:flex;background:#fff;font-family:roboto,"PingFang SC","Microsoft YaHei",sans-serif}
 #wf-gate .wg-left{width:46%;background:linear-gradient(150deg,#FD3A4B 0%,#F31C46 60%,#D8113A 100%);color:#fff;padding:80px 64px;display:flex;flex-direction:column;justify-content:center}
-#wf-gate .wg-logo{height:34px;width:auto;display:block;margin-bottom:40px}
+#wf-gate .wg-logo{height:34px;width:auto;display:block;margin-bottom:40px;align-self:flex-start}
 #wf-gate .wg-tag{font-size:40px;font-weight:700;line-height:1.25;margin-bottom:22px}
 #wf-gate .wg-sub{font-size:15px;line-height:1.8;opacity:.92;max-width:420px}
 #wf-gate .wg-right{flex:1;display:flex;align-items:center;justify-content:center;padding:40px}
