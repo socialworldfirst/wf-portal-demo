@@ -286,6 +286,13 @@
   .sp-name{font-weight:700;font-size:14px;line-height:1.4;margin-bottom:10px}
   .sp-desc{color:#9a9aa2;font-size:12.5px;line-height:1.6;flex:1}
   .sp-pay{width:100%;margin-top:14px;justify-content:center;height:38px;border-radius:999px;border-color:var(--red);color:var(--red);font-weight:600}
+  .rmb-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:22px}
+  .rmb-card{display:flex;flex-direction:column;min-height:210px}
+  .rmb-card h3{font-size:18px;font-weight:700;margin-bottom:12px}
+  .rmb-card p{color:#6B6B72;font-size:13.5px;line-height:1.7;margin-bottom:18px;max-width:420px}
+  .rmb-card .btn-pill{align-self:flex-start}
+  .rmb-bul{margin-top:18px;padding-top:16px;border-top:1px solid var(--line-2);color:#6B6B72;font-size:13px;line-height:2}
+  .rmb-more{margin-top:auto;color:var(--link);font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
 
   /* FX / forex page */
   .fx-head{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:700;margin-bottom:24px}
@@ -606,6 +613,14 @@ function prodPage(title,items){return '<div class="page-h">'+title+'</div><div c
 
 /* ---------------- views ---------------- */
 function render(){ document.getElementById('content').innerHTML = (VIEWS[route]||VIEWS._generic)(); }
+const PAYEES=[
+  {name:'Shenzhen Lihua Electronics Co., Ltd',alias:'利华电子',cur:'离岸人民币',flag:'cn',acct:'6320 8422 005',bank:'招商银行 深圳分行'},
+  {name:'Yiwu Sunshine Trading Co.',alias:'阳光义乌',cur:'离岸人民币',flag:'cn',acct:'6225 **** **** 4417',bank:'中国银行'},
+  {name:'佛山市顺德区乐华陶瓷洁具有限公司',alias:'乐华陶瓷',cur:'离岸人民币',flag:'cn',acct:'3800 1620 100',bank:'中国工商银行'},
+  {name:'Bright Future Logistics Ltd.',alias:'BF Logistics',cur:'英镑',flag:'gb',acct:'IBAN GB29 NWBK 6016 1331 9268 19',bank:'NatWest Bank'},
+  {name:'Pacific Components Inc.',alias:'Pacific',cur:'美元',flag:'us',acct:'8855 744 002',bank:'JPMORGAN CHASE BANK, N.A.'},
+  {name:'招商银行 储蓄卡',alias:'提现账户',cur:'美元',flag:'us',acct:'**** **** 6688',bank:'招商银行'}
+];
 const KJB_PLAT=['1688','TaoWorld 跨境供货平台','88生意通'];
 const KJB_BILLS=[
   {ty:'1688 担保交易 · 采购付款',sup:'佛山市顺德区乐华陶瓷洁具有限公司',amt:'-8,420.00',fee:'12.63',wf:'0.00',net:'-8,432.63',t:'2026/06/07 15:22:08',no:'TXN20260607883041'},
@@ -723,20 +738,18 @@ const VIEWS = {
     '</div>';
   },
   payees(){return ''+
-    '<div class="page-h">收款人管理 <div class="act"><button class="btn-pill">+ 新增收款人</button></div></div>'+
-    '<table class="tbl"><thead><tr><th>收款人</th><th>账号</th><th>币种 / 国家</th><th class="right">操作</th></tr></thead><tbody>'+
-      [['Shenzhen Lihua Electronics Co.','**** 6021','CNH · 中国','cn'],
-       ['Yiwu Sunshine Trading Co.','**** 4417','CNH · 中国','cn'],
-       ['Bright Future Logistics Ltd.','GB** 5971','GBP · 英国','gb'],
-       ['Pacific Components Inc.','**** 8842','USD · 美国','us']].map(r=>'<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td><img class="flag" src="'+flagUrl(r[3])+'" style="width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:8px"/>'+r[2]+'</td><td class="right"><a class="det">编辑</a></td></tr>').join('')+
+    '<div class="page-h">收款人管理 <div class="act" style="display:flex;gap:12px"><button class="btn-line">导出以下收款人</button><button class="btn-line">处理中的收款人</button><button class="btn-pill">+ 添加新的收款人</button></div></div>'+
+    '<div class="filters"><div class="fsel">收款账号 '+ri('icon-chevron-down',12)+'</div><div class="fsearch">'+ico(ICON.search,15)+'<input placeholder="请输入"/></div><div class="fsel">全部 '+ri('icon-chevron-down',12)+'</div></div>'+
+    '<table class="tbl"><thead><tr><th>收款人名称</th><th>收款人别名 '+ri('iconinfo',12)+'</th><th>币种</th><th>收款账户 '+ri('iconinfo',12)+'</th><th class="right">操作</th></tr></thead><tbody>'+
+      PAYEES.map(function(r){return '<tr><td><b>'+r.name+'</b></td><td style="color:#6B6B72">'+r.alias+'</td><td><img class="flag" src="'+flagUrl(r.flag)+'" style="width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:8px"/>'+r.cur+'</td><td><div>'+r.acct+'</div><div style="color:#9a9aa2;font-size:12px;margin-top:2px">'+r.bank+'</div></td><td class="right"><a class="det" style="color:var(--link);margin-right:16px">付款</a><a style="color:#b7b7be">⋯</a></td></tr>';}).join('')+
     '</tbody></table>';
   },
   rmb(){return ''+
-    '<div class="page-h">人民币结汇</div><div class="card conv">'+
-      '<div class="leg"><label>结汇金额</label><div class="crow"><input value="100,000.00"/><div class="pickc"><img class="flag" src="'+flagUrl('us')+'" style="width:20px;height:20px"/>USD '+ico(ICON.caret,12)+'</div></div></div>'+
-      '<div class="note"><span>结汇汇率 1 USD = 6.7700 CNY</span><span>预计入账 ¥677,000.00</span></div>'+
-      '<div class="leg"><label>入账银行卡</label><div class="crow"><input class="sm" value="招商银行 储蓄卡 **** 6688" readonly/></div></div>'+
-      '<button class="btn-pill" style="width:100%;height:46px;justify-content:center" onclick="toast(\'演示环境，结汇功能已禁用\')">确认结汇</button>'+
+    '<div class="page-h">人民币结汇</div>'+
+    '<div class="card" style="display:flex;align-items:center;background:linear-gradient(120deg,#FFF6F8,#fff)"><span style="font-size:15px;color:#3a3a42">您的预估可结汇总额度：</span><span style="font-size:30px;font-weight:800;margin:0 10px;letter-spacing:.5px">868,420.00</span><span style="font-size:16px;color:var(--ink-2);font-weight:600">CNY</span><a style="margin-left:auto;color:var(--link);cursor:pointer;display:inline-flex;align-items:center;gap:4px">查看提额方式 '+ri('icon-chevron-down',12)+'</a></div>'+
+    '<div class="rmb-grid">'+
+      '<div class="card rmb-card"><h3>单笔结汇</h3><p>转账至中国境内的同名或三方供应商的人民币银行账户或支付宝账号</p><button class="btn-pill" onclick="toast(\'演示环境，结汇功能已禁用\')">去结汇</button><div class="rmb-bul"><div>· 阳光合规，不占用个人 5 万美元/年的结汇便利化额度</div><div>· 支持美元、欧元、离岸人民币等 10 个主流币种</div><div>· 支持跨境电商、一般贸易等多种贸易场景结汇</div></div></div>'+
+      '<div class="card rmb-card"><h3>批量结汇</h3><p>将人民币一次性付款至多个收款人的银行账户</p><button class="btn-pill" onclick="toast(\'演示环境，结汇功能已禁用\')">去结汇</button><a class="rmb-more">查看详情 '+ri('icon-chevron-down',12)+'</a></div>'+
     '</div>';
   },
   finance(){return prodPage('金融服务',[
