@@ -127,6 +127,32 @@
   .asset-card .at{font-size:17px;font-weight:700;margin-bottom:8px}
   .asset-card p{color:#4a4a55;line-height:1.85;font-size:13.5px;max-width:900px}
   .asset-card .add{margin-top:16px;color:var(--link);font-weight:600;display:inline-flex;gap:5px;cursor:pointer}
+  .assets-tools{margin-left:auto;display:flex;gap:18px;font-weight:400;font-size:13px;color:#6B6B72}
+  .assets-tools span{display:flex;align-items:center;gap:5px;cursor:pointer}
+  .assets-bar{display:flex;align-items:flex-end;gap:20px;margin-bottom:20px;flex-wrap:wrap}
+  .assets-total{font-size:14px;color:#3a3a42;display:flex;align-items:center;gap:7px}
+  .assets-total b{font-size:28px;font-weight:700;color:var(--ink);letter-spacing:.3px}
+  .assets-total .u{font-size:15px;color:var(--ink-2);font-weight:600}
+  .assets-month{margin-left:auto;color:#9a9aa2;font-size:13px;display:flex;align-items:center;gap:8px}
+  .assets-month .kanban{color:#3a3a42;font-weight:600;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+  .assets-month .nf{background:#FFF1F5;color:var(--red);font-size:11px;font-weight:600;padding:2px 7px;border-radius:5px}
+  .acards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .acards.collapsed .acard:nth-child(n+4){display:none}
+  .acard{background:#FAFAFB;border:1px solid #F1F1F4;border-radius:14px;padding:20px 22px}
+  .acard .ah{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+  .acard .ah img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+  .acard .ah b{font-size:15px}
+  .acard .big{font-size:26px;font-weight:700;letter-spacing:.3px;margin-bottom:14px}
+  .acard .big small{font-size:15px;color:var(--ink-2);font-weight:600;margin-left:5px}
+  .acard .arow{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#6B6B72;padding:5px 0}
+  .acard .arow .lbl{display:flex;align-items:center;gap:5px}
+  .acard .arow .val{color:#3a3a42}
+  .acard .arow.un,.acard .arow.un .val{color:#E8890C}
+  .assets-more{display:flex;justify-content:center;margin-top:18px}
+  .assets-more button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;color:#9a9aa2;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .assets-more button:hover{color:var(--red);border-color:var(--red)}
+  .assets-more button svg{transition:transform .2s}
+  .assets-more.open button svg{transform:rotate(180deg)}
 
   .txn{padding:6px 0}
   .txn .row{display:flex;align-items:center;gap:16px;padding:16px 4px;border-bottom:1px solid var(--line-2)}
@@ -411,6 +437,17 @@ const ACCOUNTS = [
   {cur:'澳大利亚元',code:'AUD',flag:'au',no:'**** **** 1190',loc:'澳大利亚',bal:'31,205.75'},
   {cur:'新加坡元',code:'SGD',flag:'sg',no:'**** **** 2031',loc:'新加坡',bal:'12,040.00'}
 ];
+const ASSETS = [
+  {cur:'美元',code:'USD',flag:'us',total:'128,430.55',avail:'120,430.55',unavail:'1,200.00',pending:'8,000.00'},
+  {cur:'欧元',code:'EUR',flag:'eu',total:'64,210.00',avail:'60,210.00',unavail:'',pending:'4,000.00'},
+  {cur:'离岸人民币',code:'CNH',flag:'cn',total:'402,118.00',avail:'388,118.00',unavail:'',pending:'14,000.00'},
+  {cur:'英镑',code:'GBP',flag:'gb',total:'22,890.40',avail:'21,390.40',unavail:'',pending:'1,500.00'},
+  {cur:'澳大利亚元',code:'AUD',flag:'au',total:'31,205.75',avail:'29,205.75',unavail:'',pending:'2,000.00'},
+  {cur:'加拿大元',code:'CAD',flag:'ca',total:'18,300.20',avail:'18,300.20',unavail:'',pending:'0.00'},
+  {cur:'港元',code:'HKD',flag:'hk',total:'88,210.00',avail:'88,210.00',unavail:'',pending:'0.00'},
+  {cur:'日元',code:'JPY',flag:'jp',total:'1,540,200',avail:'1,540,200',unavail:'',pending:'0'},
+  {cur:'新加坡元',code:'SGD',flag:'sg',total:'12,040.00',avail:'12,040.00',unavail:'',pending:'0.00'}
+];
 const TXNS = [
   {d:'in', w:'收款 来自 Amazon EU S.a r.l.', t:'2026/06/08, 09:14:02', a:'+12,480.00', c:'EUR'},
   {d:'in', w:'收款 来自 Shopify Payments', t:'2026/06/07, 22:03:11', a:'+8,210.55', c:'USD'},
@@ -511,6 +548,8 @@ function fluctuate(){
 function bumpTimes(){ var els=document.querySelectorAll('.fx-time'); for(var i=0;i<els.length;i++){ var s=(parseInt(els[i].getAttribute('data-sec'),10)+30)%86400; els[i].setAttribute('data-sec',s); els[i].textContent=hms(s); } }
 function hms(s){ return pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60); }
 function pad(n){ return (n<10?'0':'')+n; }
+function assetCard(a){return '<div class="acard"><div class="ah"><img src="'+flagUrl(a.flag)+'"/><b>'+a.cur+'</b></div><div class="big">'+a.total+'<small>'+a.code+'</small></div><div class="arow"><span class="lbl">账户余额 '+ri('iconinfo',12)+'</span><span class="val">'+a.avail+' '+a.code+'</span></div>'+(a.unavail?'<div class="arow un"><span class="lbl">含不可用余额</span><span class="val">'+a.unavail+' '+a.code+'</span></div>':'')+'<div class="arow"><span class="lbl">待入账金额 '+ri('iconinfo',12)+'</span><span class="val">'+a.pending+' '+a.code+'</span></div></div>';}
+function toggleAssets(){var g=document.getElementById('acards'),m=document.getElementById('assets-more');if(g)g.classList.toggle('collapsed');if(m)m.classList.toggle('open');}
 const txnRow = x=>'<div class="row"><div class="ar '+x.d+'">'+(x.d==='in'?'&#8595;':'&#8593;')+'</div>'+
   '<div><div class="who">'+x.w+'</div><div class="meta"><span class="ok">成功</span>'+x.t+'</div></div>'+
   '<div class="amt">'+x.a+'<small>'+x.c+'</small></div></div>';
@@ -541,10 +580,10 @@ const VIEWS = {
         '<button class="qbtn" onclick="go(\'supplier\')"><span class="qi">'+ri('icon-vendor_payment',18)+'</span>服务商快付</button>'+
         '<button class="qbtn"><span class="qi">'+ri('icon-overflow_menu',18)+'</span></button>'+
       '</div>'+
-      '<div class="sec-h">我的资产 <span class="sm">下载 App，随时随地便捷收付</span></div>'+
-      '<div class="card asset-card"><div class="at">支持全球 20+ 主流货币</div>'+
-        '<p>美元、欧元、离岸人民币、日元、港元、英镑、澳元、新西兰元、新加坡元及加元全球 10 大主流货币轻松收款，更有墨西哥比索、菲律宾比索、印尼盾、泰铢、马来林吉特等 10+ 小币种助您布局蓝海市场。</p>'+
-        '<a class="add" onclick="go(\'account-list\')">+ 新增收款账户</a></div>'+
+      '<div class="sec-h">我的资产 <span class="sm">下载 App，随时随地便捷收付</span><span class="assets-tools"><span>'+ico('<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',15)+'隐藏</span><span>'+ico(ICON.edit,15)+'编辑</span></span></div>'+
+      '<div class="assets-bar"><span class="assets-total">预估总资产 '+ri('iconinfo',14)+' &#8776; <b>348,920.65</b> <span class="u">USD</span> '+ri('icon-chevron-down',14)+'</span><span class="assets-month">过去 1 个月收款金额约 &#8776; 96,420.00 USD <span class="kanban">'+ico('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',14)+'收款看板 <span class="nf">新功能</span></span></span></div>'+
+      '<div class="acards collapsed" id="acards">'+ASSETS.map(assetCard).join('')+'</div>'+
+      '<div class="assets-more" id="assets-more"><button onclick="toggleAssets()">'+ri('iconarrowdown',16)+'</button></div>'+
       '<div class="sec-h">账户交易</div>'+
       '<div class="card txn">'+TXNS.slice(0,6).map(txnRow).join('')+'</div>'+
       '<a class="viewall" onclick="go(\'records\')">查看全部交易记录 ›</a>'+
