@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=1280" />
 <meta name="robots" content="noindex,nofollow" />
 <title>万里汇 WorldFirst</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23FF0051'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'>万</text></svg>" />
+<link rel="shortcut icon" href="assets/favicon.png" />
+<link rel="icon" href="assets/favicon.png" />
 <style>
   :root{
     --red:#FF0051; --red-d:#E0004a; --red-soft:#FFE9F0;
@@ -221,6 +222,69 @@
   .prod p{color:var(--ink-2);font-size:13px;line-height:1.7;flex:1}
   .prod .det{color:var(--link);font-weight:600;cursor:pointer}
 
+  /* FX / forex page */
+  .fx-head{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:700;margin-bottom:24px}
+  .fx-head .info{color:#b7b7be;display:flex}
+  .fx-head .remind{margin-left:auto;color:#3a3a42;font-size:14px;display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:400}
+  .fx-grid{display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start}
+  .fx-conv{display:grid;grid-template-columns:1fr 44px 1fr;gap:14px;align-items:end;margin-bottom:24px}
+  .fx-leg label{display:block;color:#3a3a42;font-size:14px;margin-bottom:10px}
+  .fx-box{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;height:54px;overflow:hidden;transition:border .15s}
+  .fx-box:focus-within{border-color:var(--red)}
+  .fx-box .cur{display:flex;align-items:center;gap:8px;padding:0 14px;border-right:1px solid var(--line);height:100%;font-weight:600;white-space:nowrap;cursor:pointer}
+  .fx-box input{border:none;outline:none;flex:1;height:100%;padding:0 14px;font-size:16px;font-family:inherit;min-width:0;background:transparent}
+  .fx-swapbtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;color:#6B6B72;align-self:flex-end;margin-bottom:5px;cursor:pointer;transition:.15s}
+  .fx-swapbtn:hover{border-color:var(--red);color:var(--red)}
+  .fx-rate{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .fx-rate .shield{color:#1FB39B;display:flex}
+  .fx-rate b{font-size:24px;font-weight:700;letter-spacing:.3px}
+  .fx-rate .flip{display:flex;align-items:center;gap:7px;color:#6B6B72;font-size:13px;cursor:pointer}
+  .fx-rate .switch{width:34px;height:18px;border-radius:9px;background:#E5E5EA;position:relative;transition:.15s;flex:none}
+  .fx-rate .switch::after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:.15s}
+  .fx-rate .switch.on{background:var(--red)}
+  .fx-rate .switch.on::after{left:18px}
+  .fx-rate .stamp{margin-left:auto;color:#9a9aa2;font-size:12px;display:flex;align-items:center;gap:8px}
+  .fx-ring{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--red);display:flex;align-items:center;justify-content:center;font-size:10px;color:#9a9aa2;font-weight:600;animation:sp 4s linear infinite}
+  .fx-ring span{animation:sp 4s linear infinite reverse}
+  .fx-sub{color:#6B6B72;font-size:13px;margin-bottom:20px;display:flex;align-items:center;gap:5px}
+  .fx-sub b{color:var(--ink)}
+  .fx-sub a{margin-left:8px;cursor:pointer}
+  .fx-hilo{display:flex;align-items:center;gap:8px;color:#6B6B72;font-size:13px;margin-bottom:4px}
+  .fx-hilo b{color:var(--ink)}
+  .fx-hilo .bar{color:var(--line);margin:0 6px}
+  .fx-range{margin-left:auto;display:flex;gap:20px}
+  .fx-range span{cursor:pointer}
+  .fx-range .on{color:var(--red);font-weight:600}
+  .fxchart{width:100%;height:auto;display:block;margin:8px 0 4px}
+  .fx-legend{display:flex;align-items:center;gap:22px;color:#6B6B72;font-size:13px;margin-top:6px}
+  .fx-legend i{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
+  .fx-legend .decl{margin-left:auto;color:var(--link);cursor:pointer}
+  .fx-prod{display:flex;flex-direction:column;gap:14px}
+  .fx-card{border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;cursor:pointer;transition:box-shadow .15s}
+  .fx-card:hover{box-shadow:0 6px 18px rgba(0,0,0,.07)}
+  .fx-card .ch{display:flex;align-items:center;gap:11px;font-weight:700;font-size:15px;margin-bottom:8px}
+  .fx-card .ch .ci{width:28px;height:28px;color:var(--red);display:flex;align-items:center;justify-content:center}
+  .fx-card p{color:#6B6B72;font-size:13px;line-height:1.6}
+  .fx-card .tag{position:absolute;top:0;right:0;background:#FFF1F5;color:var(--red);font-size:11px;font-weight:600;padding:3px 10px;border-bottom-left-radius:10px;border-top-right-radius:14px}
+  .fx-news{margin-top:34px}
+  .fx-tabs{display:flex;align-items:center;gap:30px;border-bottom:1px solid var(--line);margin-bottom:20px}
+  .fx-tabs .t{display:flex;align-items:center;gap:7px;padding-bottom:13px;color:#6B6B72;cursor:pointer;font-size:15px}
+  .fx-tabs .t.on{color:var(--red);font-weight:600;border-bottom:2px solid var(--red)}
+  .fx-tabs .more{margin-left:auto;color:var(--link);font-size:13px;display:flex;align-items:center;gap:4px;cursor:pointer}
+  .fx-chips{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+  .fx-chip{border:1px solid var(--line);border-radius:999px;padding:7px 15px;font-size:13px;color:#3a3a42;display:flex;align-items:center;gap:6px;cursor:pointer}
+  .fx-chip.on{border-color:var(--red);color:var(--red);font-weight:600;background:#FFF1F5}
+  .fx-chips .only{margin-left:auto;display:flex;align-items:center;gap:8px;color:#6B6B72;font-size:13px}
+  .fx-chips .sw{width:34px;height:18px;border-radius:9px;background:var(--red);position:relative}
+  .fx-chips .sw::after{content:"";position:absolute;right:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff}
+  .fx-day{font-weight:700;margin:20px 0 4px;display:flex;align-items:center;gap:6px}
+  .news-item{display:flex;gap:20px;padding:18px 2px;border-bottom:1px solid var(--line-2)}
+  .news-item .tm{width:74px;flex:none;color:#9a9aa2;font-size:13px}
+  .news-item .tm .ago{display:block;color:#c2c2c9;font-size:12px;margin-top:3px}
+  .news-item .nt{font-weight:600;margin-bottom:7px;display:flex;align-items:center;gap:8px;line-height:1.5}
+  .news-item .imp{background:#FFEDED;color:#E0004a;font-size:11px;font-weight:600;padding:2px 7px;border-radius:4px;flex:none}
+  .news-item .nb{color:#6B6B72;font-size:13.5px;line-height:1.7}
+
   /* floating */
   .float{position:fixed;right:26px;bottom:90px;display:flex;flex-direction:column;gap:14px;z-index:18}
   .float .fb{width:46px;height:46px;border-radius:50%;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;color:var(--red);cursor:pointer}
@@ -405,6 +469,26 @@ function markNav(){
 
 /* ---------------- helpers ---------------- */
 function findLeaf(id){for(const n of NAV){if(n.id===id)return n;if(n.kids)for(const k of n.kids)if(k.id===id)return k;}return null;}
+function fxCard(icon,title,desc,tag){return '<div class="fx-card">'+(tag?'<span class="tag">'+tag+'</span>':'')+'<div class="ch"><span class="ci">'+ri(icon,26)+'</span>'+title+'</div><p>'+desc+'</p></div>';}
+function newsItem(t,ago,title,body){return '<div class="news-item"><div class="tm">'+t+'<span class="ago">'+ago+'</span></div><div><div class="nt">'+title+' <span class="imp">重要</span></div><div class="nb">'+body+'</div></div></div>';}
+function fxChart(){
+  const W=880,H=300,padR=64,padT=10,padB=30,x0=0,y0=padT,x1=W-padR,y1=H-padB,yMax=6.84,yMin=6.72;
+  const red=[6.792,6.789,6.795,6.791,6.799,6.806,6.803,6.810,6.813,6.807,6.799,6.794,6.787,6.781,6.778,6.785,6.779,6.771,6.763,6.756,6.750,6.748,6.746,6.751,6.760,6.769,6.762,6.771,6.778,6.774];
+  const blue=red.map(v=>+(v-0.009).toFixed(4));
+  const sx=i=>x0+(i/(red.length-1))*(x1-x0), sy=v=>y0+(1-(v-yMin)/(yMax-yMin))*(y1-y0);
+  const path=a=>a.map((v,i)=>(i?'L':'M')+sx(i).toFixed(1)+' '+sy(v).toFixed(1)).join(' ');
+  const grid=[6.84,6.81,6.78,6.75,6.72].map(v=>'<line x1="'+x0+'" y1="'+sy(v).toFixed(1)+'" x2="'+x1+'" y2="'+sy(v).toFixed(1)+'" stroke="#F0F0F3"/><text x="'+(x1+8)+'" y="'+(sy(v)+4).toFixed(1)+'" font-size="11" fill="#9a9aa2">'+v.toFixed(4)+'</text>').join('');
+  const xl=['05-11','05-13','05-17','05-21','05-25','05-29'];
+  const xlab=xl.map((d,i)=>{var anc=i===0?'start':(i===xl.length-1?'end':'middle');return '<text x="'+sx(i/(xl.length-1)*(red.length-1)).toFixed(1)+'" y="'+(H-8)+'" font-size="11" fill="#9a9aa2" text-anchor="'+anc+'">'+d+'</text>';}).join('');
+  const tx=(x1-3).toFixed(1);
+  return '<svg viewBox="0 0 '+W+' '+H+'" class="fxchart"><text x="'+(x1+8)+'" y="'+(y0+4)+'" font-size="11" fill="#9a9aa2">汇率</text>'+grid+'<path d="'+path(blue)+'" fill="none" stroke="#AFC4F0" stroke-width="1.5"/><path d="'+path(red)+'" fill="none" stroke="#FF0051" stroke-width="1.8"/><line x1="'+tx+'" y1="'+y0+'" x2="'+tx+'" y2="'+y1+'" stroke="#F0A500" stroke-dasharray="4 3"/>'+xlab+'</svg>';
+}
+let fxRateVal=6.7741, fxFlipped=false;
+function fxNum(n){return isNaN(n)?'':n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fxCalc(side){var s=document.getElementById('fx-sell'),b=document.getElementById('fx-buy');if(!s||!b)return;var r=fxFlipped?1/fxRateVal:fxRateVal;if(side===1){b.value=fxNum(parseFloat(s.value.replace(/,/g,''))*r);}else{s.value=fxNum(parseFloat(b.value.replace(/,/g,''))/r);}}
+function fxSwap(){var c=document.querySelectorAll('.fx-conv .cur');if(c.length<2)return;var t=c[0].innerHTML;c[0].innerHTML=c[1].innerHTML;c[1].innerHTML=t;fxFlipped=!fxFlipped;fxCalc(1);}
+function fxFlip(){fxFlipped=!fxFlipped;var t=document.getElementById('fx-rate-text'),sw=document.getElementById('fx-switch');if(t)t.textContent=fxFlipped?('1 CNH = '+(1/fxRateVal).toFixed(4)+' USD'):('1 USD = '+fxRateVal.toFixed(4)+' CNH');if(sw)sw.classList.toggle('on');fxCalc(1);}
+function fxRange(el){var sibs=el.parentElement.querySelectorAll('span');for(var i=0;i<sibs.length;i++)sibs[i].classList.remove('on');el.classList.add('on');}
 const txnRow = x=>'<div class="row"><div class="ar '+x.d+'">'+(x.d==='in'?'&#8595;':'&#8593;')+'</div>'+
   '<div><div class="who">'+x.w+'</div><div class="meta"><span class="ok">成功</span>'+x.t+'</div></div>'+
   '<div class="amt">'+x.a+'<small>'+x.c+'</small></div></div>';
@@ -490,12 +574,31 @@ const VIEWS = {
     '</tbody></table>';
   },
   exchange(){return ''+
-    '<div class="page-h">汇兑中心</div><div class="card conv">'+
-      '<div class="leg"><label>卖出</label><div class="crow"><input value="50,000.00"/><div class="pickc"><img class="flag" src="'+flagUrl('us')+'" style="width:20px;height:20px"/>USD '+ico(ICON.caret,12)+'</div></div></div>'+
-      '<div class="swap"><div>'+ico(ICON.swap,18)+'</div></div>'+
-      '<div class="leg"><label>买入（约）</label><div class="crow"><input value="338,755.00" readonly/><div class="pickc"><img class="flag" src="'+flagUrl('cn')+'" style="width:20px;height:20px"/>CNH '+ico(ICON.caret,12)+'</div></div></div>'+
-      '<div class="note"><span>参考汇率 1 USD = 6.7751 CNH</span><span style="color:#00B578">锁汇 09:48 刷新</span></div>'+
-      '<button class="btn-pill" style="width:100%;height:46px;justify-content:center" onclick="toast(\'演示环境，兑换功能已禁用\')">立即兑换</button>'+
+    '<div class="fx-head">汇兑中心 <span class="info">'+ri('iconinfo',16)+'</span><span class="remind">'+ri('iconnotifications',16)+'设置提醒</span></div>'+
+    '<div class="fx-grid"><div>'+
+      '<div class="fx-conv">'+
+        '<div class="fx-leg"><label>卖出</label><div class="fx-box"><div class="cur"><img class="flag" src="'+flagUrl('us')+'" style="width:22px;height:22px"/>USD '+ri('icon-chevron-down',12)+'</div><input id="fx-sell" oninput="fxCalc(1)" value="10,000.00"/></div></div>'+
+        '<button class="fx-swapbtn" onclick="fxSwap()">'+ico('<path d="M8 7h11l-3-3M16 17H5l3 3"/>',18)+'</button>'+
+        '<div class="fx-leg"><label>买入</label><div class="fx-box"><div class="cur"><img class="flag" src="'+flagUrl('cn')+'" style="width:22px;height:22px"/>CNH '+ri('icon-chevron-down',12)+'</div><input id="fx-buy" oninput="fxCalc(2)" value="67,741.00"/></div></div>'+
+      '</div>'+
+      '<div class="fx-rate"><span class="shield">'+ri('icona-dashboard_activities_FXtrade',20)+'</span><b id="fx-rate-text">1 USD = 6.7741 CNH</b><span class="flip" onclick="fxFlip()"><span class="switch" id="fx-switch"></span>翻转汇率</span><span class="stamp">2026/06/09, 12:05:16 '+ri('iconinfo',13)+'<span class="fx-ring"><span>26</span></span></span></div>'+
+      '<div class="fx-sub">每 <b>10000</b> USD 比市场参考价多换 <b>83.02</b> CNH '+ri('iconinfo',12)+'<a>比价计算器</a></div>'+
+      '<div class="fx-hilo">最高 <b>6.81311</b><span class="bar">|</span>最低 <b>6.74763</b><span class="fx-range"><span onclick="fxRange(this)">1天</span><span onclick="fxRange(this)">7天</span><span onclick="fxRange(this)">14天</span><span class="on" onclick="fxRange(this)">30天</span></span></div>'+
+      fxChart()+
+      '<div class="fx-legend"><span><i style="background:#FF0051"></i>我的汇率</span><span><i style="background:#AFC4F0"></i>市场参考价</span><span><i style="background:#D9D9DE"></i>CNY汇率</span><a class="decl">汇率声明</a></div>'+
+    '</div>'+
+    '<div class="fx-prod">'+
+      fxCard('icona-Convertbetweenaccounts1','立即兑换','支持数十个币种兑换，实时到账。','')+
+      fxCard('icona-LimitOrder1','指定汇率兑换','监控指定的汇率，在汇率到达时进行兑换操作。','热门')+
+      fxCard('iconbook-a-spot','短期锁汇','锁住当前汇率，维持 2 个工作日，无保证金。','新功能')+
+      fxCard('icona-Bookaforward1','远期锁汇','锁住未来最长 12 个月的汇率，规避波动风险。','新功能')+
+    '</div></div>'+
+    '<div class="fx-news"><div class="fx-tabs"><div class="t on">'+ri('icon-statements',16)+'外汇资讯</div><div class="t">'+ri('icon-calendar',16)+'财经日历</div><div class="t">'+ri('icon-pending',16)+'外汇单据列表</div><a class="more">最新每周汇见 06.08 '+ri('icon-chevron-right',12)+'</a></div>'+
+      '<div class="fx-chips"><span class="fx-chip on">推荐</span><span class="fx-chip">全部</span><span class="fx-chip"><img class="flag" src="'+flagUrl('us')+'" style="width:18px;height:18px"/>美元</span><span class="fx-chip"><img class="flag" src="'+flagUrl('eu')+'" style="width:18px;height:18px"/>欧元</span><span class="fx-chip"><img class="flag" src="'+flagUrl('gb')+'" style="width:18px;height:18px"/>英镑</span><span class="fx-chip"><img class="flag" src="'+flagUrl('cn')+'" style="width:18px;height:18px"/>人民币</span><span class="only">只看重要 <span class="sw"></span></span></div>'+
+      '<div class="fx-day">今天 6月9日 '+ri('icon-chevron-up',12)+'</div>'+
+      newsItem('10:42','1小时前','外汇快讯','中国 5 月以美元计算出口年率 19.4%，预期 15%，前值 14.10%。')+
+      newsItem('06:00','6小时前','美联储 6 月维持利率不变的概率为 98.1%','6 月 9 日讯，据 CME「美联储观察」：美联储到 6 月维持利率不变的概率为 98.1%，累计降息 25 个基点的概率为 1.9%；美联储到 7 月维持利率不变的概率为 76.4%。')+
+      newsItem('01:16','10小时前','外汇快讯','惠誉：预计美伊冲突将拖累 GDP 增长，推高通胀与债券收益率，并加剧全球主权国家的地缘政治风险。')+
     '</div>';
   },
   fxtransfer(){return ''+
