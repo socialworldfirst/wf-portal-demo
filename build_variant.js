@@ -54,7 +54,7 @@ function b64(buf) { return Buffer.from(buf).toString('base64'); }
   // --- gate: WorldFirst-styled password screen injected at top of <body> ---
   const gate = `<div id="wf-gate">
   <div class="wg-left">
-    <div class="wg-logo">World<small>First</small></div>
+    <img class="wg-logo" src="assets/logo-white.svg" alt="WorldFirst">
     <div class="wg-tag">一个账户<br>连接全球生意</div>
     <div class="wg-sub">全球 100+ 国家和地区，多币种收款、低成本兑换、快速付款。</div>
   </div>
@@ -72,8 +72,7 @@ function b64(buf) { return Buffer.from(buf).toString('base64'); }
 <style>
 #wf-gate{position:fixed;inset:0;z-index:99999;display:flex;background:#fff;font-family:roboto,"PingFang SC","Microsoft YaHei",sans-serif}
 #wf-gate .wg-left{width:46%;background:linear-gradient(150deg,#FD3A4B 0%,#F31C46 60%,#D8113A 100%);color:#fff;padding:80px 64px;display:flex;flex-direction:column;justify-content:center}
-#wf-gate .wg-logo{font-size:46px;font-weight:800;letter-spacing:.5px;margin-bottom:40px}
-#wf-gate .wg-logo small{font-size:20px;font-weight:600;opacity:.95;margin-left:2px}
+#wf-gate .wg-logo{height:34px;width:auto;display:block;margin-bottom:40px}
 #wf-gate .wg-tag{font-size:40px;font-weight:700;line-height:1.25;margin-bottom:22px}
 #wf-gate .wg-sub{font-size:15px;line-height:1.8;opacity:.92;max-width:420px}
 #wf-gate .wg-right{flex:1;display:flex;align-items:center;justify-content:center;padding:40px}
