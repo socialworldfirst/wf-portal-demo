@@ -272,6 +272,20 @@
   .kjb-info{background:#F4F8FF;color:#5a6b8c;font-size:13px;padding:12px 16px;border-radius:8px;margin:18px 0;display:flex;align-items:center;gap:8px}
   .kjb-sum{display:flex;align-items:center;font-size:13px;color:#6B6B72;margin:8px 0 6px}
   .kjb-sum b{color:var(--ink)}
+  .btn-line{height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;color:#3a3a42;font-size:13px;font-weight:500;padding:0 14px;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+  .btn-line:hover{border-color:var(--red);color:var(--red)}
+  .sp-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 24px}
+  .sp-tab{border:1px solid var(--line);border-radius:999px;padding:8px 18px;font-size:14px;color:#3a3a42;cursor:pointer}
+  .sp-tab.on{background:#FFF1F5;border-color:var(--red);color:var(--red);font-weight:600}
+  .sp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .sp-card{border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:264px}
+  .sp-cat{position:absolute;top:0;left:0;background:#F3F3F7;color:#8a8a92;font-size:11px;padding:3px 10px;border-top-left-radius:14px;border-bottom-right-radius:10px}
+  .sp-rec{position:absolute;top:0;right:0;background:#FFF1F5;color:var(--red);font-size:11px;font-weight:600;padding:3px 10px;border-top-right-radius:14px;border-bottom-left-radius:10px}
+  .sp-logo{height:62px;display:flex;align-items:center;justify-content:center;margin:22px 0 14px}
+  .sp-logo img{max-height:46px;max-width:175px;object-fit:contain}
+  .sp-name{font-weight:700;font-size:14px;line-height:1.4;margin-bottom:10px}
+  .sp-desc{color:#9a9aa2;font-size:12.5px;line-height:1.6;flex:1}
+  .sp-pay{width:100%;margin-top:14px;justify-content:center;height:38px;border-radius:999px;border-color:var(--red);color:var(--red);font-weight:600}
 
   /* FX / forex page */
   .fx-head{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:700;margin-bottom:24px}
@@ -400,6 +414,7 @@
 
 <script src="assets/iconfont1.js"></script>
 <script src="assets/iconfont2.js"></script>
+<script src="assets/providers.js"></script>
 <script>
 /* ---------------- params / data ---------------- */
 const P = new URLSearchParams(location.search);
@@ -656,10 +671,10 @@ const VIEWS = {
     '<div class="card bal-card"><div class="bt">可用余额</div>'+
       '<div class="bx">扣款方式：默认使用交易同币种余额扣款，交易币种余额不足时使用 <b>美元</b> 或 <b>港币</b> 余额扣款</div>'+
       '<div class="chips">'+
-        '<div class="chip"><img class="flag" src="'+flagUrl('us')+'"/><div><b>12,480.55</b><br><small>USD</small></div></div>'+
-        '<div class="chip"><img class="flag" src="'+flagUrl('hk')+'"/><div><b>88,210.00</b><br><small>HKD</small></div></div>'+
-        '<div class="chip"><img class="flag" src="'+flagUrl('ae')+'"/><div><b>3,200.00</b><br><small>AED</small></div></div>'+
-        '<div class="chip"><img class="flag" src="'+flagUrl('au')+'"/><div><b>31,205.75</b><br><small>AUD</small></div></div>'+
+        '<div class="chip"><img class="flag" src="'+flagUrl('us')+'"/><div><b>120,430.55</b><br><small>USD</small></div></div>'+
+        '<div class="chip"><img class="flag" src="'+flagUrl('hk')+'"/><div><b>5,900.00</b><br><small>HKD</small></div></div>'+
+        '<div class="chip"><img class="flag" src="'+flagUrl('ae')+'"/><div><b>0.00</b><br><small>AED</small></div></div>'+
+        '<div class="chip"><img class="flag" src="'+flagUrl('au')+'"/><div><b>0.00</b><br><small>AUD</small></div></div>'+
         '<div class="chip-next">›</div>'+
       '</div></div>'+
     '<div class="sec-h">默认账户 · 所有卡 <div class="act" style="margin-left:auto"><button class="btn-pill">+ 申请新卡</button></div></div>'+
@@ -759,7 +774,19 @@ const VIEWS = {
     return '<div class="page-h">'+label+'</div><div class="card"><div class="empty"><div class="ei">'+ico(ICON.plus,40)+'</div><div>'+label+' · 演示页面</div><div style="font-size:13px">该模块在演示环境中展示，操作已禁用</div></div></div>';
   }
 };
-['orders','intransit','request','supplier','transrec','wt-ov','wt-ord','fin-loan','fin-ins'].forEach(id=>{ if(!VIEWS[id]) VIEWS[id]=VIEWS._generic; });
+VIEWS.supplier=function(){
+  var cats=['全部服务商','推荐服务商','退税服务','广告营销','物流仓储','技术服务','财务税务','分销平台'];
+  return ''+
+   '<div style="font-size:22px;font-weight:700">选择服务商</div>'+
+   '<div style="color:#9a9aa2;font-size:13px;margin:7px 0 22px">选择对应服务商发起付款，支持实时到账，点击 LOGO 可查看服务商详情。没有找到您的服务商？<a style="color:var(--link);cursor:pointer">点击反馈</a></div>'+
+   '<div class="search" style="width:100%;max-width:680px">'+ico(ICON.search,16)+'<input placeholder="搜索对应服务商发起付款，支持实时到账"/></div>'+
+   '<div class="sp-tabs">'+cats.map(function(c,i){return '<div class="sp-tab'+(i===0?' on':'')+'" onclick="spFilter(this,\''+c+'\')">'+c+'</div>';}).join('')+'</div>'+
+   '<div class="sp-grid" id="sp-grid">'+(window.PROVIDERS||[]).map(spCard).join('')+'</div>';
+};
+function spDesc(cat){return {'广告营销':'跨境广告投放与品牌出海营销服务。','物流仓储':'跨境物流头程、海外仓与末端配送服务。','退税服务':'出口退税申报与跨境合规服务。','技术服务':'跨境电商技术与 SaaS 解决方案。','财务税务':'跨境财税、合规与公司服务。','分销平台':'全球分销与供货平台服务。'}[cat]||'跨境电商服务商，支持万里汇余额实时付款。';}
+function spCard(p){return '<div class="sp-card" data-cat="'+(p.cat||'')+'" data-rec="'+(p.rec?1:0)+'">'+(p.cat?'<span class="sp-cat">'+p.cat+'</span>':'')+(p.rec?'<span class="sp-rec">推荐</span>':'')+'<div class="sp-logo"><img src="'+p.logo+'" alt="" loading="lazy"/></div><div class="sp-name">'+(p.name||'')+'</div><div class="sp-desc">'+spDesc(p.cat)+'</div><button class="btn-line sp-pay" onclick="toast(\'演示环境，付款功能已禁用\')">去付款</button></div>';}
+function spFilter(el,cat){var t=el.parentElement.querySelectorAll('.sp-tab');for(var i=0;i<t.length;i++)t[i].classList.remove('on');el.classList.add('on');var cards=document.querySelectorAll('#sp-grid .sp-card');for(var j=0;j<cards.length;j++){var c=cards[j];var show=(cat==='全部服务商')||(cat==='推荐服务商'&&c.getAttribute('data-rec')==='1')||(c.getAttribute('data-cat')===cat);c.style.display=show?'':'none';}}
+['orders','intransit','request','transrec','wt-ov','wt-ord','fin-loan','fin-ins'].forEach(id=>{ if(!VIEWS[id]) VIEWS[id]=VIEWS._generic; });
 
 /* ---------------- toast ---------------- */
 let tT;
