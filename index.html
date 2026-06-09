@@ -25,7 +25,10 @@
   img{display:block}
   .flag{width:24px;height:24px;border-radius:50%;object-fit:cover;background:#eee;flex:none}
   .ri{fill:currentColor;display:inline-block;vertical-align:-0.15em}
-  .logo-img{height:30px;width:auto;display:block}
+  .logo-img{height:22px;width:auto;display:block}
+  .banner-img{width:100%;display:block;border-radius:14px}
+  .app-ico{width:24px;height:24px;border-radius:6px;display:block}
+  .amt{transition:color .2s}
   .ti-img{width:44px;height:44px;flex:none;object-fit:contain}
 
   /* ---------- LOGIN ---------- */
@@ -66,7 +69,7 @@
   .logo .wf{display:flex;flex-direction:column;line-height:1.1;font-size:11px;color:#2b2b3a;font-weight:700;letter-spacing:.5px}
   .logo .wf b{color:var(--red);font-size:11px}
   .nav{padding:6px 12px 30px}
-  .nav-item{display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:10px;color:#3a3a42;cursor:pointer;font-size:14.5px;user-select:none;position:relative}
+  .nav-item{display:flex;align-items:center;gap:14px;height:48px;padding:0 16px;border-radius:10px;color:#3a3a42;cursor:pointer;font-size:14px;user-select:none;position:relative;margin-bottom:4px}
   .nav-item:hover{background:var(--line-2)}
   .nav-item.on{background:#F3F3F8;color:var(--ink);font-weight:600}
   .nav-item .ico{width:18px;height:18px;flex:none;color:#86868f;display:flex}
@@ -75,7 +78,7 @@
   .nav-item.open .car{transform:rotate(180deg)}
   .sub{overflow:hidden;max-height:0;transition:max-height .25s ease}
   .sub.open{max-height:340px}
-  .sub-item{display:flex;align-items:center;height:40px;padding:0 14px 0 44px;border-radius:10px;color:#5a5a63;cursor:pointer;font-size:14px}
+  .sub-item{display:flex;align-items:center;height:44px;padding:0 16px 0 48px;border-radius:10px;color:#5a5a63;cursor:pointer;font-size:14px;margin-bottom:2px}
   .sub-item:hover{background:var(--line-2)}
   .sub-item.on{color:var(--red);font-weight:600;background:#FFF1F5}
   .demo-tag{margin:8px 20px 24px;font-size:11px;color:#c2c2c9;letter-spacing:1.5px}
@@ -91,7 +94,8 @@
   .bell{position:relative;color:#5a5a63;cursor:pointer;display:flex}
   .bell .b{position:absolute;top:-8px;left:11px;background:var(--red);color:#fff;font-size:10px;border-radius:9px;padding:1px 5px;font-weight:600}
   .user{display:flex;align-items:center;gap:9px;cursor:pointer}
-  .user .av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#FF6f9c,#FF0051);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px}
+  .user .av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#FF6f9c,#FF0051);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;flex:none}
+  .user #uname{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .content{padding:30px 32px 60px;max-width:1380px}
 
   /* ---------- COMPONENTS ---------- */
@@ -356,7 +360,7 @@
       <div class="promo-sel">外贸B2B与海外账号快捷开通！<span class="dot"></span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
       <div class="grow"></div>
-      <div class="app-btn"><span class="qr">WF</span>下载万里汇App</div>
+      <div class="app-btn"><img class="app-ico" src="assets/app-icon.png" alt="">下载万里汇App</div>
       <div class="lk">新手引导</div>
       <div class="bell"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="b">10+</span></div>
       <div class="user"><span class="av" id="avatar"></span><span id="uname">hello,</span>
@@ -380,7 +384,7 @@
 const P = new URLSearchParams(location.search);
 const NAMES = ['陈嘉怡','林浩然','王思远','李梓萌','黄俊杰','周雅琳','吴宇航','刘梦洁','徐文涛','张晓彤','郑书瑶','赵睿哲'];
 const NAME = P.get('name') || NAMES[Math.floor(Math.random()*NAMES.length)];
-const COMPANY = P.get('company') || '';
+const COMPANY = P.get('company') || 'LINKWAVE TRADING (HK) LIMITED';
 const MOBILE = P.get('mobile') || '132 4803 4068';
 const SHOW_TODO = P.get('todo')==='1';  // 待办事项 temporarily hidden; add ?todo=1 to show
 
@@ -428,26 +432,22 @@ const NAV = [
   {id:'benefits', ic:'gift', label:'我的权益'}
 ];
 const ACCOUNTS = [
-  {cur:'美元',code:'USD',flag:'us',no:'**** **** 8842',loc:'美国',bal:'128,430.55'},
-  {cur:'欧元',code:'EUR',flag:'eu',no:'IE63 CHAS 9309 0301 0076 68',loc:'爱尔兰',bal:'64,210.00'},
-  {cur:'英镑',code:'GBP',flag:'gb',no:'GB74 CHAS 6095 6121 6559 71',loc:'英国',bal:'22,890.40'},
-  {cur:'离岸人民币',code:'CNH',flag:'cn',no:'**** **** 6677',loc:'香港',bal:'402,118.00'},
-  {cur:'日元',code:'JPY',flag:'jp',no:'9569 002',loc:'日本',bal:'1,540,200'},
-  {cur:'港元',code:'HKD',flag:'hk',no:'**** **** 5520',loc:'香港',bal:'88,210.00'},
-  {cur:'加拿大元',code:'CAD',flag:'ca',no:'3007 100001',loc:'加拿大',bal:'18,300.20'},
-  {cur:'澳大利亚元',code:'AUD',flag:'au',no:'**** **** 1190',loc:'澳大利亚',bal:'31,205.75'},
-  {cur:'新加坡元',code:'SGD',flag:'sg',no:'**** **** 2031',loc:'新加坡',bal:'12,040.00'}
+  {cur:'美元',code:'USD',flag:'us',no:'**** **** 8842',loc:'美国',bal:'120,430.55'},
+  {cur:'欧元',code:'EUR',flag:'eu',no:'IE63 CHAS 9309 0301 0076 68',loc:'爱尔兰',bal:'8,420.00'},
+  {cur:'英镑',code:'GBP',flag:'gb',no:'GB74 CHAS 6095 6121 6559 71',loc:'英国',bal:'3,150.40'},
+  {cur:'离岸人民币',code:'CNH',flag:'cn',no:'**** **** 6677',loc:'香港',bal:'12,680.00'},
+  {cur:'港元',code:'HKD',flag:'hk',no:'**** **** 5520',loc:'香港',bal:'5,900.00'},
+  {cur:'日元',code:'JPY',flag:'jp',no:'9569 002',loc:'日本',bal:'0'},
+  {cur:'加拿大元',code:'CAD',flag:'ca',no:'3007 100001',loc:'加拿大',bal:'0.00'},
+  {cur:'澳大利亚元',code:'AUD',flag:'au',no:'**** **** 1190',loc:'澳大利亚',bal:'0.00'},
+  {cur:'新加坡元',code:'SGD',flag:'sg',no:'**** **** 2031',loc:'新加坡',bal:'0.00'}
 ];
 const ASSETS = [
   {cur:'美元',code:'USD',flag:'us',total:'128,430.55',avail:'120,430.55',unavail:'1,200.00',pending:'8,000.00'},
-  {cur:'欧元',code:'EUR',flag:'eu',total:'64,210.00',avail:'60,210.00',unavail:'',pending:'4,000.00'},
-  {cur:'离岸人民币',code:'CNH',flag:'cn',total:'402,118.00',avail:'388,118.00',unavail:'',pending:'14,000.00'},
-  {cur:'英镑',code:'GBP',flag:'gb',total:'22,890.40',avail:'21,390.40',unavail:'',pending:'1,500.00'},
-  {cur:'澳大利亚元',code:'AUD',flag:'au',total:'31,205.75',avail:'29,205.75',unavail:'',pending:'2,000.00'},
-  {cur:'加拿大元',code:'CAD',flag:'ca',total:'18,300.20',avail:'18,300.20',unavail:'',pending:'0.00'},
-  {cur:'港元',code:'HKD',flag:'hk',total:'88,210.00',avail:'88,210.00',unavail:'',pending:'0.00'},
-  {cur:'日元',code:'JPY',flag:'jp',total:'1,540,200',avail:'1,540,200',unavail:'',pending:'0'},
-  {cur:'新加坡元',code:'SGD',flag:'sg',total:'12,040.00',avail:'12,040.00',unavail:'',pending:'0.00'}
+  {cur:'欧元',code:'EUR',flag:'eu',total:'8,420.00',avail:'8,420.00',unavail:'',pending:'0.00'},
+  {cur:'离岸人民币',code:'CNH',flag:'cn',total:'12,680.00',avail:'12,680.00',unavail:'',pending:'0.00'},
+  {cur:'英镑',code:'GBP',flag:'gb',total:'3,150.40',avail:'3,150.40',unavail:'',pending:'0.00'},
+  {cur:'港元',code:'HKD',flag:'hk',total:'5,900.00',avail:'5,900.00',unavail:'',pending:'0.00'}
 ];
 const TXNS = [
   {d:'in', w:'收款 来自 Amazon EU S.a r.l.', t:'2026/06/08, 09:14:02', a:'+12,480.00', c:'EUR'},
@@ -549,7 +549,11 @@ function fluctuate(){
 function bumpTimes(){ var els=document.querySelectorAll('.fx-time'); for(var i=0;i<els.length;i++){ var s=(parseInt(els[i].getAttribute('data-sec'),10)+30)%86400; els[i].setAttribute('data-sec',s); els[i].textContent=hms(s); } }
 function hms(s){ return pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60); }
 function pad(n){ return (n<10?'0':'')+n; }
-function assetCard(a){return '<div class="acard"><div class="ah"><img src="'+flagUrl(a.flag)+'"/><b>'+a.cur+'</b></div><div class="big">'+a.total+'<small>'+a.code+'</small></div><div class="arow"><span class="lbl">账户余额 '+ri('iconinfo',12)+'</span><span class="val">'+a.avail+' '+a.code+'</span></div>'+(a.unavail?'<div class="arow un"><span class="lbl">含不可用余额</span><span class="val">'+a.unavail+' '+a.code+'</span></div>':'')+'<div class="arow"><span class="lbl">待入账金额 '+ri('iconinfo',12)+'</span><span class="val">'+a.pending+' '+a.code+'</span></div></div>';}
+const MASK='∗∗∗∗∗∗';
+let amtHidden=true;
+function amt(v){return '<span class="amt" data-v="'+v+'">'+(amtHidden?MASK:v)+'</span>';}
+function toggleAmt(){amtHidden=!amtHidden;var els=document.querySelectorAll('.amt');for(var i=0;i<els.length;i++)els[i].textContent=amtHidden?MASK:els[i].getAttribute('data-v');var t=document.getElementById('amt-toggle');if(t&&t.lastChild)t.lastChild.textContent=amtHidden?'显示':'隐藏';}
+function assetCard(a){return '<div class="acard"><div class="ah"><img src="'+flagUrl(a.flag)+'"/><b>'+a.cur+'</b></div><div class="big">'+amt(a.total)+'<small>'+a.code+'</small></div><div class="arow"><span class="lbl">账户余额 '+ri('iconinfo',12)+'</span><span class="val">'+amt(a.avail)+' '+a.code+'</span></div>'+(a.unavail?'<div class="arow un"><span class="lbl">含不可用余额</span><span class="val">'+amt(a.unavail)+' '+a.code+'</span></div>':'')+'<div class="arow"><span class="lbl">待入账金额 '+ri('iconinfo',12)+'</span><span class="val">'+amt(a.pending)+' '+a.code+'</span></div></div>';}
 function toggleAssets(){var g=document.getElementById('acards'),m=document.getElementById('assets-more');if(g)g.classList.toggle('collapsed');if(m)m.classList.toggle('open');}
 const txnRow = x=>'<div class="row"><div class="ar '+x.d+'">'+(x.d==='in'?'&#8595;':'&#8593;')+'</div>'+
   '<div><div class="who">'+x.w+'</div><div class="meta"><span class="ok">成功</span>'+x.t+'</div></div>'+
@@ -565,7 +569,7 @@ function prodPage(title,items){return '<div class="page-h">'+title+'</div><div c
 function render(){ document.getElementById('content').innerHTML = (VIEWS[route]||VIEWS._generic)(); }
 const VIEWS = {
   home(){return ''+
-    '<div class="banner"><h3>万里汇外贸B2B <b>百亿补贴</b> 新客专享锁定全年优惠</h3><div class="more">查看详情 ›</div></div>'+
+    '<img class="banner-img" src="assets/banner.png" alt="万里汇外贸B2B 百亿补贴 新客专享锁定全年优惠">'+
     '<div class="grid col-2" style="margin-top:24px"><div>'+
       (SHOW_TODO?'<div class="sec-h">待办事项</div>'+
       '<div class="card todo">'+
@@ -581,8 +585,8 @@ const VIEWS = {
         '<button class="qbtn" onclick="go(\'supplier\')"><span class="qi">'+ri('icon-vendor_payment',18)+'</span>服务商快付</button>'+
         '<button class="qbtn"><span class="qi">'+ri('icon-overflow_menu',18)+'</span></button>'+
       '</div>'+
-      '<div class="sec-h">我的资产 <span class="sm">下载 App，随时随地便捷收付</span><span class="assets-tools"><span>'+ico('<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',15)+'隐藏</span><span>'+ico(ICON.edit,15)+'编辑</span></span></div>'+
-      '<div class="assets-bar"><span class="assets-total">预估总资产 '+ri('iconinfo',14)+' &#8776; <b>348,920.65</b> <span class="u">USD</span> '+ri('icon-chevron-down',14)+'</span><span class="assets-month">过去 1 个月收款金额约 &#8776; 96,420.00 USD <span class="kanban">'+ico('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',14)+'收款看板 <span class="nf">新功能</span></span></span></div>'+
+      '<div class="sec-h">我的资产 <span class="sm">下载 App，随时随地便捷收付</span><span class="assets-tools"><span id="amt-toggle" onclick="toggleAmt()">'+ico('<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',15)+'显示</span><span>'+ico(ICON.edit,15)+'编辑</span></span></div>'+
+      '<div class="assets-bar"><span class="assets-total">预估总资产 '+ri('iconinfo',14)+' &#8776; <b>'+amt('144,442.30')+'</b> <span class="u">USD</span> '+ri('icon-chevron-down',14)+'</span><span class="assets-month">过去 1 个月收款金额约 &#8776; '+amt('18,640.00')+' USD <span class="kanban">'+ico('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',14)+'收款看板 <span class="nf">新功能</span></span></span></div>'+
       '<div class="acards collapsed" id="acards">'+ASSETS.map(assetCard).join('')+'</div>'+
       '<div class="assets-more" id="assets-more"><button onclick="toggleAssets()">'+ri('iconarrowdown',16)+'</button></div>'+
       '<div class="sec-h">账户交易</div>'+
@@ -739,7 +743,7 @@ function doLogin(){
 function typeInto(el,text,done){let i=0;(function tick(){el.value=text.slice(0,i++);if(i<=text.length)setTimeout(tick,55);else if(done)done();})();}
 
 window.addEventListener('DOMContentLoaded',function(){
-  const first=(NAME.trim()[0]||'S').toUpperCase();
+  const first=((COMPANY||NAME).trim()[0]||'L').toUpperCase();
   document.getElementById('avatar').textContent=first;
   document.getElementById('uname').textContent='hello, '+(COMPANY||NAME);
   if(P.get('demo')!=='1'){document.getElementById('demoTag').style.display='none';}
