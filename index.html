@@ -877,7 +877,20 @@ VIEWS.intransit=function(){var rows=[['Amazon.com Services LLC','美元','+18,33
 VIEWS.request=function(){var rows=[['Bright Future Logistics Ltd.','+3,500.00','GBP','已支付','2026/06/06'],['Pacific Components Inc.','+12,400.00','USD','待支付','2026/06/05'],['New customer deposit','+1,200.00','USD','待支付','2026/06/02']];return '<div class="page-h">请求收款 <div class="act"><button class="btn-pill">+ 创建收款请求</button></div></div>'+'<div style="color:#9a9aa2;font-size:13px;margin:-10px 0 18px">向客户发送收款链接，对方可通过银行卡 / 转账付款至您的万里汇账户。</div>'+'<table class="tbl"><thead><tr><th>收款备注</th><th>金额</th><th>状态</th><th>创建时间</th><th class="right">操作</th></tr></thead><tbody>'+rows.map(function(r){return '<tr><td><b>'+r[0]+'</b></td><td><b>'+r[1]+'</b> <span style="color:#9a9aa2;font-size:12px">'+r[2]+'</span></td><td>'+statusTag(r[3])+'</td><td style="color:#9a9aa2">'+r[4]+'</td><td class="right"><a class="det" style="color:var(--link)">复制链接</a></td></tr>';}).join('')+'</tbody></table>';};
 VIEWS['wt-ov']=function(){return '<div class="page-h">WorldTrade</div>'+'<div class="card" style="background:linear-gradient(120deg,#EAF1FF,#F4ECFF);border:none;margin-bottom:22px"><div style="font-size:20px;font-weight:800;margin-bottom:8px">WorldTrade · 跨境 B2B 交易</div><p style="color:#4a4a55;line-height:1.8;max-width:760px">在线对接海外买家与中国供应商，支持交易撮合、合同管理、担保收付与账期融资，让跨境 B2B 大额交易更安全、更高效。</p></div>'+'<div class="prod-grid">'+'<div class="prod"><span class="pi">'+ico(ICON.trade,22)+'</span><h4>在线下单</h4><p>在线发起与管理跨境采购订单，全流程可追踪。</p></div>'+'<div class="prod"><span class="pi">'+ico(ICON.check,22)+'</span><h4>交易保障</h4><p>担保收付，资金按交易节点释放，买卖双方更安心。</p></div>'+'<div class="prod"><span class="pi">'+ico(ICON.finance,22)+'</span><h4>账期融资</h4><p>基于真实交易流水提供灵活账期与融资额度。</p></div>'+'</div>';};
 VIEWS['wt-ord']=function(){var rows=[['WT20260605001','Pacific Components Inc.','+45,000.00','USD','履约中','2026/06/05'],['WT20260528004','Bright Future Logistics Ltd.','+28,600.00','GBP','已完成','2026/05/28']];return '<div class="page-h">订单管理</div>'+'<table class="tbl"><thead><tr><th>订单号</th><th>交易对手</th><th>金额</th><th>状态</th><th class="right">创建时间</th></tr></thead><tbody>'+rows.map(function(r){return '<tr><td style="color:#6B6B72">'+r[0]+'</td><td><b>'+r[1]+'</b></td><td><b>'+r[2]+'</b> <span style="color:#9a9aa2;font-size:12px">'+r[3]+'</span></td><td>'+statusTag(r[4])+'</td><td class="right" style="color:#9a9aa2">'+r[5]+'</td></tr>';}).join('')+'</tbody></table>';};
-['fin-loan','fin-ins'].forEach(id=>{ if(!VIEWS[id]) VIEWS[id]=VIEWS._generic; });
+VIEWS['fin-loan']=function(){return '<div class="page-h">账期融资</div>'+
+  '<div class="card" style="display:flex;align-items:center;background:linear-gradient(120deg,#EAF1FF,#fff);margin-bottom:22px"><div><div style="color:#3a3a42;font-size:14px">可用授信额度（参考）</div><div style="font-size:30px;font-weight:800;margin-top:6px">200,000.00 <span style="font-size:15px;color:var(--ink-2);font-weight:600">USD</span></div></div><button class="btn-pill" style="margin-left:auto" onclick="toast(\'演示环境，申请功能已禁用\')">申请额度</button></div>'+
+  '<div class="prod-grid">'+
+   '<div class="prod"><span class="pi">'+ico(ICON.finance,22)+'</span><h4>基于交易流水</h4><p>用真实的跨境收款流水授信，最快当天放款。</p></div>'+
+   '<div class="prod"><span class="pi">'+ico(ICON.savings,22)+'</span><h4>灵活周转</h4><p>旺季备货、账期垫资随借随还，按日计息。</p></div>'+
+   '<div class="prod"><span class="pi">'+ico(ICON.check,22)+'</span><h4>纯线上办理</h4><p>全流程线上申请与还款，无需抵押。</p></div>'+
+  '</div>';};
+VIEWS['fin-ins']=function(){return '<div class="page-h">跨境保险</div>'+
+  '<div class="card" style="background:linear-gradient(120deg,#EAF1FF,#F4ECFF);border:none;margin-bottom:22px"><div style="font-size:20px;font-weight:800;margin-bottom:8px">跨境保险 · 为每一笔订单保驾护航</div><p style="color:#4a4a55;line-height:1.8;max-width:760px">货物运输、信用风险、合规责任一站投保，保障跨境贸易全链路安全。</p></div>'+
+  '<div class="prod-grid">'+
+   '<div class="prod"><span class="pi">'+ico(ICON.trade,22)+'</span><h4>货物运输险</h4><p>覆盖海运、空运全程货损货差风险。</p></div>'+
+   '<div class="prod"><span class="pi">'+ico(ICON.payee,22)+'</span><h4>信用保险</h4><p>买家违约、拒付风险保障，安心做账期。</p></div>'+
+   '<div class="prod"><span class="pi">'+ico(ICON.check,22)+'</span><h4>合规责任险</h4><p>VAT、产品责任等海外合规风险兜底。</p></div>'+
+  '</div>';};
 
 /* ---------------- toast ---------------- */
 let tT;
