@@ -109,11 +109,11 @@
   .sec-h{font-size:18px;font-weight:700;margin:30px 0 16px;display:flex;align-items:center;gap:10px}
   .sec-h .sm{font-size:13px;color:var(--ink-3);font-weight:400}
 
-  .banner{height:120px;border-radius:14px;background:linear-gradient(100deg,#FF2D6E,#FF0051 60%,#D6003f);color:#fff;display:flex;align-items:center;padding:0 36px;gap:18px;position:relative;overflow:hidden}
-  .banner h3{font-size:26px;font-weight:800;letter-spacing:.5px;position:relative;z-index:1}
+  .banner{height:120px;border-radius:14px;background:linear-gradient(90deg,#FD3A4B 0%,#FD3A4B 52%,#F31C46 100%);color:#fff;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .banner-deco{position:absolute;left:14px;top:50%;transform:translateY(-50%);height:122px;width:auto;z-index:1}
+  .banner h3{font-size:25px;font-weight:800;letter-spacing:.5px;position:relative;z-index:2;text-align:center}
   .banner h3 b{color:#FFE34D}
-  .banner .more{margin-left:auto;background:#fff;color:var(--red);height:40px;border-radius:999px;padding:0 22px;font-weight:700;display:flex;align-items:center;position:relative;z-index:1}
-  .banner::after{content:"";position:absolute;right:230px;top:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.1)}
+  .banner .more{position:absolute;right:36px;top:50%;transform:translateY(-50%);background:#fff;color:#E10449;height:38px;border-radius:999px;padding:0 22px;font-weight:700;display:flex;align-items:center;z-index:2;font-size:14px}
 
   .todo .row{display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:1px solid var(--line-2)}
   .todo .row:last-child{border-bottom:none}
@@ -179,9 +179,7 @@
   .fx .fav .ed{margin-left:auto;border:1px solid var(--line);border-radius:8px;padding:5px 12px;color:#3a3a42;display:flex;gap:6px;align-items:center}
   .rate{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line-2)}
   .rate:last-child{border-bottom:none}
-  .rate .rr{flex:1}
-  .rate .a{color:var(--ink-2);font-size:13px}
-  .rate .b{font-weight:700;font-size:15px;margin-top:2px}
+  .rate .rr{flex:1;font-size:14px;color:#3a3a42}
   .rate svg{flex:none}
   .cal{margin-top:20px}
   .cal .ct{color:#4a4a55;font-size:13.5px;line-height:1.7}
@@ -473,7 +471,7 @@ const NAMES = ['陈嘉怡','林浩然','王思远','李梓萌','黄俊杰','周�
 const NAME = P.get('name') || NAMES[Math.floor(Math.random()*NAMES.length)];
 const COMPANY = P.get('company') || 'LINKWAVE TRADING (HK) LIMITED';
 const MOBILE = P.get('mobile') || '132 4803 4068';
-const SHOW_TODO = P.get('todo')==='1';  // 待办事项 temporarily hidden; add ?todo=1 to show
+const SHOW_TODO = P.get('todo')!=='0';  // 待办事项 shown by default (matches real); hide with ?todo=0
 
 const ICON = {
   home:'<path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>',
@@ -651,7 +649,7 @@ const txnRow = x=>'<div class="row"><div class="ar '+x.d+'">'+(x.d==='in'?'&#859
 function fxPanel(){return '<div class="card fx">'+
   '<div class="fxh"><b>实时汇率</b><span class="upd">最后更新于 <span class="fx-time" data-sec="35322">09:48:42</span> '+cdRing()+'</span></div>'+
   '<div class="fav">汇率收藏 <span class="ed">'+ico(ICON.edit,13)+' 编辑</span></div>'+
-  RATES.map(r=>'<div class="rate"><div class="rr"><div class="a">'+r[0]+'</div><div class="b"><span class="rateval" data-base="'+r[1]+'" data-cur="'+r[1]+'">'+r[1]+'</span><span style="font-size:12px;color:#9a9aa2;font-weight:500"> '+r[2]+'</span></div></div>'+spark(r[3])+'</div>').join('')+
+  RATES.map(r=>'<div class="rate"><div class="rr">'+r[0]+' &#8594; <span class="rateval" data-base="'+r[1]+'" data-cur="'+r[1]+'">'+r[1]+'</span> <span style="color:#9a9aa2">'+r[2]+'</span></div>'+spark(r[3])+'</div>').join('')+
   '<a class="viewall" onclick="go(\'exchange\')">前往汇兑中心 ›</a></div>';}
 function prodPage(title,items){return '<div class="page-h">'+title+'</div><div class="prod-grid">'+items.map(it=>'<div class="prod"><span class="pi">'+ico(ICON.finance,22)+'</span><h4>'+it[0]+'</h4><p>'+it[1]+'</p><a class="det">了解更多 ›</a></div>').join('')+'</div>';}
 
@@ -682,7 +680,7 @@ const KJB_BILLS=[
 function kjbTab(el){var s=el.parentElement.querySelectorAll('.kjb-tab');for(var i=0;i<s.length;i++)s[i].classList.remove('on');el.classList.add('on');}
 const VIEWS = {
   home(){return ''+
-    '<img class="banner-img" src="assets/banner.png" alt="万里汇外贸B2B 百亿补贴 新客专享锁定全年优惠">'+
+    '<div class="banner"><img class="banner-deco" src="assets/banner-deco.png" alt=""><h3>万里汇外贸B2B <b>百亿补贴</b> 新客专享锁定全年优惠</h3><div class="more">查看详情 ›</div></div>'+
     '<div class="grid col-2" style="margin-top:24px"><div>'+
       (SHOW_TODO?'<div class="sec-h">待办事项</div>'+
       '<div class="card todo">'+
