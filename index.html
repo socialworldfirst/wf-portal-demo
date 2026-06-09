@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1280" />
+<meta name="robots" content="noindex,nofollow" />
+<title>万里汇 WorldFirst</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23FF0051'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='700'>万</text></svg>" />
+<style>
+  :root{
+    --red:#FF0051; --red-d:#E0004a; --red-soft:#FFE9F0;
+    --ink:#1A1A1A; --ink-2:#6B6B72; --ink-3:#9A9AA2;
+    --line:#ECECEF; --line-2:#F4F4F7;
+    --link:#4E5BD6; --green:#00B578; --green-soft:#E6F8F1;
+    --grad-a:#EAF1FF; --grad-b:#F4ECFF;
+    --side:256px; --top:64px;
+    --font:"Roboto","PingFang SC",-apple-system,"system-ui","Segoe UI","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:var(--font);color:var(--ink);background:#fff;font-size:14px;-webkit-font-smoothing:antialiased}
+  a{color:var(--link);text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+  img{display:block}
+  .flag{width:24px;height:24px;border-radius:50%;object-fit:cover;background:#eee;flex:none}
+
+  /* ---------- LOGIN ---------- */
+  #login{position:fixed;inset:0;z-index:50;display:flex;background:#fff;transition:opacity .5s ease}
+  #login.hide{opacity:0;pointer-events:none}
+  .lg-brand{flex:1.1;background:linear-gradient(135deg,#FF2D6E 0%,#FF0051 55%,#D6003f 100%);color:#fff;
+    display:flex;flex-direction:column;justify-content:center;padding:0 8vw;position:relative;overflow:hidden}
+  .lg-brand::after{content:"";position:absolute;right:-120px;bottom:-120px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.08)}
+  .lg-brand::before{content:"";position:absolute;left:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.06)}
+  .lg-logo{font-size:42px;font-weight:800;letter-spacing:1px;margin-bottom:26px;display:flex;align-items:baseline;gap:10px}
+  .lg-logo small{font-size:18px;font-weight:600;opacity:.95}
+  .lg-h{font-size:34px;font-weight:700;line-height:1.35;margin-bottom:18px;position:relative;z-index:1}
+  .lg-sub{font-size:16px;opacity:.92;line-height:1.9;position:relative;z-index:1}
+  .lg-form{flex:1;display:flex;align-items:center;justify-content:center}
+  .lg-card{width:380px}
+  .lg-card h2{font-size:24px;font-weight:700;margin-bottom:4px}
+  .lg-card .muted{color:var(--ink-3);margin-bottom:30px}
+  .lg-tabs{display:flex;gap:28px;border-bottom:1px solid var(--line);margin-bottom:26px}
+  .lg-tabs span{padding-bottom:12px;color:var(--ink-2);font-size:15px;cursor:pointer}
+  .lg-tabs span.on{color:var(--ink);font-weight:600;border-bottom:2px solid var(--red)}
+  .fld{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;height:48px;padding:0 14px;margin-bottom:16px;transition:border .2s}
+  .fld:focus-within{border-color:var(--red)}
+  .fld .pre{color:var(--ink-2);padding-right:10px;border-right:1px solid var(--line);margin-right:12px;font-size:15px}
+  .fld input{border:none;outline:none;flex:1;font-size:15px;font-family:inherit;color:var(--ink);background:transparent}
+  .fld .sms{color:var(--red);font-size:13px;white-space:nowrap;cursor:pointer}
+  .lg-btn{width:100%;height:48px;border-radius:999px;background:var(--red);color:#fff;font-size:16px;font-weight:600;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:10px;transition:background .2s}
+  .lg-btn:hover{background:var(--red-d)}
+  .lg-row{display:flex;justify-content:space-between;margin-top:18px;font-size:13px;color:var(--ink-2)}
+  .spin{width:18px;height:18px;border:2px solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+
+  /* ---------- APP SHELL ---------- */
+  #app{display:none;min-height:100vh}
+  #app.show{display:block}
+  .side{position:fixed;top:0;left:0;bottom:0;width:var(--side);background:#fff;border-right:1px solid var(--line);overflow-y:auto;z-index:20}
+  .side::-webkit-scrollbar{width:6px}.side::-webkit-scrollbar-thumb{background:#e4e4e8;border-radius:3px}
+  .logo{height:var(--top);display:flex;align-items:center;gap:9px;padding:0 22px;font-weight:800;font-size:25px;color:var(--red);position:sticky;top:0;background:#fff;z-index:2}
+  .logo .wf{display:flex;flex-direction:column;line-height:1.1;font-size:11px;color:#2b2b3a;font-weight:700;letter-spacing:.5px}
+  .logo .wf b{color:var(--red);font-size:11px}
+  .nav{padding:6px 12px 30px}
+  .nav-item{display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:10px;color:#3a3a42;cursor:pointer;font-size:14.5px;user-select:none;position:relative}
+  .nav-item:hover{background:var(--line-2)}
+  .nav-item.on{background:#F3F3F8;color:var(--ink);font-weight:600}
+  .nav-item .ico{width:18px;height:18px;flex:none;color:#86868f;display:flex}
+  .nav-item.on .ico{color:var(--red)}
+  .nav-item .car{margin-left:auto;width:14px;height:14px;transition:transform .2s;color:#b7b7be;display:flex}
+  .nav-item.open .car{transform:rotate(180deg)}
+  .sub{overflow:hidden;max-height:0;transition:max-height .25s ease}
+  .sub.open{max-height:340px}
+  .sub-item{display:flex;align-items:center;height:40px;padding:0 14px 0 44px;border-radius:10px;color:#5a5a63;cursor:pointer;font-size:14px}
+  .sub-item:hover{background:var(--line-2)}
+  .sub-item.on{color:var(--red);font-weight:600;background:#FFF1F5}
+  .demo-tag{margin:8px 20px 24px;font-size:11px;color:#c2c2c9;letter-spacing:1.5px}
+
+  .main{margin-left:var(--side)}
+  .top{height:var(--top);display:flex;align-items:center;gap:16px;padding:0 32px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fff;z-index:15}
+  .promo-sel{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;height:38px;padding:0 14px;color:#3a3a42;font-size:13.5px;position:relative}
+  .promo-sel .dot{position:absolute;top:-3px;right:-3px;width:8px;height:8px;background:var(--red);border-radius:50%}
+  .top .grow{flex:1}
+  .app-btn{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;height:38px;padding:0 14px;font-size:13.5px;color:#3a3a42}
+  .app-btn .qr{width:22px;height:22px;border-radius:5px;background:var(--red);color:#fff;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .top .lk{color:#3a3a42;font-size:13.5px;cursor:pointer}
+  .bell{position:relative;color:#5a5a63;cursor:pointer;display:flex}
+  .bell .b{position:absolute;top:-8px;left:11px;background:var(--red);color:#fff;font-size:10px;border-radius:9px;padding:1px 5px;font-weight:600}
+  .user{display:flex;align-items:center;gap:9px;cursor:pointer}
+  .user .av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#FF6f9c,#FF0051);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px}
+  .content{padding:30px 32px 60px;max-width:1380px}
+
+  /* ---------- COMPONENTS ---------- */
+  .page-h{font-size:22px;font-weight:700;margin-bottom:22px;display:flex;align-items:center;gap:14px}
+  .page-h .act{margin-left:auto}
+  .btn-pill{height:38px;border-radius:999px;background:var(--red);color:#fff;font-weight:600;padding:0 20px;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+  .btn-pill:hover{background:var(--red-d)}
+  .grid{display:grid;gap:20px}
+  .col-2{grid-template-columns:1fr 380px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px}
+  .sec-h{font-size:18px;font-weight:700;margin:30px 0 16px;display:flex;align-items:center;gap:10px}
+  .sec-h .sm{font-size:13px;color:var(--ink-3);font-weight:400}
+
+  .banner{height:120px;border-radius:14px;background:linear-gradient(100deg,#FF2D6E,#FF0051 60%,#D6003f);color:#fff;display:flex;align-items:center;padding:0 36px;gap:18px;position:relative;overflow:hidden}
+  .banner h3{font-size:26px;font-weight:800;letter-spacing:.5px;position:relative;z-index:1}
+  .banner h3 b{color:#FFE34D}
+  .banner .more{margin-left:auto;background:#fff;color:var(--red);height:40px;border-radius:999px;padding:0 22px;font-weight:700;display:flex;align-items:center;position:relative;z-index:1}
+  .banner::after{content:"";position:absolute;right:230px;top:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.1)}
+
+  .todo .row{display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:1px solid var(--line-2)}
+  .todo .row:last-child{border-bottom:none}
+  .todo .ti{width:40px;height:40px;border-radius:9px;background:#FFF1F5;display:flex;align-items:center;justify-content:center;color:var(--red);flex:none}
+  .todo .tt{font-weight:600;margin-bottom:3px}
+  .todo .td{color:var(--ink-3);font-size:13px;max-width:560px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .todo .go{margin-left:auto;color:var(--red);font-weight:600;display:flex;align-items:center;gap:4px;white-space:nowrap;cursor:pointer}
+
+  .quick{display:flex;gap:14px;flex-wrap:wrap}
+  .qbtn{display:flex;align-items:center;gap:9px;height:48px;border-radius:999px;border:1px solid var(--line);padding:0 22px;font-weight:600;color:#3a3a42;background:#fff}
+  .qbtn.pri{background:var(--red);color:#fff;border-color:var(--red)}
+  .qbtn .qi{width:18px;height:18px;display:flex}
+
+  .asset-card{background:linear-gradient(120deg,var(--grad-a),var(--grad-b));border:none}
+  .asset-card .at{font-size:17px;font-weight:700;margin-bottom:8px}
+  .asset-card p{color:#4a4a55;line-height:1.85;font-size:13.5px;max-width:900px}
+  .asset-card .add{margin-top:16px;color:var(--link);font-weight:600;display:inline-flex;gap:5px;cursor:pointer}
+
+  .txn{padding:6px 0}
+  .txn .row{display:flex;align-items:center;gap:16px;padding:16px 4px;border-bottom:1px solid var(--line-2)}
+  .txn .row:last-child{border-bottom:none}
+  .txn .ar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;font-size:15px}
+  .txn .ar.in{background:#E9F1FF;color:#3b6cff}
+  .txn .ar.out{background:#FFF0F3;color:var(--red)}
+  .txn .who{font-weight:600}
+  .txn .meta{color:var(--ink-3);font-size:12.5px;margin-top:3px}
+  .txn .meta .ok{color:var(--green);margin-right:8px}
+  .txn .amt{margin-left:auto;font-size:17px;font-weight:700}
+  .txn .amt small{font-size:12px;color:var(--ink-3);font-weight:500;margin-left:4px}
+  .viewall{color:var(--link);font-weight:600;display:inline-block;margin-top:14px;cursor:pointer}
+
+  .fx .fxh{display:flex;align-items:center;margin-bottom:6px}
+  .fx .fxh b{font-size:18px}
+  .fx .fxh .upd{margin-left:auto;color:var(--ink-3);font-size:12px;display:flex;align-items:center;gap:8px}
+  .fx .ring{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--red);animation:sp 4s linear infinite}
+  .fx .fav{display:flex;align-items:center;margin:14px 0 6px;color:var(--ink-2);font-size:13px}
+  .fx .fav .ed{margin-left:auto;border:1px solid var(--line);border-radius:8px;padding:5px 12px;color:#3a3a42;display:flex;gap:6px;align-items:center}
+  .rate{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line-2)}
+  .rate:last-child{border-bottom:none}
+  .rate .rr{flex:1}
+  .rate .a{color:var(--ink-2);font-size:13px}
+  .rate .b{font-weight:700;font-size:15px;margin-top:2px}
+  .rate svg{flex:none}
+  .cal{margin-top:20px}
+  .cal .ct{color:#4a4a55;font-size:13.5px;line-height:1.7}
+
+  /* account list */
+  .seg{display:flex;gap:30px;border-bottom:1px solid var(--line);margin-bottom:22px}
+  .seg span{padding-bottom:13px;color:var(--ink-2);cursor:pointer;font-size:15px}
+  .seg span.on{color:var(--red);font-weight:600;border-bottom:2px solid var(--red)}
+  .search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;height:42px;width:330px;padding:0 14px;margin-bottom:24px;color:var(--ink-3)}
+  .search input{border:none;outline:none;flex:1;font-size:14px;font-family:inherit}
+  .acct-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .acct{border-radius:14px;background:linear-gradient(125deg,var(--grad-a),var(--grad-b));padding:20px 22px;min-height:150px;display:flex;flex-direction:column;border:1px solid #EEF0FA}
+  .acct .ah{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .acct .ah b{font-size:15px}
+  .acct .no{font-size:18px;font-weight:700;letter-spacing:.5px;color:#23232b}
+  .acct .bal{margin-top:8px;font-size:13px;color:var(--ink-2)}
+  .acct .bal b{font-size:19px;color:var(--ink);font-weight:700;letter-spacing:.3px}
+  .acct .foot{margin-top:auto;display:flex;align-items:center;padding-top:14px;color:var(--ink-3);font-size:13px}
+  .acct .det{color:var(--link);font-weight:600;display:flex;align-items:center;gap:3px;cursor:pointer}
+
+  /* worldcard */
+  .wc-tools{display:flex;gap:34px;justify-content:flex-end}
+  .wc-tool{display:flex;flex-direction:column;align-items:center;gap:7px;color:#3a3a42;font-size:12.5px;width:74px;text-align:center;cursor:pointer}
+  .wc-tool .ic{width:30px;height:30px;color:#3a3a42;display:flex;align-items:center;justify-content:center}
+  .bal-card{margin:18px 0 30px}
+  .bal-card .bt{font-size:18px;font-weight:700}
+  .bal-card .bx{color:var(--ink-3);font-size:13px;margin:6px 0 18px}
+  .bal-card .bx b{color:#3a3a42}
+  .chips{display:flex;gap:14px;align-items:center}
+  .chip{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 18px;min-width:150px}
+  .chip b{font-size:17px}
+  .chip small{color:var(--ink-3);font-size:12px}
+  .chip-next{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink-3)}
+  .filters{display:flex;gap:12px;align-items:center;margin:18px 0}
+  .fsel{height:40px;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;padding:0 14px;color:var(--ink-2);gap:24px;font-size:13.5px}
+  .fsearch{flex:1;max-width:260px;height:40px;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;gap:8px;padding:0 14px;color:var(--ink-3)}
+  .fsearch input{border:none;outline:none;flex:1;font-family:inherit}
+  .tbl{width:100%;border-collapse:collapse}
+  .tbl th{text-align:left;color:var(--ink-2);font-weight:600;font-size:13px;padding:14px 12px;border-bottom:1px solid var(--line)}
+  .tbl td{padding:16px 12px;border-bottom:1px solid var(--line-2);font-size:14px;vertical-align:middle}
+  .tbl .right{text-align:right}
+  .cardmini{display:flex;align-items:center;gap:14px}
+  .cardmini .cv{width:62px;height:40px;border-radius:7px;background:linear-gradient(120deg,#2b2b3a,#45455c);position:relative;color:#fff;flex:none;overflow:hidden}
+  .cardmini .cv::after{content:"World";position:absolute;left:7px;top:6px;font-size:8px;font-weight:700;letter-spacing:.3px}
+  .cardmini .cv b{position:absolute;left:7px;bottom:6px;font-size:8px;opacity:.8;font-weight:500}
+  .cardmini .cv i{position:absolute;right:6px;bottom:6px;width:14px;height:10px;border-radius:2px;background:linear-gradient(120deg,#FFB36b,#FF0051)}
+  .badge{display:inline-block;background:var(--green-soft);color:var(--green);font-size:12px;font-weight:600;padding:3px 10px;border-radius:6px;margin-left:8px}
+  .usebar{height:8px;width:220px;background:var(--line-2);border-radius:5px;overflow:hidden}
+  .usebar i{display:block;height:100%;background:var(--red);border-radius:5px}
+
+  /* fx / exchange / payee / generic */
+  .conv{max-width:520px}
+  .conv .leg{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px}
+  .conv .leg label{color:var(--ink-3);font-size:12.5px}
+  .conv .leg .crow{display:flex;align-items:center;margin-top:8px;gap:10px}
+  .conv .leg input{border:none;outline:none;font-size:22px;font-weight:700;flex:1;font-family:inherit;color:var(--ink);min-width:0}
+  .conv .leg input.sm{font-size:16px;font-weight:600}
+  .conv .pickc{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-weight:600;white-space:nowrap}
+  .conv .swap{display:flex;justify-content:center;margin:-8px 0}
+  .conv .swap div{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;color:var(--red)}
+  .conv .note{display:flex;justify-content:space-between;color:var(--ink-2);font-size:13px;margin:6px 2px 20px}
+  .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 0;color:var(--ink-3);gap:14px}
+  .empty .ei{width:90px;height:90px;border-radius:50%;background:var(--line-2);display:flex;align-items:center;justify-content:center;color:#cdcdd4}
+  .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .prod{border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px}
+  .prod .pi{width:44px;height:44px;border-radius:11px;background:#FFF1F5;color:var(--red);display:flex;align-items:center;justify-content:center}
+  .prod h4{font-size:16px}
+  .prod p{color:var(--ink-2);font-size:13px;line-height:1.7;flex:1}
+  .prod .det{color:var(--link);font-weight:600;cursor:pointer}
+
+  /* floating */
+  .float{position:fixed;right:26px;bottom:90px;display:flex;flex-direction:column;gap:14px;z-index:18}
+  .float .fb{width:46px;height:46px;border-radius:50%;background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;color:var(--red);cursor:pointer}
+  .help{position:fixed;right:26px;bottom:26px;width:52px;height:52px;border-radius:50%;background:#6C4BF4;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(108,75,244,.4);z-index:18;font-size:22px;cursor:pointer}
+  .toast{position:fixed;left:50%;top:80px;transform:translateX(-50%);background:#1A1A1A;color:#fff;padding:11px 20px;border-radius:10px;font-size:14px;z-index:60;opacity:0;transition:opacity .25s, top .25s;pointer-events:none}
+  .toast.show{opacity:1;top:92px}
+</style>
+</head>
+<body>
+
+<!-- ===================== LOGIN ===================== -->
+<div id="login">
+  <div class="lg-brand">
+    <div class="lg-logo">万里汇 <small>World First</small></div>
+    <div class="lg-h">一个账户<br/>连接全球生意</div>
+    <div class="lg-sub">全球 100+ 国家和地区收付款<br/>20+ 主流货币 · 当地银行账户<br/>持牌合规 · 资金安全有保障</div>
+  </div>
+  <div class="lg-form">
+    <div class="lg-card">
+      <h2>登录万里汇</h2>
+      <div class="muted">欢迎回来，请登录您的账户</div>
+      <div class="lg-tabs"><span class="on">验证码登录</span><span>密码登录</span></div>
+      <div class="fld"><span class="pre">+86</span><input id="lg-mobile" placeholder="请输入手机号" /></div>
+      <div class="fld"><input id="lg-pass" type="password" placeholder="请输入验证码" /><span class="sms">获取验证码</span></div>
+      <button class="lg-btn" id="lg-btn" onclick="doLogin()"><span>登 录</span></button>
+      <div class="lg-row"><span>忘记密码？</span><span>免费注册</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== APP ===================== -->
+<div id="app">
+  <aside class="side">
+    <div class="logo">万里汇<div class="wf"><b>World</b><b>First</b></div></div>
+    <nav class="nav" id="nav"></nav>
+    <div class="demo-tag" id="demoTag">演示环境 · DEMO</div>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <div class="promo-sel">外贸B2B与海外账号快捷开通！<span class="dot"></span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="grow"></div>
+      <div class="app-btn"><span class="qr">WF</span>下载万里汇App</div>
+      <div class="lk">新手引导</div>
+      <div class="bell"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="b">10+</span></div>
+      <div class="user"><span class="av" id="avatar"></span><span id="uname">hello,</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9a9aa2" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+    </header>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<div class="float">
+  <div class="fb" title="产品建议"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></div>
+  <div class="fb" title="App"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+</div>
+<div class="help">?</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------------- params / data ---------------- */
+const P = new URLSearchParams(location.search);
+const NAMES = ['陈嘉怡','林浩然','王思远','李梓萌','黄俊杰','周雅琳','吴宇航','刘梦洁','徐文涛','张晓彤','郑书瑶','赵睿哲'];
+const NAME = P.get('name') || NAMES[Math.floor(Math.random()*NAMES.length)];
+const COMPANY = P.get('company') || '';
+const MOBILE = P.get('mobile') || '132 4803 4068';
+
+const ICON = {
+  home:'<path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>',
+  collect:'<circle cx="12" cy="12" r="9"/><path d="M12 7v8M8 11l4 4 4-4"/>',
+  transfer:'<circle cx="12" cy="12" r="9"/><path d="M12 17V9M8 13l4-4 4 4"/>',
+  rmb:'<circle cx="12" cy="12" r="9"/><path d="M8 8l4 5 4-5M12 13v4M9.5 14h5M9.5 16.5h5"/>',
+  trade:'<path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/>',
+  card:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/>',
+  payee:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',
+  exch:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+  finance:'<path d="M3 21h18M5 21V10M10 21V7M15 21v-9M20 21V5"/>',
+  savings:'<circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9h4.5a1.5 1.5 0 0 1 0 3H9h5"/>',
+  gift:'<rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18M12 8v13M12 8C9 8 7 4 12 4c5 0 3 4 0 4z"/>',
+  doc:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+  doc2:'<path d="M5 4h14v16H5z"/><path d="M9 9h6M9 13h6"/>',
+  set:'<circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 0 0-1.7-1L16.5 2h-4l-.4 2.6a7 7 0 0 0-1.7 1l-2.3-1-2 3.4L5.1 11a7 7 0 0 0 0 2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 1.7 1l.4 2.6h4l.4-2.6a7 7 0 0 0 1.7-1l2.3 1 2-3.4-2-1.5a7 7 0 0 0 .1-1z"/>',
+  check:'<circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/>',
+  caret:'<path d="M6 9l6 6 6-6"/>',
+  swap:'<path d="M7 4v13M7 17l-3-3M17 20V7M17 7l3 3"/>',
+  edit:'<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+  bell:'<rect x="4" y="5" width="16" height="12" rx="2"/><path d="M4 9h16"/>',
+  plus:'<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 12h6M12 9v6"/>'
+};
+const NAV = [
+  {id:'home', ic:'home', label:'首页'},
+  {id:'collect', ic:'collect', label:'收款服务', kids:[
+     {id:'account-list',label:'收款账户'},{id:'records',label:'收款记录'},
+     {id:'orders',label:'收款订单'},{id:'intransit',label:'在途资金追踪'},{id:'request',label:'请求收款'}]},
+  {id:'transfer', ic:'transfer', label:'转账服务', kids:[
+     {id:'fxtransfer',label:'外币汇款'},{id:'supplier',label:'服务商快付'},{id:'transrec',label:'转账记录'}]},
+  {id:'rmb', ic:'rmb', label:'人民币结汇'},
+  {id:'trade', ic:'trade', label:'WorldTrade', kids:[
+     {id:'wt-ov',label:'交易概览'},{id:'wt-ord',label:'订单管理'}]},
+  {id:'worldcard', ic:'card', label:'万里付卡'},
+  {id:'payees', ic:'payee', label:'收款人管理'},
+  {id:'exchange', ic:'exch', label:'汇兑中心'},
+  {id:'global', ic:'globe', label:'跨境宝'},
+  {id:'finance', ic:'finance', label:'金融服务', kids:[
+     {id:'fin-loan',label:'账期融资'},{id:'fin-ins',label:'跨境保险'}]},
+  {id:'savings', ic:'savings', label:'万余盈'},
+  {id:'benefits', ic:'gift', label:'我的权益'}
+];
+const ACCOUNTS = [
+  {cur:'美元',code:'USD',flag:'us',no:'**** **** 8842',loc:'美国',bal:'128,430.55'},
+  {cur:'欧元',code:'EUR',flag:'eu',no:'IE63 CHAS 9309 0301 0076 68',loc:'爱尔兰',bal:'64,210.00'},
+  {cur:'英镑',code:'GBP',flag:'gb',no:'GB74 CHAS 6095 6121 6559 71',loc:'英国',bal:'22,890.40'},
+  {cur:'离岸人民币',code:'CNH',flag:'cn',no:'**** **** 6677',loc:'香港',bal:'402,118.00'},
+  {cur:'日元',code:'JPY',flag:'jp',no:'9569 002',loc:'日本',bal:'1,540,200'},
+  {cur:'港元',code:'HKD',flag:'hk',no:'**** **** 5520',loc:'香港',bal:'88,210.00'},
+  {cur:'加拿大元',code:'CAD',flag:'ca',no:'3007 100001',loc:'加拿大',bal:'18,300.20'},
+  {cur:'澳大利亚元',code:'AUD',flag:'au',no:'**** **** 1190',loc:'澳大利亚',bal:'31,205.75'},
+  {cur:'新加坡元',code:'SGD',flag:'sg',no:'**** **** 2031',loc:'新加坡',bal:'12,040.00'}
+];
+const TXNS = [
+  {d:'in', w:'收款 来自 Amazon EU S.a r.l.', t:'2026/06/08, 09:14:02', a:'+12,480.00', c:'EUR'},
+  {d:'in', w:'收款 来自 Shopify Payments', t:'2026/06/07, 22:03:11', a:'+8,210.55', c:'USD'},
+  {d:'out',w:'付款 给 Shenzhen Lihua Electronics', t:'2026/06/07, 16:40:55', a:'-45,000.00', c:'CNH'},
+  {d:'in', w:'收款 来自 eBay Commerce Inc.', t:'2026/06/06, 11:27:43', a:'+3,905.20', c:'GBP'},
+  {d:'out',w:'提现 到 招商银行 **** 6688', t:'2026/06/05, 14:10:09', a:'-20,000.00', c:'USD'},
+  {d:'in', w:'收款 来自 Walmart Marketplace', t:'2026/06/05, 08:55:30', a:'+6,742.10', c:'USD'},
+  {d:'out',w:'付款 给 Yiwu Sunshine Trading Co.', t:'2026/06/04, 19:22:18', a:'-88,200.00', c:'CNH'},
+  {d:'in', w:'收款 来自 TikTok Shop US', t:'2026/06/04, 10:08:47', a:'+2,150.00', c:'USD'},
+  {d:'in', w:'收款 来自 Etsy Ireland UC', t:'2026/06/03, 15:33:20', a:'+1,420.75', c:'EUR'},
+  {d:'out',w:'换汇 USD 到 CNH', t:'2026/06/03, 09:12:00', a:'-15,000.00', c:'USD'},
+  {d:'in', w:'收款 来自 Lazada Group', t:'2026/06/02, 18:45:10', a:'+9,880.00', c:'SGD'},
+  {d:'in', w:'收款 来自 Amazon.com Services', t:'2026/06/02, 07:20:55', a:'+18,330.40', c:'USD'}
+];
+const RATES = [
+  ['1 CNH','0.1473','USD',[18,14,15,11,12,8,9]],
+  ['1 USD','6.7700','CNY',[8,9,7,11,10,13,12]],
+  ['1 USD','6.7751','CNH',[10,9,12,8,11,9,13]],
+  ['1 MXN','0.3882','CNH',[9,11,10,14,8,12,7]],
+  ['10000 NGN','7.0993','USD',[12,8,13,9,14,7,15]],
+  ['1 MYR','1.6620','CNH',[7,9,8,12,10,13,11]],
+  ['1000 KES','7.6389','USD',[14,10,12,9,7,11,8]]
+];
+const CARDS = [
+  {n:'Marketing Spend', u:42, used:'4,210', lim:'10,000', dt:'2026/01/23', last:'4821'},
+  {n:'Ads - Meta', u:53, used:'7,890', lim:'15,000', dt:'2025/11/02', last:'7193'},
+  {n:'SaaS - Tools', u:25, used:'1,260', lim:'5,000', dt:'2025/09/14', last:'5560'}
+];
+const flagUrl = c => 'https://flagcdn.com/w80/'+c+'.png';
+const ico = (p,s,sw)=>'<svg width="'+(s||18)+'" height="'+(s||18)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+(sw||1.8)+'" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
+const spark = (pts,w,h)=>{w=w||70;h=h||24;const max=Math.max.apply(0,pts),min=Math.min.apply(0,pts);const sx=w/(pts.length-1);const sc=v=>h-2-((v-min)/(max-min||1))*(h-4);const d=pts.map((v,i)=>(i?'L':'M')+(i*sx).toFixed(1)+' '+sc(v).toFixed(1)).join(' ');return '<svg width="'+w+'" height="'+h+'"><path d="'+d+'" fill="none" stroke="#FF0051" stroke-width="1.6"/></svg>';};
+
+/* ---------------- nav ---------------- */
+let route='home';
+function buildNav(){
+  const nav=document.getElementById('nav');
+  nav.innerHTML = NAV.map(function(n){
+    if(!n.kids) return '<div class="nav-item" data-id="'+n.id+'" onclick="go(\''+n.id+'\')"><span class="ico">'+ico(ICON[n.ic])+'</span>'+n.label+'</div>';
+    const kids = n.kids.map(k=>'<div class="sub-item" data-id="'+k.id+'" onclick="go(\''+k.id+'\',event)">'+k.label+'</div>').join('');
+    return '<div class="nav-item grp" data-grp="'+n.id+'" onclick="toggleGrp(\''+n.id+'\')"><span class="ico">'+ico(ICON[n.ic])+'</span>'+n.label+'<span class="car">'+ico(ICON.caret,14)+'</span></div><div class="sub" data-sub="'+n.id+'">'+kids+'</div>';
+  }).join('');
+}
+function toggleGrp(id){
+  const g=document.querySelector('[data-grp="'+id+'"]'), s=document.querySelector('[data-sub="'+id+'"]');
+  g.classList.toggle('open'); s.classList.toggle('open');
+}
+const PARENT={'account-list':'collect','records':'collect','orders':'collect','intransit':'collect','request':'collect',
+  'fxtransfer':'transfer','supplier':'transfer','transrec':'transfer','wt-ov':'trade','wt-ord':'trade','fin-loan':'finance','fin-ins':'finance'};
+function go(id,e){ if(e) e.stopPropagation(); route=id; render(); markNav(); window.scrollTo(0,0); }
+function markNav(){
+  document.querySelectorAll('.nav-item,.sub-item').forEach(el=>el.classList.remove('on'));
+  const leaf=document.querySelector('.sub-item[data-id="'+route+'"]')||document.querySelector('.nav-item[data-id="'+route+'"]');
+  if(leaf) leaf.classList.add('on');
+  const par=PARENT[route];
+  if(par){const g=document.querySelector('[data-grp="'+par+'"]'),s=document.querySelector('[data-sub="'+par+'"]');if(g)g.classList.add('open');if(s)s.classList.add('open');}
+}
+
+/* ---------------- helpers ---------------- */
+function findLeaf(id){for(const n of NAV){if(n.id===id)return n;if(n.kids)for(const k of n.kids)if(k.id===id)return k;}return null;}
+const txnRow = x=>'<div class="row"><div class="ar '+x.d+'">'+(x.d==='in'?'&#8595;':'&#8593;')+'</div>'+
+  '<div><div class="who">'+x.w+'</div><div class="meta"><span class="ok">成功</span>'+x.t+'</div></div>'+
+  '<div class="amt">'+x.a+'<small>'+x.c+'</small></div></div>';
+function fxPanel(){return '<div class="card fx">'+
+  '<div class="fxh"><b>实时汇率</b><span class="upd">最后更新于 09:48:42 <span class="ring"></span></span></div>'+
+  '<div class="fav">汇率收藏 <span class="ed">'+ico(ICON.edit,13)+' 编辑</span></div>'+
+  RATES.map(r=>'<div class="rate"><div class="rr"><div class="a">'+r[0]+'</div><div class="b">'+r[1]+'<span style="font-size:12px;color:#9a9aa2;font-weight:500"> '+r[2]+'</span></div></div>'+spark(r[3])+'</div>').join('')+
+  '<a class="viewall" onclick="go(\'exchange\')">前往汇兑中心 ›</a></div>';}
+function prodPage(title,items){return '<div class="page-h">'+title+'</div><div class="prod-grid">'+items.map(it=>'<div class="prod"><span class="pi">'+ico(ICON.finance,22)+'</span><h4>'+it[0]+'</h4><p>'+it[1]+'</p><a class="det">了解更多 ›</a></div>').join('')+'</div>';}
+
+/* ---------------- views ---------------- */
+function render(){ document.getElementById('content').innerHTML = (VIEWS[route]||VIEWS._generic)(); }
+const VIEWS = {
+  home(){return ''+
+    '<div class="banner"><h3>万里汇外贸B2B <b>百亿补贴</b> 新客专享锁定全年优惠</h3><div class="more">查看详情 ›</div></div>'+
+    '<div class="grid col-2" style="margin-top:24px"><div>'+
+      '<div class="sec-h">待办事项</div>'+
+      '<div class="card todo">'+
+        '<div class="row"><div class="ti">'+ico(ICON.doc)+'</div><div><div class="tt">关联收款订单</div><div class="td">我们需要您提供一些关于向您的 WorldFirst 账户付款的信息，请前往收款页面按说明操作。</div></div><div class="go">去处理 ›</div></div>'+
+        '<div class="row"><div class="ti">'+ico(ICON.doc2)+'</div><div><div class="tt">补充订单材料</div><div class="td">补充交易订单材料</div></div><div class="go">补充材料 ›</div></div>'+
+        '<div class="row"><div class="ti">'+ico(ICON.payee)+'</div><div><div class="tt">收款人 - 收款人验证</div><div class="td">安全起见，请验证收款人</div></div><div class="go">验证收款人 ›</div></div>'+
+      '</div><a class="viewall">展开更多待办事项 ›</a>'+
+      '<div class="sec-h">快捷导航</div>'+
+      '<div class="quick">'+
+        '<button class="qbtn pri" onclick="go(\'account-list\')"><span class="qi">'+ico(ICON.collect,18)+'</span>收款账户</button>'+
+        '<button class="qbtn" onclick="go(\'fxtransfer\')"><span class="qi">'+ico(ICON.transfer,18)+'</span>外币汇款</button>'+
+        '<button class="qbtn" onclick="go(\'worldcard\')"><span class="qi">'+ico(ICON.card,18)+'</span>万里付卡</button>'+
+        '<button class="qbtn" onclick="go(\'supplier\')"><span class="qi">'+ico(ICON.exch,18)+'</span>服务商快付</button>'+
+        '<button class="qbtn">···</button>'+
+      '</div>'+
+      '<div class="sec-h">我的资产 <span class="sm">下载 App，随时随地便捷收付</span></div>'+
+      '<div class="card asset-card"><div class="at">支持全球 20+ 主流货币</div>'+
+        '<p>美元、欧元、离岸人民币、日元、港元、英镑、澳元、新西兰元、新加坡元及加元全球 10 大主流货币轻松收款，更有墨西哥比索、菲律宾比索、印尼盾、泰铢、马来林吉特等 10+ 小币种助您布局蓝海市场。</p>'+
+        '<a class="add" onclick="go(\'account-list\')">+ 新增收款账户</a></div>'+
+      '<div class="sec-h">账户交易</div>'+
+      '<div class="card txn">'+TXNS.slice(0,6).map(txnRow).join('')+'</div>'+
+      '<a class="viewall" onclick="go(\'records\')">查看全部交易记录 ›</a>'+
+    '</div><div>'+fxPanel()+
+      '<div class="card cal"><div class="sec-h" style="margin:0 0 12px">金融日历</div><div class="ct">今天无币种假期，您的交易不受任何影响</div><a class="viewall">查看详情 ›</a></div>'+
+    '</div></div>';
+  },
+  'account-list'(){return ''+
+    '<div class="page-h">收款账户列表 <div class="act"><button class="btn-pill">+ 创建收款账户</button></div></div>'+
+    '<div class="seg"><span class="on">单币种账户</span><span>多币种账户</span></div>'+
+    '<div class="search">'+ico(ICON.search,16)+'<input placeholder="收款账号"/></div>'+
+    '<div class="acct-grid">'+ACCOUNTS.map(a=>'<div class="acct">'+
+        '<div class="ah"><img class="flag" src="'+flagUrl(a.flag)+'" alt=""/><b>'+a.cur+'</b></div>'+
+        '<div class="no">'+a.no+'</div>'+
+        '<div class="bal">可用余额 &nbsp;<b>'+a.bal+' '+a.code+'</b></div>'+
+        '<div class="foot">开户地：'+a.loc+'<a class="det" style="margin-left:auto">详情 ›</a></div>'+
+      '</div>').join('')+'</div>';
+  },
+  records(){return ''+
+    '<div class="page-h">收款记录</div>'+
+    '<div class="filters"><div class="fsel">全部币种 '+ico(ICON.caret,12)+'</div><div class="fsel">全部状态 '+ico(ICON.caret,12)+'</div>'+
+      '<div class="fsearch">'+ico(ICON.search,15)+'<input placeholder="交易对手 / 单号"/></div></div>'+
+    '<div class="card txn">'+TXNS.map(txnRow).join('')+'</div>';
+  },
+  worldcard(){return ''+
+    '<div class="page-h">我的万里付卡 World Card<div class="act"><div class="wc-tools">'+
+        '<div class="wc-tool"><span class="ic">'+ico(ICON.payee,26)+'</span>持卡人管理</div>'+
+        '<div class="wc-tool"><span class="ic">'+ico(ICON.bell,26)+'</span>3DS 通知</div>'+
+        '<div class="wc-tool"><span class="ic">'+ico(ICON.set,24)+'</span>卡设置</div>'+
+        '<div class="wc-tool"><span class="ic">'+ico(ICON.check,26)+'</span>返现活动和使用攻略</div>'+
+      '</div></div></div>'+
+    '<div class="seg"><span class="on">默认账户</span><span>预算账户</span><span>交易明细</span></div>'+
+    '<div class="card bal-card"><div class="bt">可用余额</div>'+
+      '<div class="bx">扣款方式：默认使用交易同币种余额扣款，交易币种余额不足时使用 <b>美元</b> 或 <b>港币</b> 余额扣款</div>'+
+      '<div class="chips">'+
+        '<div class="chip"><img class="flag" src="'+flagUrl('us')+'"/><div><b>12,480.55</b><br><small>USD</small></div></div>'+
+        '<div class="chip"><img class="flag" src="'+flagUrl('hk')+'"/><div><b>88,210.00</b><br><small>HKD</small></div></div>'+
+        '<div class="chip"><img class="flag" src="'+flagUrl('ae')+'"/><div><b>3,200.00</b><br><small>AED</small></div></div>'+
+        '<div class="chip"><img class="flag" src="'+flagUrl('au')+'"/><div><b>31,205.75</b><br><small>AUD</small></div></div>'+
+        '<div class="chip-next">›</div>'+
+      '</div></div>'+
+    '<div class="sec-h">默认账户 · 所有卡 <div class="act" style="margin-left:auto"><button class="btn-pill">+ 申请新卡</button></div></div>'+
+    '<div class="filters"><div class="fsel">本月已用 '+ico(ICON.caret,12)+'</div><div class="fsel">状态 '+ico(ICON.caret,12)+'</div><div class="fsel">卡片类型 '+ico(ICON.caret,12)+'</div>'+
+      '<div class="fsearch">'+ico(ICON.search,15)+'<input placeholder="请输入卡号"/></div></div>'+
+    '<table class="tbl"><thead><tr><th>卡片</th><th>本月已用</th><th class="right">开卡时间</th></tr></thead><tbody>'+
+      CARDS.map(c=>'<tr><td><div class="cardmini"><div class="cv"><b>'+c.n+'</b><i></i></div><div><b>'+c.n+'</b><span class="badge">正常</span><div style="color:#9a9aa2;font-size:12px;margin-top:4px">**** **** **** '+c.last+'</div></div></div></td>'+
+        '<td><div class="usebar"><i style="width:'+c.u+'%"></i></div><div style="color:#9a9aa2;font-size:12px;margin-top:6px">$'+c.used+' / $'+c.lim+'</div></td>'+
+        '<td class="right">'+c.dt+'</td></tr>').join('')+
+    '</tbody></table>';
+  },
+  exchange(){return ''+
+    '<div class="page-h">汇兑中心</div><div class="card conv">'+
+      '<div class="leg"><label>卖出</label><div class="crow"><input value="50,000.00"/><div class="pickc"><img class="flag" src="'+flagUrl('us')+'" style="width:20px;height:20px"/>USD '+ico(ICON.caret,12)+'</div></div></div>'+
+      '<div class="swap"><div>'+ico(ICON.swap,18)+'</div></div>'+
+      '<div class="leg"><label>买入（约）</label><div class="crow"><input value="338,755.00" readonly/><div class="pickc"><img class="flag" src="'+flagUrl('cn')+'" style="width:20px;height:20px"/>CNH '+ico(ICON.caret,12)+'</div></div></div>'+
+      '<div class="note"><span>参考汇率 1 USD = 6.7751 CNH</span><span style="color:#00B578">锁汇 09:48 刷新</span></div>'+
+      '<button class="btn-pill" style="width:100%;height:46px;justify-content:center" onclick="toast(\'演示环境，兑换功能已禁用\')">立即兑换</button>'+
+    '</div>';
+  },
+  fxtransfer(){return ''+
+    '<div class="page-h">外币汇款</div><div class="card conv">'+
+      '<div class="leg"><label>收款人</label><div class="crow"><input class="sm" value="Shenzhen Lihua Electronics Co."/></div></div>'+
+      '<div class="leg"><label>汇款金额</label><div class="crow"><input value="20,000.00"/><div class="pickc"><img class="flag" src="'+flagUrl('us')+'" style="width:20px;height:20px"/>USD '+ico(ICON.caret,12)+'</div></div></div>'+
+      '<div class="note"><span>预计到账 1 个工作日</span><span>手续费 ¥0（VIP 权益）</span></div>'+
+      '<button class="btn-pill" style="width:100%;height:46px;justify-content:center" onclick="toast(\'演示环境，汇款功能已禁用\')">下一步</button>'+
+    '</div>';
+  },
+  payees(){return ''+
+    '<div class="page-h">收款人管理 <div class="act"><button class="btn-pill">+ 新增收款人</button></div></div>'+
+    '<table class="tbl"><thead><tr><th>收款人</th><th>账号</th><th>币种 / 国家</th><th class="right">操作</th></tr></thead><tbody>'+
+      [['Shenzhen Lihua Electronics Co.','**** 6021','CNH · 中国','cn'],
+       ['Yiwu Sunshine Trading Co.','**** 4417','CNH · 中国','cn'],
+       ['Bright Future Logistics Ltd.','GB** 5971','GBP · 英国','gb'],
+       ['Pacific Components Inc.','**** 8842','USD · 美国','us']].map(r=>'<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td><img class="flag" src="'+flagUrl(r[3])+'" style="width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:8px"/>'+r[2]+'</td><td class="right"><a class="det">编辑</a></td></tr>').join('')+
+    '</tbody></table>';
+  },
+  rmb(){return ''+
+    '<div class="page-h">人民币结汇</div><div class="card conv">'+
+      '<div class="leg"><label>结汇金额</label><div class="crow"><input value="100,000.00"/><div class="pickc"><img class="flag" src="'+flagUrl('us')+'" style="width:20px;height:20px"/>USD '+ico(ICON.caret,12)+'</div></div></div>'+
+      '<div class="note"><span>结汇汇率 1 USD = 6.7700 CNY</span><span>预计入账 ¥677,000.00</span></div>'+
+      '<div class="leg"><label>入账银行卡</label><div class="crow"><input class="sm" value="招商银行 储蓄卡 **** 6688" readonly/></div></div>'+
+      '<button class="btn-pill" style="width:100%;height:46px;justify-content:center" onclick="toast(\'演示环境，结汇功能已禁用\')">确认结汇</button>'+
+    '</div>';
+  },
+  finance(){return prodPage('金融服务',[
+    ['账期融资','基于您的真实交易流水，最快当天放款，灵活周转旺季备货资金。'],
+    ['跨境保险','货物运输险、信用险一站投保，保障每一笔跨境订单。'],
+    ['信用赋能','积累 WorldFirst 信用分，解锁更高额度与更优费率。']]);},
+  global(){return prodPage('跨境宝',[
+    ['一店多国','一个店铺布局全球主流电商平台，统一收款统一结算。'],
+    ['本地账户','在 10+ 国家拥有当地银行账户，像本地商家一样收款。'],
+    ['合规护航','VAT、EPR 等海外合规一站式办理。']]);},
+  savings(){return ''+
+    '<div class="page-h">万余盈</div>'+
+    '<div class="card" style="max-width:520px"><div class="at" style="font-size:17px;font-weight:700;margin-bottom:8px">闲置资金，自动增值</div>'+
+      '<div style="display:flex;align-items:flex-end;gap:8px;margin:10px 0"><span style="font-size:38px;font-weight:800;color:#FF0051">4.18%</span><span style="color:#9a9aa2;padding-bottom:8px">美元 7 日年化（参考）</span></div>'+
+      '<p style="color:#6B6B72;line-height:1.8">账户闲置外币一键转入万余盈，T+0 灵活申赎，收益每日可见。当前持有 <b>120,000.00 USD</b>，累计收益 <b style="color:#00B578">+1,284.36 USD</b>。</p>'+
+      '<button class="btn-pill" style="margin-top:18px" onclick="toast(\'演示环境，申购功能已禁用\')">转入资金</button></div>';},
+  benefits(){return ''+
+    '<div class="page-h">我的权益</div>'+
+    '<div class="card" style="max-width:640px;background:linear-gradient(120deg,#EAF1FF,#F4ECFF);border:none">'+
+      '<div style="display:flex;align-items:center;gap:14px"><span class="pi" style="width:46px;height:46px;border-radius:12px;background:#fff;color:#FF0051;display:flex;align-items:center;justify-content:center">'+ico(ICON.gift,24)+'</span>'+
+      '<div><div style="font-size:20px;font-weight:800">VIP · 金牌商户</div><div style="color:#6B6B72">您已解锁全部 12 项专属权益</div></div></div>'+
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px">'+
+        ['专属客户经理','汇款手续费减免','优先汇率','提现加速','专属活动','信用额度上浮'].map(b=>'<div style="background:#fff;border-radius:10px;padding:14px 16px;font-weight:600">✓ '+b+'</div>').join('')+
+      '</div></div>';},
+  _generic(){
+    const label=(findLeaf(route)||{}).label||'功能页';
+    return '<div class="page-h">'+label+'</div><div class="card"><div class="empty"><div class="ei">'+ico(ICON.plus,40)+'</div><div>'+label+' · 演示页面</div><div style="font-size:13px">该模块在演示环境中展示，操作已禁用</div></div></div>';
+  }
+};
+['orders','intransit','request','supplier','transrec','wt-ov','wt-ord','fin-loan','fin-ins'].forEach(id=>{ if(!VIEWS[id]) VIEWS[id]=VIEWS._generic; });
+
+/* ---------------- toast ---------------- */
+let tT;
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),1800);}
+
+/* ---------------- login / boot ---------------- */
+function showApp(){
+  document.getElementById('login').classList.add('hide');
+  document.getElementById('app').classList.add('show');
+  buildNav();
+  route = P.get('view') || 'home';
+  render(); markNav();
+}
+let loggingIn=false;
+function doLogin(){
+  if(loggingIn) return; loggingIn=true;
+  const b=document.getElementById('lg-btn');
+  b.innerHTML='<span class="spin"></span><span>登录中…</span>';
+  setTimeout(showApp,900);
+}
+function typeInto(el,text,done){let i=0;(function tick(){el.value=text.slice(0,i++);if(i<=text.length)setTimeout(tick,55);else if(done)done();})();}
+
+window.addEventListener('DOMContentLoaded',function(){
+  const first=(NAME.trim()[0]||'S').toUpperCase();
+  document.getElementById('avatar').textContent=first;
+  document.getElementById('uname').textContent='hello, '+(COMPANY||NAME);
+  if(P.get('demo')!=='1'){document.getElementById('demoTag').style.display='none';}
+  if(P.get('skiplogin')==='1'){ showApp(); return; }
+  const m=document.getElementById('lg-mobile'), pw=document.getElementById('lg-pass');
+  setTimeout(function(){ typeInto(m,MOBILE,function(){
+    setTimeout(function(){ typeInto(pw,'••••••',function(){ setTimeout(doLogin,500); }); },350);
+  }); },700);
+});
+</script>
+</body>
+</html>
