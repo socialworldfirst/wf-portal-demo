@@ -519,7 +519,7 @@ const NAV = [
   {id:'benefits', ic:'gift', label:'我的权益'}
 ];
 const ACCOUNTS = [
-  {cur:'美元',code:'USD',flag:'us',no:'**** **** 8842',loc:'美国',bal:'120,430.55'},
+  {cur:'美元',code:'USD',flag:'us',no:'**** **** 8842',loc:'美国',bal:'153,223.55'},
   {cur:'欧元',code:'EUR',flag:'eu',no:'IE63 CHAS 9309 0301 0076 68',loc:'爱尔兰',bal:'8,420.00'},
   {cur:'英镑',code:'GBP',flag:'gb',no:'GB74 CHAS 6095 6121 6559 71',loc:'英国',bal:'3,150.40'},
   {cur:'离岸人民币',code:'CNH',flag:'cn',no:'**** **** 6677',loc:'香港',bal:'12,680.00'},
@@ -530,7 +530,7 @@ const ACCOUNTS = [
   {cur:'新加坡元',code:'SGD',flag:'sg',no:'**** **** 2031',loc:'新加坡',bal:'0.00'}
 ];
 const ASSETS = [
-  {cur:'美元',code:'USD',flag:'us',total:'128,430.55',avail:'120,430.55',unavail:'1,200.00',pending:'8,000.00'},
+  {cur:'美元',code:'USD',flag:'us',total:'161,223.55',avail:'153,223.55',unavail:'1,200.00',pending:'8,000.00'},
   {cur:'欧元',code:'EUR',flag:'eu',total:'8,420.00',avail:'8,420.00',unavail:'',pending:'0.00'},
   {cur:'离岸人民币',code:'CNH',flag:'cn',total:'12,680.00',avail:'12,680.00',unavail:'',pending:'0.00'},
   {cur:'英镑',code:'GBP',flag:'gb',total:'3,150.40',avail:'3,150.40',unavail:'',pending:'0.00'},
@@ -699,7 +699,7 @@ const VIEWS = {
         '<button class="qbtn"><span class="qi">'+ri('icon-overflow_menu',18)+'</span></button>'+
       '</div>'+
       '<div class="sec-h">我的资产 <span class="sm">下载 App，随时随地便捷收付</span><span class="assets-tools"><span id="amt-toggle" onclick="toggleAmt()">'+ico('<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',15)+'显示</span><span>'+ico(ICON.edit,15)+'编辑</span></span></div>'+
-      '<div class="assets-bar"><span class="assets-total">预估总资产 '+ri('iconinfo',14)+' &#8776; <b>'+amt('144,442.30')+'</b> <span class="u">USD</span> '+ri('icon-chevron-down',14)+'</span><span class="assets-month">过去 1 个月收款金额约 &#8776; '+amt('18,640.00')+' USD <span class="kanban">'+ico('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',14)+'收款看板 <span class="nf">新功能</span></span></span></div>'+
+      '<div class="assets-bar"><span class="assets-total">预估总资产 '+ri('iconinfo',14)+' &#8776; <b>'+amt('177,235.30')+'</b> <span class="u">USD</span> '+ri('icon-chevron-down',14)+'</span><span class="assets-month">过去 1 个月收款金额约 &#8776; '+amt('18,640.00')+' USD <span class="kanban">'+ico('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',14)+'收款看板 <span class="nf">新功能</span></span></span></div>'+
       '<div class="acards collapsed" id="acards">'+ASSETS.map(assetCard).join('')+'</div>'+
       '<div class="assets-more" id="assets-more"><button onclick="toggleAssets()">'+ri('iconarrowdown',16)+'</button></div>'+
       '<div class="sec-h">账户交易</div>'+
@@ -737,7 +737,7 @@ const VIEWS = {
     '<div class="card bal-card"><div class="bt">可用余额</div>'+
       '<div class="bx">扣款方式：默认使用交易同币种余额扣款，交易币种余额不足时使用 <b>美元</b> 或 <b>港币</b> 余额扣款</div>'+
       '<div class="chips">'+
-        '<div class="chip"><img class="flag" src="'+flagUrl('us')+'"/><div><b>120,430.55</b><br><small>USD</small></div></div>'+
+        '<div class="chip"><img class="flag" src="'+flagUrl('us')+'"/><div><b>153,223.55</b><br><small>USD</small></div></div>'+
         '<div class="chip"><img class="flag" src="'+flagUrl('hk')+'"/><div><b>5,900.00</b><br><small>HKD</small></div></div>'+
         '<div class="chip"><img class="flag" src="'+flagUrl('ae')+'"/><div><b>0.00</b><br><small>AED</small></div></div>'+
         '<div class="chip"><img class="flag" src="'+flagUrl('au')+'"/><div><b>0.00</b><br><small>AUD</small></div></div>'+
