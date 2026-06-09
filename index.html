@@ -23,6 +23,9 @@
   button{font-family:inherit;cursor:pointer;border:none;background:none}
   img{display:block}
   .flag{width:24px;height:24px;border-radius:50%;object-fit:cover;background:#eee;flex:none}
+  .ri{fill:currentColor;display:inline-block;vertical-align:-0.15em}
+  .logo-img{height:30px;width:auto;display:block}
+  .ti-img{width:44px;height:44px;flex:none;object-fit:contain}
 
   /* ---------- LOGIN ---------- */
   #login{position:fixed;inset:0;z-index:50;display:flex;background:#fff;transition:opacity .5s ease}
@@ -251,7 +254,7 @@
 <!-- ===================== APP ===================== -->
 <div id="app">
   <aside class="side">
-    <div class="logo">万里汇<div class="wf"><b>World</b><b>First</b></div></div>
+    <div class="logo"><img src="assets/logo.png" alt="WorldFirst" class="logo-img"></div>
     <nav class="nav" id="nav"></nav>
     <div class="demo-tag" id="demoTag">演示环境 · DEMO</div>
   </aside>
@@ -277,6 +280,8 @@
 <div class="help">?</div>
 <div class="toast" id="toast"></div>
 
+<script src="assets/iconfont1.js"></script>
+<script src="assets/iconfont2.js"></script>
 <script>
 /* ---------------- params / data ---------------- */
 const P = new URLSearchParams(location.search);
@@ -369,6 +374,8 @@ const CARDS = [
 ];
 const flagUrl = c => 'https://flagcdn.com/w80/'+c+'.png';
 const ico = (p,s,sw)=>'<svg width="'+(s||18)+'" height="'+(s||18)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+(sw||1.8)+'" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
+const NAVICO={home:'iconhome-filled',collect:'icona-RequesttoPay1',transfer:'iconsend-money',rmb:'icon-cny_money-circle',trade:'iconworld-trade',worldcard:'icon-world_card',payees:'iconpayee-management',exchange:'iconfx-manager',global:'iconcross-border-pay',finance:'iconcredit-tech',savings:'icondeposit-product',benefits:'iconrewards-center'};
+const ri=(id,s)=>'<svg class="ri" width="'+(s||18)+'" height="'+(s||18)+'" aria-hidden="true"><use xlink:href="#'+id+'"></use></svg>';
 const spark = (pts,w,h)=>{w=w||70;h=h||24;const max=Math.max.apply(0,pts),min=Math.min.apply(0,pts);const sx=w/(pts.length-1);const sc=v=>h-2-((v-min)/(max-min||1))*(h-4);const d=pts.map((v,i)=>(i?'L':'M')+(i*sx).toFixed(1)+' '+sc(v).toFixed(1)).join(' ');return '<svg width="'+w+'" height="'+h+'"><path d="'+d+'" fill="none" stroke="#FF0051" stroke-width="1.6"/></svg>';};
 
 /* ---------------- nav ---------------- */
@@ -376,9 +383,9 @@ let route='home';
 function buildNav(){
   const nav=document.getElementById('nav');
   nav.innerHTML = NAV.map(function(n){
-    if(!n.kids) return '<div class="nav-item" data-id="'+n.id+'" onclick="go(\''+n.id+'\')"><span class="ico">'+ico(ICON[n.ic])+'</span>'+n.label+'</div>';
+    if(!n.kids) return '<div class="nav-item" data-id="'+n.id+'" onclick="go(\''+n.id+'\')"><span class="ico">'+ri(NAVICO[n.id])+'</span>'+n.label+'</div>';
     const kids = n.kids.map(k=>'<div class="sub-item" data-id="'+k.id+'" onclick="go(\''+k.id+'\',event)">'+k.label+'</div>').join('');
-    return '<div class="nav-item grp" data-grp="'+n.id+'" onclick="toggleGrp(\''+n.id+'\')"><span class="ico">'+ico(ICON[n.ic])+'</span>'+n.label+'<span class="car">'+ico(ICON.caret,14)+'</span></div><div class="sub" data-sub="'+n.id+'">'+kids+'</div>';
+    return '<div class="nav-item grp" data-grp="'+n.id+'" onclick="toggleGrp(\''+n.id+'\')"><span class="ico">'+ri(NAVICO[n.id])+'</span>'+n.label+'<span class="car">'+ri('iconarrowdown',12)+'</span></div><div class="sub" data-sub="'+n.id+'">'+kids+'</div>';
   }).join('');
 }
 function toggleGrp(id){
@@ -416,17 +423,17 @@ const VIEWS = {
     '<div class="grid col-2" style="margin-top:24px"><div>'+
       '<div class="sec-h">待办事项</div>'+
       '<div class="card todo">'+
-        '<div class="row"><div class="ti">'+ico(ICON.doc)+'</div><div><div class="tt">关联收款订单</div><div class="td">我们需要您提供一些关于向您的 WorldFirst 账户付款的信息，请前往收款页面按说明操作。</div></div><div class="go">去处理 ›</div></div>'+
-        '<div class="row"><div class="ti">'+ico(ICON.doc2)+'</div><div><div class="tt">补充订单材料</div><div class="td">补充交易订单材料</div></div><div class="go">补充材料 ›</div></div>'+
-        '<div class="row"><div class="ti">'+ico(ICON.payee)+'</div><div><div class="tt">收款人 - 收款人验证</div><div class="td">安全起见，请验证收款人</div></div><div class="go">验证收款人 ›</div></div>'+
+        '<div class="row"><img class="ti-img" src="assets/todo-order.png" alt=""><div><div class="tt">关联收款订单</div><div class="td">我们需要您提供一些关于向您的 WorldFirst 账户付款的信息，请前往收款页面按说明操作。</div></div><div class="go">去处理 ›</div></div>'+
+        '<div class="row"><img class="ti-img" src="assets/todo-order.png" alt=""><div><div class="tt">补充订单材料</div><div class="td">补充交易订单材料</div></div><div class="go">补充材料 ›</div></div>'+
+        '<div class="row"><img class="ti-img" src="assets/todo-payee.png" alt=""><div><div class="tt">收款人 - 收款人验证</div><div class="td">安全起见，请验证收款人</div></div><div class="go">验证收款人 ›</div></div>'+
       '</div><a class="viewall">展开更多待办事项 ›</a>'+
       '<div class="sec-h">快捷导航</div>'+
       '<div class="quick">'+
-        '<button class="qbtn pri" onclick="go(\'account-list\')"><span class="qi">'+ico(ICON.collect,18)+'</span>收款账户</button>'+
-        '<button class="qbtn" onclick="go(\'fxtransfer\')"><span class="qi">'+ico(ICON.transfer,18)+'</span>外币汇款</button>'+
-        '<button class="qbtn" onclick="go(\'worldcard\')"><span class="qi">'+ico(ICON.card,18)+'</span>万里付卡</button>'+
-        '<button class="qbtn" onclick="go(\'supplier\')"><span class="qi">'+ico(ICON.exch,18)+'</span>服务商快付</button>'+
-        '<button class="qbtn">···</button>'+
+        '<button class="qbtn pri" onclick="go(\'account-list\')"><span class="qi">'+ri('icon-collection_account',18)+'</span>收款账户</button>'+
+        '<button class="qbtn" onclick="go(\'fxtransfer\')"><span class="qi">'+ri('icon-money-circle',18)+'</span>外币汇款</button>'+
+        '<button class="qbtn" onclick="go(\'worldcard\')"><span class="qi">'+ri('icon-world_card',18)+'</span>万里付卡</button>'+
+        '<button class="qbtn" onclick="go(\'supplier\')"><span class="qi">'+ri('icon-vendor_payment',18)+'</span>服务商快付</button>'+
+        '<button class="qbtn"><span class="qi">'+ri('icon-overflow_menu',18)+'</span></button>'+
       '</div>'+
       '<div class="sec-h">我的资产 <span class="sm">下载 App，随时随地便捷收付</span></div>'+
       '<div class="card asset-card"><div class="at">支持全球 20+ 主流货币</div>'+
