@@ -251,6 +251,27 @@
   .prod h4{font-size:16px}
   .prod p{color:var(--ink-2);font-size:13px;line-height:1.7;flex:1}
   .prod .det{color:var(--link);font-weight:600;cursor:pointer}
+  .kjb-bal{padding:24px 26px}
+  .kjb-top{display:flex;align-items:flex-start}
+  .kjb-l{color:#3a3a42;font-size:14px;display:flex;align-items:center;gap:6px;margin-bottom:10px}
+  .kjb-amt{font-size:34px;font-weight:800;letter-spacing:.5px}
+  .kjb-amt span{font-size:16px;color:var(--ink-2);font-weight:600;margin-left:8px}
+  .kjb-notify{margin-left:auto;color:#6B6B72;font-size:13px;display:flex;align-items:center;gap:8px}
+  .kjb-notify .sw{width:38px;height:20px;border-radius:10px;background:#E5E5EA;position:relative}
+  .kjb-notify .sw.on{background:var(--red)}
+  .kjb-notify .sw.on::after{content:"";position:absolute;right:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+  .kjb-hr{height:1px;background:var(--line);margin:18px 0}
+  .kjb-bot{display:flex;align-items:center;font-size:13px;color:#6B6B72}
+  .kjb-bot a{color:var(--link);cursor:pointer}
+  .kjb-cur{margin-left:auto;color:#9a9aa2;display:flex;align-items:center;gap:6px}
+  .kjb-cur .flag{width:18px;height:18px;display:inline-block}
+  .kjb-cur a{margin-left:10px;color:var(--link)}
+  .kjb-tabs{display:flex;align-items:center;gap:18px;border-bottom:1px solid var(--line);margin-top:26px}
+  .kjb-tab{padding:12px 4px;color:#6B6B72;cursor:pointer;font-weight:600;font-size:15px;border-bottom:2px solid transparent;margin-bottom:-1px}
+  .kjb-tab.on{color:var(--red);border-bottom-color:var(--red)}
+  .kjb-info{background:#F4F8FF;color:#5a6b8c;font-size:13px;padding:12px 16px;border-radius:8px;margin:18px 0;display:flex;align-items:center;gap:8px}
+  .kjb-sum{display:flex;align-items:center;font-size:13px;color:#6B6B72;margin:8px 0 6px}
+  .kjb-sum b{color:var(--ink)}
 
   /* FX / forex page */
   .fx-head{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:700;margin-bottom:24px}
@@ -499,7 +520,8 @@ function toggleGrp(id){
 }
 const PARENT={'account-list':'collect','records':'collect','orders':'collect','intransit':'collect','request':'collect',
   'fxtransfer':'transfer','supplier':'transfer','transrec':'transfer','wt-ov':'trade','wt-ord':'trade','fin-loan':'finance','fin-ins':'finance'};
-function go(id,e){ if(e) e.stopPropagation(); route=id; render(); markNav(); window.scrollTo(0,0); }
+function go(id,e){ if(e) e.stopPropagation(); if(route!==id){ try{history.pushState({r:id},'');}catch(_){ } } route=id; render(); markNav(); window.scrollTo(0,0); }
+window.addEventListener('popstate',function(ev){ var r=(ev.state&&ev.state.r)||'home'; route=r; render(); markNav(); window.scrollTo(0,0); });
 function markNav(){
   document.querySelectorAll('.nav-item,.sub-item').forEach(el=>el.classList.remove('on'));
   const leaf=document.querySelector('.sub-item[data-id="'+route+'"]')||document.querySelector('.nav-item[data-id="'+route+'"]');
@@ -569,6 +591,14 @@ function prodPage(title,items){return '<div class="page-h">'+title+'</div><div c
 
 /* ---------------- views ---------------- */
 function render(){ document.getElementById('content').innerHTML = (VIEWS[route]||VIEWS._generic)(); }
+const KJB_PLAT=['1688','TaoWorld 跨境供货平台','88生意通'];
+const KJB_BILLS=[
+  {ty:'1688 担保交易 · 采购付款',sup:'佛山市顺德区乐华陶瓷洁具有限公司',amt:'-8,420.00',fee:'12.63',wf:'0.00',net:'-8,432.63',t:'2026/06/07 15:22:08',no:'TXN20260607883041'},
+  {ty:'1688 担保交易 · 采购付款',sup:'中山市古镇华艺灯饰照明有限公司',amt:'-15,680.00',fee:'23.52',wf:'0.00',net:'-15,703.52',t:'2026/06/05 10:48:31',no:'TXN20260605771209'},
+  {ty:'1688 担保交易 · 采购付款',sup:'东莞市长安镇精密五金制品厂',amt:'-6,250.00',fee:'9.38',wf:'0.00',net:'-6,259.38',t:'2026/06/03 18:05:44',no:'TXN20260603620887'},
+  {ty:'1688 担保交易 · 退款',sup:'佛山市南海区美的家电配件商行',amt:'+1,200.00',fee:'0.00',wf:'0.00',net:'+1,200.00',t:'2026/06/02 09:31:12',no:'TXN20260602510433'}
+];
+function kjbTab(el){var s=el.parentElement.querySelectorAll('.kjb-tab');for(var i=0;i<s.length;i++)s[i].classList.remove('on');el.classList.add('on');}
 const VIEWS = {
   home(){return ''+
     '<img class="banner-img" src="assets/banner.png" alt="万里汇外贸B2B 百亿补贴 新客专享锁定全年优惠">'+
@@ -698,10 +728,18 @@ const VIEWS = {
     ['账期融资','基于您的真实交易流水，最快当天放款，灵活周转旺季备货资金。'],
     ['跨境保险','货物运输险、信用险一站投保，保障每一笔跨境订单。'],
     ['信用赋能','积累 WorldFirst 信用分，解锁更高额度与更优费率。']]);},
-  global(){return prodPage('跨境宝',[
-    ['一店多国','一个店铺布局全球主流电商平台，统一收款统一结算。'],
-    ['本地账户','在 10+ 国家拥有当地银行账户，像本地商家一样收款。'],
-    ['合规护航','VAT、EPR 等海外合规一站式办理。']]);},
+  global(){return ''+
+    '<div style="margin-bottom:24px"><div style="font-size:22px;font-weight:700">跨境宝</div><div style="color:#9a9aa2;font-size:13px;margin-top:7px">万里汇余额直接支付 1688、TaoWorld 跨境供货平台、88生意通采购款，做生意快人一步！</div></div>'+
+    '<div class="card kjb-bal"><div class="kjb-top"><div><div class="kjb-l">可用参考总余额 '+ri('iconinfo',13)+'</div><div class="kjb-amt">4,860.69<span>CNH</span></div></div><div class="kjb-notify">跨境宝直采资金流出通知 '+ri('iconinfo',13)+'<span class="sw on"></span></div></div><div class="kjb-hr"></div><div class="kjb-bot"><span>您可通过 <a>兑换</a>，或 <a>充值</a> 增加可用代扣余额</span><span class="kjb-cur">当前扣款币种及顺序 <img class="flag" src="'+flagUrl('cn')+'"/> 离岸人民币 <a>修改</a></span></div></div>'+
+    '<div class="kjb-tabs">'+KJB_PLAT.map(function(p,i){return '<div class="kjb-tab'+(i===0?' on':'')+'" onclick="kjbTab(this)">'+p+'</div>';}).join('')+'<button class="btn-pill" style="margin-left:auto" onclick="toast(\'演示环境，下单功能已禁用\')">去 1688 下单</button></div>'+
+    '<div class="card" style="padding:16px 22px;margin-top:18px"><div style="display:flex;align-items:center;font-weight:600">跨境宝付款攻略<span style="margin-left:auto;color:#b7b7be;display:flex">'+ri('icon-chevron-down',16)+'</span></div></div>'+
+    '<div class="sec-h" style="margin-top:30px">近期跨境宝账单 <span style="margin-left:auto;display:flex;gap:12px"><button class="btn-line">账单下载记录</button><button class="btn-line">下载查询结果</button></span></div>'+
+    '<div class="kjb-info">'+ri('iconinfo',14)+' 更新：支持查看下载超过 92 天的明细数据</div>'+
+    '<div class="filters"><div class="fsel">2026/05/09 &nbsp;至&nbsp; 2026/06/09</div><div class="fsel">账单类型 – 全部 '+ri('icon-chevron-down',12)+'</div><div class="fsearch">'+ico(ICON.search,15)+'<input placeholder="支持商家订单号，交易号搜索"/></div></div>'+
+    '<div class="kjb-sum"><b style="font-size:16px">汇总</b><span style="margin-left:auto">共 <b>4</b> 笔　　1688 商品总金额（支付）：<b>30,350.00</b> CNY 3 笔　　退款：<b>1,200.00</b> CNY 1 笔</span></div>'+
+    '<table class="tbl"><thead><tr><th>类型</th><th>商品金额</th><th>跨境宝服务费</th><th>万里汇服务费</th><th class="right">万里汇余额实际变动合计 '+ri('iconinfo',12)+'</th></tr></thead><tbody>'+
+      KJB_BILLS.map(function(b){return '<tr><td><div style="font-weight:600">'+b.ty+'</div><div style="color:#9a9aa2;font-size:12px;margin-top:4px">'+b.sup+'</div><div style="color:#c2c2c9;font-size:12px;margin-top:2px">'+b.t+' · '+b.no+'</div></td><td>'+b.amt+' CNY</td><td>'+b.fee+' CNY</td><td>'+b.wf+' CNY</td><td class="right" style="font-weight:700">'+b.net+' CNH</td></tr>';}).join('')+
+    '</tbody></table>';},
   savings(){return ''+
     '<div class="page-h">万余盈</div>'+
     '<div class="card" style="max-width:520px"><div class="at" style="font-size:17px;font-weight:700;margin-bottom:8px">闲置资金，自动增值</div>'+
