@@ -246,6 +246,9 @@
   .fx-rate .stamp{margin-left:auto;color:#9a9aa2;font-size:12px;display:flex;align-items:center;gap:8px}
   .fx-ring{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--red);display:flex;align-items:center;justify-content:center;font-size:10px;color:#9a9aa2;font-weight:600;animation:sp 4s linear infinite}
   .fx-ring span{animation:sp 4s linear infinite reverse}
+  .cd-ring{width:28px;height:28px;display:inline-block;vertical-align:middle}
+  #cd-arc{transition:stroke-dashoffset .9s linear}
+  .rateval{transition:color .35s}
   .fx-sub{color:#6B6B72;font-size:13px;margin-bottom:20px;display:flex;align-items:center;gap:5px}
   .fx-sub b{color:var(--ink)}
   .fx-sub a{margin-left:8px;cursor:pointer}
@@ -489,13 +492,32 @@ function fxCalc(side){var s=document.getElementById('fx-sell'),b=document.getEle
 function fxSwap(){var c=document.querySelectorAll('.fx-conv .cur');if(c.length<2)return;var t=c[0].innerHTML;c[0].innerHTML=c[1].innerHTML;c[1].innerHTML=t;fxFlipped=!fxFlipped;fxCalc(1);}
 function fxFlip(){fxFlipped=!fxFlipped;var t=document.getElementById('fx-rate-text'),sw=document.getElementById('fx-switch');if(t)t.textContent=fxFlipped?('1 CNH = '+(1/fxRateVal).toFixed(4)+' USD'):('1 USD = '+fxRateVal.toFixed(4)+' CNH');if(sw)sw.classList.toggle('on');fxCalc(1);}
 function fxRange(el){var sibs=el.parentElement.querySelectorAll('span');for(var i=0;i<sibs.length;i++)sibs[i].classList.remove('on');el.classList.add('on');}
+/* ---- live FX ticker: countdown ring + price fluctuation ---- */
+function cdRing(){return '<svg class="cd-ring" viewBox="0 0 28 28"><circle cx="14" cy="14" r="11" fill="none" stroke="#ECECEF" stroke-width="2.5"/><circle id="cd-arc" cx="14" cy="14" r="11" fill="none" stroke="#FF0051" stroke-width="2.5" stroke-linecap="round" transform="rotate(-90 14 14)" stroke-dasharray="69.12" stroke-dashoffset="69.12"/><text id="cd-num" x="14" y="17.6" text-anchor="middle" font-size="11" font-weight="600" fill="#9a9aa2">30</text></svg>';}
+let TICK=null, cdRem=30;
+function startTick(){ if(TICK) return; cdRem=30; TICK=setInterval(onTick,1000); }
+function onTick(){ cdRem--; if(cdRem<=0){ cdRem=30; fluctuate(); bumpTimes(); } var a=document.getElementById('cd-arc'); if(a) a.setAttribute('stroke-dashoffset',(69.12*cdRem/30).toFixed(2)); var n=document.getElementById('cd-num'); if(n) n.textContent=cdRem; }
+function flash(el,up){ if(!el) return; el.style.color=up?'#00B578':'#E0004a'; setTimeout(function(){el.style.color='';},700); }
+function fluctuate(){
+  var up=Math.random()>0.48, d=(Math.random()*0.0035+0.0006)*(up?1:-1);
+  fxRateVal=+Math.max(6.745,Math.min(6.815,fxRateVal+d)).toFixed(4);
+  var t=document.getElementById('fx-rate-text');
+  if(t){ t.textContent=fxFlipped?('1 CNH = '+(1/fxRateVal).toFixed(4)+' USD'):('1 USD = '+fxRateVal.toFixed(4)+' CNH'); flash(t,up); }
+  var ex=document.getElementById('fx-extra'); if(ex) ex.textContent=(70+Math.random()*30).toFixed(2);
+  fxCalc(1);
+  var list=document.querySelectorAll('.rateval');
+  for(var i=0;i<list.length;i++){ var el=list[i]; var cur=parseFloat(el.getAttribute('data-cur')), base=parseFloat(el.getAttribute('data-base')); var u=Math.random()>0.48; var nv=cur*(1+(Math.random()*0.0014+0.0002)*(u?1:-1)); nv=Math.max(base*0.985,Math.min(base*1.015,nv)); el.setAttribute('data-cur',nv.toFixed(4)); el.textContent=nv.toFixed(4); flash(el,u); }
+}
+function bumpTimes(){ var els=document.querySelectorAll('.fx-time'); for(var i=0;i<els.length;i++){ var s=(parseInt(els[i].getAttribute('data-sec'),10)+30)%86400; els[i].setAttribute('data-sec',s); els[i].textContent=hms(s); } }
+function hms(s){ return pad(Math.floor(s/3600))+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60); }
+function pad(n){ return (n<10?'0':'')+n; }
 const txnRow = x=>'<div class="row"><div class="ar '+x.d+'">'+(x.d==='in'?'&#8595;':'&#8593;')+'</div>'+
   '<div><div class="who">'+x.w+'</div><div class="meta"><span class="ok">成功</span>'+x.t+'</div></div>'+
   '<div class="amt">'+x.a+'<small>'+x.c+'</small></div></div>';
 function fxPanel(){return '<div class="card fx">'+
-  '<div class="fxh"><b>实时汇率</b><span class="upd">最后更新于 09:48:42 <span class="ring"></span></span></div>'+
+  '<div class="fxh"><b>实时汇率</b><span class="upd">最后更新于 <span class="fx-time" data-sec="35322">09:48:42</span> '+cdRing()+'</span></div>'+
   '<div class="fav">汇率收藏 <span class="ed">'+ico(ICON.edit,13)+' 编辑</span></div>'+
-  RATES.map(r=>'<div class="rate"><div class="rr"><div class="a">'+r[0]+'</div><div class="b">'+r[1]+'<span style="font-size:12px;color:#9a9aa2;font-weight:500"> '+r[2]+'</span></div></div>'+spark(r[3])+'</div>').join('')+
+  RATES.map(r=>'<div class="rate"><div class="rr"><div class="a">'+r[0]+'</div><div class="b"><span class="rateval" data-base="'+r[1]+'" data-cur="'+r[1]+'">'+r[1]+'</span><span style="font-size:12px;color:#9a9aa2;font-weight:500"> '+r[2]+'</span></div></div>'+spark(r[3])+'</div>').join('')+
   '<a class="viewall" onclick="go(\'exchange\')">前往汇兑中心 ›</a></div>';}
 function prodPage(title,items){return '<div class="page-h">'+title+'</div><div class="prod-grid">'+items.map(it=>'<div class="prod"><span class="pi">'+ico(ICON.finance,22)+'</span><h4>'+it[0]+'</h4><p>'+it[1]+'</p><a class="det">了解更多 ›</a></div>').join('')+'</div>';}
 
@@ -581,8 +603,8 @@ const VIEWS = {
         '<button class="fx-swapbtn" onclick="fxSwap()">'+ico('<path d="M8 7h11l-3-3M16 17H5l3 3"/>',18)+'</button>'+
         '<div class="fx-leg"><label>买入</label><div class="fx-box"><div class="cur"><img class="flag" src="'+flagUrl('cn')+'" style="width:22px;height:22px"/>CNH '+ri('icon-chevron-down',12)+'</div><input id="fx-buy" oninput="fxCalc(2)" value="67,741.00"/></div></div>'+
       '</div>'+
-      '<div class="fx-rate"><span class="shield">'+ri('icona-dashboard_activities_FXtrade',20)+'</span><b id="fx-rate-text">1 USD = 6.7741 CNH</b><span class="flip" onclick="fxFlip()"><span class="switch" id="fx-switch"></span>翻转汇率</span><span class="stamp">2026/06/09, 12:05:16 '+ri('iconinfo',13)+'<span class="fx-ring"><span>26</span></span></span></div>'+
-      '<div class="fx-sub">每 <b>10000</b> USD 比市场参考价多换 <b>83.02</b> CNH '+ri('iconinfo',12)+'<a>比价计算器</a></div>'+
+      '<div class="fx-rate"><span class="shield">'+ri('icona-dashboard_activities_FXtrade',20)+'</span><b id="fx-rate-text">1 USD = 6.7741 CNH</b><span class="flip" onclick="fxFlip()"><span class="switch" id="fx-switch"></span>翻转汇率</span><span class="stamp">2026/06/09, <span class="fx-time" data-sec="43516">12:05:16</span> '+ri('iconinfo',13)+cdRing()+'</span></div>'+
+      '<div class="fx-sub">每 <b>10000</b> USD 比市场参考价多换 <b id="fx-extra">83.02</b> CNH '+ri('iconinfo',12)+'<a>比价计算器</a></div>'+
       '<div class="fx-hilo">最高 <b>6.81311</b><span class="bar">|</span>最低 <b>6.74763</b><span class="fx-range"><span onclick="fxRange(this)">1天</span><span onclick="fxRange(this)">7天</span><span onclick="fxRange(this)">14天</span><span class="on" onclick="fxRange(this)">30天</span></span></div>'+
       fxChart()+
       '<div class="fx-legend"><span><i style="background:#FF0051"></i>我的汇率</span><span><i style="background:#AFC4F0"></i>市场参考价</span><span><i style="background:#D9D9DE"></i>CNY汇率</span><a class="decl">汇率声明</a></div>'+
@@ -665,7 +687,7 @@ function showApp(){
   document.getElementById('app').classList.add('show');
   buildNav();
   route = P.get('view') || 'home';
-  render(); markNav();
+  render(); markNav(); startTick();
 }
 let loggingIn=false;
 function doLogin(){
