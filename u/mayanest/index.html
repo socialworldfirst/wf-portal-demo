@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=1280" />
 <meta name="robots" content="noindex,nofollow" />
 <title>万里汇 WorldFirst</title>
-<link rel="shortcut icon" href="assets/favicon.png" />
-<link rel="icon" href="assets/favicon.png" />
+<link rel="shortcut icon" href="../../assets/favicon.png" />
+<link rel="icon" href="../../assets/favicon.png" />
 <style>
   :root{
     --red:#FF0051; --red-d:#E0004a; --red-soft:#FFE9F0;
@@ -413,7 +413,73 @@
 </style>
 </head>
 <body>
-<!--__VARIANT_GATE__-->
+<div id="wf-gate">
+  <div class="wg-left">
+    <div class="wg-logo">World<small>First</small></div>
+    <div class="wg-tag">一个账户<br>连接全球生意</div>
+    <div class="wg-sub">全球 100+ 国家和地区，多币种收款、低成本兑换、快速付款。</div>
+  </div>
+  <div class="wg-right">
+    <form class="wg-card" id="wg-form" autocomplete="off">
+      <div class="wg-h">账户登录</div>
+      <div class="wg-p">请输入专属访问密码登录您的账户</div>
+      <input id="wg-pw" type="password" placeholder="访问密码" autocomplete="off" spellcheck="false"/>
+      <div id="wg-err" class="wg-err"></div>
+      <button class="wg-btn" type="submit">登 录</button>
+      <div class="wg-foot">本页面为演示环境，所有数据均为虚构展示。</div>
+    </form>
+  </div>
+</div>
+<style>
+#wf-gate{position:fixed;inset:0;z-index:99999;display:flex;background:#fff;font-family:roboto,"PingFang SC","Microsoft YaHei",sans-serif}
+#wf-gate .wg-left{width:46%;background:linear-gradient(150deg,#FD3A4B 0%,#F31C46 60%,#D8113A 100%);color:#fff;padding:80px 64px;display:flex;flex-direction:column;justify-content:center}
+#wf-gate .wg-logo{font-size:46px;font-weight:800;letter-spacing:.5px;margin-bottom:40px}
+#wf-gate .wg-logo small{font-size:20px;font-weight:600;opacity:.95;margin-left:2px}
+#wf-gate .wg-tag{font-size:40px;font-weight:700;line-height:1.25;margin-bottom:22px}
+#wf-gate .wg-sub{font-size:15px;line-height:1.8;opacity:.92;max-width:420px}
+#wf-gate .wg-right{flex:1;display:flex;align-items:center;justify-content:center;padding:40px}
+#wf-gate .wg-card{width:360px;display:flex;flex-direction:column}
+#wf-gate .wg-h{font-size:26px;font-weight:700;color:#1A1A1A;margin-bottom:8px}
+#wf-gate .wg-p{font-size:14px;color:#9a9aa2;margin-bottom:28px}
+#wf-gate #wg-pw{height:50px;border:1px solid #E4E4E8;border-radius:10px;padding:0 16px;font-size:15px;outline:none;transition:border .15s}
+#wf-gate #wg-pw:focus{border-color:#FF0051}
+#wf-gate .wg-err{color:#E0004a;font-size:13px;min-height:18px;margin:8px 2px 0}
+#wf-gate .wg-btn{height:50px;margin-top:14px;border:none;border-radius:10px;background:#FF0051;color:#fff;font-size:16px;font-weight:600;letter-spacing:2px;cursor:pointer;transition:background .15s}
+#wf-gate .wg-btn:hover{background:#E0004a}
+#wf-gate .wg-btn:disabled{opacity:.6;cursor:default}
+#wf-gate .wg-foot{margin-top:26px;font-size:12px;color:#b7b7be;text-align:center}
+@media(max-width:860px){#wf-gate .wg-left{display:none}}
+</style>
+<script>
+(function(){
+  var SLUG="mayanest", SALT="dsC2MghWcTRTpSNsP4mJLw==", IV="tA//z+BOXcslf8qg", CT="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";
+  var pre=null; try{pre=sessionStorage.getItem('WFV_'+SLUG);}catch(e){}
+  var gate=document.getElementById('wf-gate');
+  if(pre){ if(gate) gate.style.display='none'; return; }
+  function b2u(s){var bin=atob(s),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u;}
+  async function unlock(pw){
+    var km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+    var key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b2u(SALT),iterations:100000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+    var pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:b2u(IV)},key,b2u(CT));
+    return new TextDecoder().decode(pt);
+  }
+  document.getElementById('wg-form').addEventListener('submit',async function(e){
+    e.preventDefault();
+    var pw=document.getElementById('wg-pw').value.trim(), err=document.getElementById('wg-err'), btn=document.querySelector('.wg-btn');
+    if(!pw) return;
+    btn.disabled=true; btn.textContent='登录中…'; err.textContent='';
+    try{
+      var json=await unlock(pw); JSON.parse(json);
+      sessionStorage.setItem('WFV_'+SLUG, json);
+      location.reload();
+    }catch(_){
+      err.textContent='密码不正确，请检查后重试'; btn.disabled=false; btn.textContent='登 录';
+      document.getElementById('wg-pw').value=''; document.getElementById('wg-pw').focus();
+    }
+  });
+  document.getElementById('wg-pw').focus();
+})();
+</script>
 
 <!-- ===================== LOGIN ===================== -->
 <div id="login">
@@ -438,7 +504,7 @@
 <!-- ===================== APP ===================== -->
 <div id="app">
   <aside class="side">
-    <div class="logo"><img src="assets/logo.png" alt="WorldFirst" class="logo-img"></div>
+    <div class="logo"><img src="../../assets/logo.png" alt="WorldFirst" class="logo-img"></div>
     <nav class="nav" id="nav"></nav>
     <div class="demo-tag" id="demoTag">演示环境 · DEMO</div>
   </aside>
@@ -447,7 +513,7 @@
       <div class="promo-sel">外贸B2B与海外账号快捷开通！<span class="dot"></span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
       <div class="grow"></div>
-      <div class="app-btn"><img class="app-ico" src="assets/app-icon.png" alt="">下载万里汇App</div>
+      <div class="app-btn"><img class="app-ico" src="../../assets/app-icon.png" alt="">下载万里汇App</div>
       <div class="lk">新手引导</div>
       <div class="bell"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="b">10+</span></div>
       <div class="user"><span class="av" id="avatar"></span><span id="uname">hello,</span>
@@ -464,12 +530,12 @@
 <div class="help">?</div>
 <div class="toast" id="toast"></div>
 
-<script src="assets/iconfont1.js"></script>
-<script src="assets/iconfont2.js"></script>
-<script src="assets/providers.js"></script>
+<script src="../../assets/iconfont1.js"></script>
+<script src="../../assets/iconfont2.js"></script>
+<script src="../../assets/providers.js"></script>
 <script>
 /* ---------------- params / data ---------------- */
-/*__VARIANT_SHIM__*/
+try{var __s=sessionStorage.getItem('WFV_mayanest');if(__s)window.WF_VARIANT=JSON.parse(__s);}catch(e){}
 function V(k){return (window.WF_VARIANT&&window.WF_VARIANT[k])||null;}
 const P = new URLSearchParams(location.search);
 const NAMES = ['陈嘉怡','林浩然','王思远','李梓萌','黄俊杰','周雅琳','吴宇航','刘梦洁','徐文涛','张晓彤','郑书瑶','赵睿哲'];
@@ -569,7 +635,7 @@ const CARDS = V('cards') || [
 ];
 const TOTAL_ASSETS = V('total') || '177,235.30';
 const TOTAL_MONTH = V('month') || '18,640.00';
-const flagUrl = c => 'assets/flags/'+c+'.svg';
+const flagUrl = c => '../../assets/flags/'+c+'.svg';
 const ico = (p,s,sw)=>'<svg width="'+(s||18)+'" height="'+(s||18)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+(sw||1.8)+'" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
 const NAVICO={home:'iconhome-filled',collect:'icona-RequesttoPay1',transfer:'iconsend-money',rmb:'icon-cny_money-circle',trade:'iconworld-trade',worldcard:'icon-world_card',payees:'iconpayee-management',exchange:'iconfx-manager',global:'iconcross-border-pay',finance:'iconcredit-tech',savings:'icondeposit-product',benefits:'iconrewards-center'};
 const ri=(id,s)=>'<svg class="ri" width="'+(s||18)+'" height="'+(s||18)+'" aria-hidden="true"><use xlink:href="#'+id+'"></use></svg>';
@@ -708,7 +774,7 @@ const PAYEES=[
   {name:'Pacific Components Inc.',alias:'Pacific',cur:'美元',flag:'us',acct:'8855 744 002',bank:'JPMORGAN CHASE BANK, N.A.'},
   {name:'招商银行 储蓄卡',alias:'提现账户',cur:'美元',flag:'us',acct:'**** **** 6688',bank:'招商银行'}
 ];
-const KJB_PLAT=[{logo:'assets/kjb-1688.svg',name:'1688',h:26},{logo:'assets/kjb-taoworld.png',name:'TaoWorld 跨境供货平台',h:24},{logo:'assets/kjb-88.png',name:'88生意通',h:30}];
+const KJB_PLAT=[{logo:'../../assets/kjb-1688.svg',name:'1688',h:26},{logo:'../../assets/kjb-taoworld.png',name:'TaoWorld 跨境供货平台',h:24},{logo:'../../assets/kjb-88.png',name:'88生意通',h:30}];
 const KJB_BILLS=[
   {ty:'1688 担保交易 · 采购付款',sup:'佛山市顺德区乐华陶瓷洁具有限公司',amt:'-8,420.00',fee:'12.63',wf:'0.00',net:'-8,432.63',t:'2026/06/07 15:22:08',no:'TXN20260607883041'},
   {ty:'1688 担保交易 · 采购付款',sup:'中山市古镇华艺灯饰照明有限公司',amt:'-15,680.00',fee:'23.52',wf:'0.00',net:'-15,703.52',t:'2026/06/05 10:48:31',no:'TXN20260605771209'},
@@ -722,9 +788,9 @@ const VIEWS = {
     '<div class="grid col-2" style="margin-top:24px"><div>'+
       (SHOW_TODO?'<div class="sec-h">待办事项</div>'+
       '<div class="card todo">'+
-        '<div class="row"><img class="ti-img" src="assets/todo-order.png" alt=""><div><div class="tt">关联收款订单</div><div class="td">我们需要您提供一些关于向您的 WorldFirst 账户付款的信息，请前往收款页面按说明操作。</div></div><div class="go">去处理 ›</div></div>'+
-        '<div class="row"><img class="ti-img" src="assets/todo-order.png" alt=""><div><div class="tt">补充订单材料</div><div class="td">补充交易订单材料</div></div><div class="go">补充材料 ›</div></div>'+
-        '<div class="row"><img class="ti-img" src="assets/todo-payee.png" alt=""><div><div class="tt">收款人 - 收款人验证</div><div class="td">安全起见，请验证收款人</div></div><div class="go">验证收款人 ›</div></div>'+
+        '<div class="row"><img class="ti-img" src="../../assets/todo-order.png" alt=""><div><div class="tt">关联收款订单</div><div class="td">我们需要您提供一些关于向您的 WorldFirst 账户付款的信息，请前往收款页面按说明操作。</div></div><div class="go">去处理 ›</div></div>'+
+        '<div class="row"><img class="ti-img" src="../../assets/todo-order.png" alt=""><div><div class="tt">补充订单材料</div><div class="td">补充交易订单材料</div></div><div class="go">补充材料 ›</div></div>'+
+        '<div class="row"><img class="ti-img" src="../../assets/todo-payee.png" alt=""><div><div class="tt">收款人 - 收款人验证</div><div class="td">安全起见，请验证收款人</div></div><div class="go">验证收款人 ›</div></div>'+
       '</div><a class="viewall">展开更多待办事项 ›</a>':'')+
       '<div class="sec-h">快捷导航</div>'+
       '<div class="quick">'+
@@ -783,7 +849,7 @@ const VIEWS = {
     '<div class="filters"><div class="fsel">本月已用 '+ico(ICON.caret,12)+'</div><div class="fsel">状态 '+ico(ICON.caret,12)+'</div><div class="fsel">卡片类型 '+ico(ICON.caret,12)+'</div>'+
       '<div class="fsearch">'+ico(ICON.search,15)+'<input placeholder="请输入卡号"/></div></div>'+
     '<table class="tbl"><thead><tr><th>卡片</th><th>本月已用</th><th class="right">开卡时间</th></tr></thead><tbody>'+
-      CARDS.map(c=>'<tr><td><div class="cardmini"><img class="cv" src="assets/card.png" alt=""><div><b>'+c.n+'</b><span class="badge">正常</span><div style="color:#9a9aa2;font-size:12px;margin-top:4px">**** **** **** '+c.last+'</div></div></div></td>'+
+      CARDS.map(c=>'<tr><td><div class="cardmini"><img class="cv" src="../../assets/card.png" alt=""><div><b>'+c.n+'</b><span class="badge">正常</span><div style="color:#9a9aa2;font-size:12px;margin-top:4px">**** **** **** '+c.last+'</div></div></div></td>'+
         '<td><div class="usebar"><i style="width:'+c.u+'%"></i></div><div style="color:#9a9aa2;font-size:12px;margin-top:6px">$'+c.used+' / $'+c.lim+'</div></td>'+
         '<td class="right">'+c.dt+'</td></tr>').join('')+
     '</tbody></table>';

@@ -1,1 +1,4 @@
 _punchlist.md
+# plaintext variant configs — NEVER deploy (would bypass the password gate)
+profiles/
+*.local.json
