@@ -476,7 +476,7 @@ const CARDS = [
   {n:'Ads - Meta', u:53, used:'7,890', lim:'15,000', dt:'2025/11/02', last:'7193'},
   {n:'SaaS - Tools', u:25, used:'1,260', lim:'5,000', dt:'2025/09/14', last:'5560'}
 ];
-const flagUrl = c => 'https://flagcdn.com/w80/'+c+'.png';
+const flagUrl = c => 'assets/flags/'+c+'.svg';
 const ico = (p,s,sw)=>'<svg width="'+(s||18)+'" height="'+(s||18)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+(sw||1.8)+'" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
 const NAVICO={home:'iconhome-filled',collect:'icona-RequesttoPay1',transfer:'iconsend-money',rmb:'icon-cny_money-circle',trade:'iconworld-trade',worldcard:'icon-world_card',payees:'iconpayee-management',exchange:'iconfx-manager',global:'iconcross-border-pay',finance:'iconcredit-tech',savings:'icondeposit-product',benefits:'iconrewards-center'};
 const ri=(id,s)=>'<svg class="ri" width="'+(s||18)+'" height="'+(s||18)+'" aria-hidden="true"><use xlink:href="#'+id+'"></use></svg>';
