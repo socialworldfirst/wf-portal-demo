@@ -248,7 +248,7 @@
     </aside>
     <div class="main">
       <div class="topbar">
-        <div class="tb-lang" id="langtog" onclick="setLang(lang==='en'?'zh':'en')">中文</div>
+        <div class="tb-lang" id="langtog" onclick="toggleLang()">中文</div>
         <div class="tb-ic" title="Rewards"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18M12 8v13M12 8C9 8 7 4 12 4c5 0 3 4 0 4z"/></svg></div>
         <div class="tb-ic" title="Notifications"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6M10 20a2 2 0 0 0 4 0"/></svg></div>
         <div class="tb-user"><span class="av" id="avatar">B</span><span class="un" id="uname"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9aa2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
@@ -538,6 +538,7 @@ function buildNav(){document.getElementById('nav').innerHTML=NAV.map(n=>'<div cl
 function markNav(){var act=(route==='convert'||route.indexOf('pay-')===0||route==='forex-lock')?'payments':route;document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('on',e.getAttribute('data-id')===act));}
 function paintTop(){document.getElementById('uname').textContent=t('hello')+(COMPANY||NAME);document.getElementById('avatar').textContent=((COMPANY||NAME).trim()[0]||'Z').toUpperCase();document.getElementById('langtog').textContent=(lang==='en'?'中文':'EN');}
 function render(){document.getElementById('content').innerHTML=(VIEWS[route]||VIEWS.home)();if(route==='convert')cvRender();markNav();}
+function toggleLang(){setLang(lang==='en'?'zh':'en');}
 function setLang(l){lang=l;document.documentElement.lang=(l==='zh'?'zh-CN':'en');try{var u=new URL(location.href);u.searchParams.set('lang',l);history.replaceState(history.state,'',u);}catch(_){}paintTop();buildNav();render();}
 function go(id,e){if(e)e.stopPropagation();if(id&&id.indexOf('pay-')===0)wizStep=0;if(route!==id){try{history.pushState({r:id},'');}catch(_){}}route=id;render();window.scrollTo(0,0);}
 window.addEventListener('popstate',ev=>{route=(ev.state&&ev.state.r)||'home';render();window.scrollTo(0,0);});
