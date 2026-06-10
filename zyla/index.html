@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=1280"/>
+<meta name="robots" content="noindex"/>
+<title>Zyla</title>
+<link rel="shortcut icon" href="assets/favicon.ico"/>
+<style>
+  :root{--blue:#0072E0;--blue-d:#005FBD;--ink:#1A1A1A;--ink-2:#3a3a42;--ink-3:#9a9aa2;--line:#ECECEF;--line-2:#F2F2F5;--green:#00B578;--bg:#F6F7F9;--navy:#001064}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:roboto,"PingFang SC",-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
+  a{color:var(--blue);text-decoration:none;cursor:pointer}
+  img{display:block}
+  .hide{display:none!important}
+  /* ---------- login ---------- */
+  #login{position:fixed;inset:0;display:flex;background:#fff;z-index:100}
+  #login .lg-left{width:46%;background:linear-gradient(150deg,#3A1FB8 0%,#0072E0 55%,#00B3E6 100%);color:#fff;padding:80px 64px;display:flex;flex-direction:column;justify-content:center}
+  #login .lg-logo{font-size:44px;font-weight:800;margin-bottom:36px}
+  #login .lg-h{font-size:40px;font-weight:700;line-height:1.25;margin-bottom:20px}
+  #login .lg-sub{font-size:15px;line-height:1.8;opacity:.92;max-width:420px}
+  #login .lg-right{flex:1;display:flex;align-items:center;justify-content:center}
+  #login .lg-card{width:360px}
+  #login .lg-card h2{font-size:26px;margin-bottom:8px}
+  #login .lg-card p{color:var(--ink-3);font-size:14px;margin-bottom:26px}
+  #login .lg-field{height:50px;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;padding:0 14px;margin-bottom:14px;color:var(--ink-2);font-size:15px}
+  #login .lg-field input{border:none;outline:none;flex:1;font-size:15px;background:transparent}
+  #login .lg-btn{height:50px;width:100%;border:none;border-radius:999px;background:var(--blue);color:#fff;font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+  .spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  /* ---------- shell ---------- */
+  #app{display:none}
+  #app.show{display:block}
+  .layout{display:flex;min-height:100vh}
+  .side{width:256px;flex:none;border-right:1px solid var(--line);padding:0 16px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .brand{height:88px;display:flex;align-items:center;padding-left:8px}
+  .brand img{height:30px;width:auto}
+  .nav-item{display:flex;align-items:center;gap:12px;height:48px;padding:0 14px;border-radius:10px;color:var(--ink-2);font-size:15px;font-weight:500;cursor:pointer;margin-bottom:4px}
+  .nav-item:hover{background:var(--line-2)}
+  .nav-item.on{background:rgba(0,16,100,.07);color:var(--ink);font-weight:600}
+  .nav-item .ic{width:22px;height:22px;flex:none;color:inherit;display:flex;align-items:center;justify-content:center}
+  .main{flex:1;min-width:0;display:flex;flex-direction:column}
+  .topbar{height:88px;display:flex;align-items:center;padding:0 40px;justify-content:flex-end;gap:18px}
+  .tb-ic{width:38px;height:38px;border-radius:50%;background:var(--line-2);display:flex;align-items:center;justify-content:center;color:var(--ink-2);cursor:pointer}
+  .tb-user{display:flex;align-items:center;gap:8px;cursor:pointer;max-width:200px}
+  .tb-user .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#0072E0,#00B3E6);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex:none}
+  .tb-user .un{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .content{flex:1;padding:8px 40px 60px;max-width:1480px;width:100%}
+  .colwrap{display:flex;gap:32px;align-items:flex-start}
+  .colmain{flex:1;min-width:0}
+  .colside{width:320px;flex:none}
+  h1.pt{font-size:26px;font-weight:700;margin-bottom:6px}
+  .pt-sub{color:var(--ink-3);font-size:14px;margin-bottom:24px}
+  .sec-h{font-size:20px;font-weight:700;margin:30px 0 16px;display:flex;align-items:center}
+  .card{border:1px solid var(--line);border-radius:14px;padding:22px 24px;background:#fff}
+  .btn-pill{height:42px;padding:0 22px;border-radius:999px;background:var(--blue);color:#fff;border:none;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+  .btn-pill.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .btn-pill:hover{filter:brightness(.97)}
+  /* todo */
+  .todo .row{display:flex;align-items:center;gap:16px;padding:18px 4px}
+  .todo .ti{width:48px;height:48px;border-radius:12px;flex:none}
+  .todo .who{font-weight:600;font-size:15px}
+  .todo .meta{color:var(--ink-3);font-size:13px;margin-top:3px}
+  .todo a{margin-left:auto;font-weight:600}
+  /* shortcuts */
+  .shortcuts{display:flex;gap:14px;align-items:center}
+  .sc{height:48px;padding:0 20px;border:1px solid var(--line);border-radius:999px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;cursor:pointer;background:#fff}
+  .sc.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .sc.more{width:48px;padding:0;justify-content:center;color:var(--ink-3)}
+  /* assets */
+  .assets-bar{display:flex;align-items:center;margin:6px 0 18px;color:var(--ink-2);font-size:14px}
+  .assets-total{display:flex;align-items:center;gap:6px}
+  .assets-total b{font-size:18px;color:var(--ink)}
+  .acct-row{display:flex;gap:18px;flex-wrap:wrap}
+  .acct{width:300px;border:1px solid var(--line);border-radius:14px;padding:20px;cursor:pointer;transition:box-shadow .15s}
+  .acct:hover{box-shadow:0 6px 20px rgba(0,0,0,.06)}
+  .acct .ah{display:flex;align-items:center;gap:10px;font-weight:600}
+  .acct .ah .flag{width:26px;height:26px;border-radius:50%}
+  .acct .ah .chev{margin-left:auto;color:var(--ink-3)}
+  .acct .abal{font-size:26px;font-weight:700;margin:14px 0 16px}
+  .acct .aln{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-3);margin-top:7px}
+  .acct .aln b{color:var(--ink);font-weight:600}
+  /* txn list */
+  .txn .row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-bottom:1px solid var(--line-2)}
+  .txn .row:last-child{border-bottom:none}
+  .txn .ar{width:34px;height:34px;border-radius:50%;background:#F2F2F5;color:var(--ink-2);display:flex;align-items:center;justify-content:center;font-size:16px;flex:none}
+  .txn .who{font-weight:600;font-size:15px}
+  .txn .meta{color:var(--ink-3);font-size:12.5px;margin-top:5px}
+  .txn .meta .ok{color:var(--green);margin-right:8px}
+  .txn .amt{margin-left:auto;font-size:17px;font-weight:700}
+  .txn .amt small{font-size:12px;color:var(--ink-3);font-weight:500;margin-left:4px}
+  .empty{display:flex;flex-direction:column;align-items:center;padding:54px 0;color:var(--ink-3);font-size:14px}
+  .empty img{width:120px;margin-bottom:6px;opacity:.9}
+  /* right rail */
+  .rail-h{font-size:20px;font-weight:700;margin-bottom:14px;display:flex;align-items:center}
+  .rail-h .upd{margin-left:auto;font-size:12px;color:var(--ink-3);font-weight:400;display:flex;align-items:center;gap:7px}
+  .cal-card{border:1px solid var(--line);border-radius:14px;padding:18px 20px;color:var(--ink-2);font-size:14px;line-height:1.7}
+  .rates{border:1px solid var(--line);border-radius:14px;padding:6px 20px}
+  .rate{display:flex;align-items:center;padding:14px 0;border-bottom:1px solid var(--line-2)}
+  .rate:last-child{border-bottom:none}
+  .rate .rr{flex:1;font-size:14px;color:var(--ink-2)}
+  .rate .rr b{font-weight:700;color:var(--ink)}
+  .rate .rateval{font-weight:700}
+  /* table */
+  .tbl{width:100%;border-collapse:collapse}
+  .tbl th{text-align:left;font-size:13px;color:var(--ink-3);font-weight:500;padding:16px 12px;border-bottom:1px solid var(--line)}
+  .tbl td{padding:18px 12px;border-bottom:1px solid var(--line-2);font-size:14px;vertical-align:top}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl .right{text-align:right}
+  .status{display:inline-flex;align-items:center;gap:6px}
+  .status .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+  .pager{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:22px}
+  .pager .pg{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;color:var(--ink-3)}
+  .pager .pg.on{background:#fff;border-color:var(--blue);color:var(--blue);font-weight:600}
+  .filters{display:flex;gap:12px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+  .fil{height:40px;border:1px solid var(--line);border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-2);background:#fff;cursor:pointer}
+  /* feature grid (payments) */
+  .feat{border:1px solid var(--line);border-radius:14px;padding:22px 24px;display:flex;align-items:center;gap:18px;cursor:pointer;margin-bottom:18px;transition:box-shadow .15s,border-color .15s}
+  .feat:hover{box-shadow:0 6px 22px rgba(0,0,0,.06);border-color:#dfe3ea}
+  .feat .fi{width:46px;height:46px;border-radius:12px;background:#EAF3FF;color:var(--blue);display:flex;align-items:center;justify-content:center;flex:none}
+  .feat .ft{font-size:17px;font-weight:700;margin-bottom:5px}
+  .feat .fd{color:var(--ink-3);font-size:13.5px;line-height:1.5}
+  .feat img.fi-img{width:46px;height:46px;border-radius:12px;object-fit:contain;background:#fff;border:1px solid var(--line);padding:6px}
+  .payee-h{font-size:20px;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px}
+  .payee-l{display:block;padding:8px 0;font-weight:600}
+  /* steps (multi) */
+  .step{display:flex;gap:14px;margin-bottom:22px}
+  .step .n{width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+  .step .st{font-weight:600;font-size:15px}
+  .step .ss{color:var(--blue);font-size:13px;margin-top:4px}
+  /* convert / fx */
+  .conv{display:grid;grid-template-columns:1fr 44px 1fr;gap:14px;align-items:end;margin-top:8px}
+  .leg label{display:block;color:var(--ink-2);font-size:14px;margin-bottom:10px}
+  .leg{position:relative}
+  .box{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;height:54px;overflow:hidden}
+  .box .cur{display:flex;align-items:center;gap:8px;padding:0 14px;border-right:1px solid var(--line);height:100%;font-weight:600;white-space:nowrap;cursor:pointer}
+  .box .cur .flag{width:22px;height:22px;border-radius:50%}
+  .box input{border:none;outline:none;flex:1;height:100%;padding:0 14px;font-size:16px;font-weight:600;text-align:right}
+  .swapb{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--blue);margin-bottom:5px}
+  .dd{position:absolute;top:86px;left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.13);z-index:40;max-height:0;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .12s}
+  .dd.open{max-height:300px;overflow-y:auto;opacity:1;pointer-events:auto;padding:6px}
+  .dd-item{display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:14px}
+  .dd-item:hover{background:var(--line-2)}
+  .dd-item.sel{color:var(--blue);background:#EAF3FF}
+  .rate-line{display:flex;align-items:center;gap:12px;margin-top:18px;font-size:15px}
+  .rate-line b{font-size:16px}
+  .cd-ring{width:26px;height:26px}
+  .foot{padding:30px 40px 40px;color:var(--ink-3);font-size:12px;line-height:1.7;text-align:center;border-top:1px solid var(--line);margin-top:20px}
+  .foot a{color:var(--blue)}
+  #toast{position:fixed;left:50%;bottom:46px;transform:translateX(-50%);background:rgba(0,0,0,.82);color:#fff;padding:11px 20px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:200}
+  #toast.show{opacity:1}
+</style>
+</head>
+<body>
+<!--__VARIANT_GATE__-->
+
+<div id="login">
+  <div class="lg-left">
+    <div class="lg-logo">zyla</div>
+    <div class="lg-h">One account,<br>global business.</div>
+    <div class="lg-sub">Send and receive cross-border payments like a local. Collect from 100+ marketplaces, hold multiple currencies, and convert at competitive rates.</div>
+  </div>
+  <div class="lg-right">
+    <div class="lg-card">
+      <h2>Log in</h2>
+      <p>Welcome back to your Zyla account.</p>
+      <div class="lg-field"><input id="lg-email" placeholder="Email"/></div>
+      <div class="lg-field"><input id="lg-pass" type="password" placeholder="Password"/></div>
+      <button class="lg-btn" id="lg-btn" onclick="doLogin()">Log in</button>
+    </div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="layout">
+    <aside class="side">
+      <div class="brand"><img src="assets/logo.png" alt="zyla"/></div>
+      <nav id="nav"></nav>
+    </aside>
+    <div class="main">
+      <div class="topbar">
+        <div class="tb-ic" title="Rewards"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18M12 8v13M12 8C9 8 7 4 12 4c5 0 3 4 0 4z"/></svg></div>
+        <div class="tb-ic" title="Notifications"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6M10 20a2 2 0 0 0 4 0"/></svg></div>
+        <div class="tb-user"><span class="av" id="avatar">B</span><span class="un" id="uname">hello,</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9aa2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div>
+      <div class="content" id="content"></div>
+      <div class="foot">
+        Zyla is a service of AUS Merchant Services, Inc., a licensed provider of money transfer services (NMLS ID: 1277102). All money transmission is provided pursuant to state money transmission licenses (available <a>here</a>) held by AUS Merchant Services, Inc. Zyla is currently not available in New York, Nevada, and is available only for certain business types in Virginia.<br>The Zyla Account is a commercial tool to support business activities only. It is not available to consumers for personal, family, or household purposes.<br>
+        <a>Terms and Conditions</a> | <a>Privacy Policy</a> | <a>Cookie Policy</a> | <a>Do Not Sell or Share My Personal Information</a><br>
+        Copyright 2022 Alipay US, Inc. All rights reserved
+      </div>
+    </div>
+  </div>
+</div>
+<div id="toast"></div>
+
+<script>
+/*__VARIANT_SHIM__*/
+function V(k){return (window.WF_VARIANT&&window.WF_VARIANT[k])||null;}
+const P=new URLSearchParams(location.search);
+const COMPANY=P.get('company')||V('company')||'BRIGHTLEAF GOODS LLC';
+const NAME=P.get('name')||V('name')||'Brightleaf';
+const TOTAL=V('total')||'186,402.55';
+const MONTH=V('month')||'42,310.00';
+const ASSETS=V('assets')||[
+  {cur:'USD',flag:'us',bal:'160,420.50',pending:'7,000.00'},
+  {cur:'EUR',flag:'eu',bal:'9,240.00',pending:'0.00'},
+  {cur:'GBP',flag:'gb',bal:'4,180.00',pending:'0.00'},
+  {cur:'CAD',flag:'ca',bal:'2,100.00',pending:'0.00'}
+];
+const TXNS=V('txns')||[
+  {d:'in', w:'Received from Amazon.com Services', t:'2026/06/08, 08:42:17', a:'+18,420.00', c:'USD'},
+  {d:'in', w:'Received from TikTok Shop US', t:'2026/06/07, 21:15:09', a:'+9,640.00', c:'USD'},
+  {d:'out',w:'World Pay to Yiwu Charm Trading', t:'2026/06/07, 16:30:44', a:'-12,800.00', c:'USD'},
+  {d:'in', w:'Received from Shopify Payments', t:'2026/06/06, 19:50:31', a:'+6,210.55', c:'USD'},
+  {d:'out',w:'Withdrawal to Chase Bank ****7720', t:'2026/06/06, 14:02:55', a:'-25,000.00', c:'USD'},
+  {d:'in', w:'Received from Walmart Marketplace', t:'2026/06/05, 10:08:30', a:'+4,742.10', c:'USD'},
+  {d:'in', w:'Received from eBay Commerce Inc.', t:'2026/06/04, 17:33:48', a:'+3,905.20', c:'USD'}
+];
+const COLLECT=V('collect')||[
+  {t:'2026/06/08, 08:42:17', d:'Amazon.com Services LLC\nAMZN Marketplace payout', acc:'20000043750614', a:'18,420.00', c:'USD'},
+  {t:'2026/06/07, 21:15:09', d:'TikTok Shop US\nCreator marketplace settlement', acc:'20000043750614', a:'9,640.00', c:'USD'},
+  {t:'2026/06/06, 19:50:31', d:'Shopify Payments\nStore payout', acc:'20000043750614', a:'6,210.55', c:'USD'},
+  {t:'2026/06/05, 10:08:30', d:'Walmart Marketplace\nSeller payout', acc:'20000043750614', a:'4,742.10', c:'USD'}
+];
+const RATES=V('rates')||[
+  ['1 USD','0.8599','EUR',[12,13,11,14,12,15,13]],
+  ['1 USD','0.7419','GBP',[9,8,10,9,11,10,12]],
+  ['1 USD','1.3841','CAD',[14,13,15,12,14,13,15]],
+  ['1 USD','1.4128','AUD',[11,12,10,13,11,14,12]],
+  ['1 USD','1.2779','SGD',[10,11,9,12,10,13,11]]
+];
+
+const NAV=[
+  {id:'home',label:'Home',ic:'<path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>'},
+  {id:'collections',label:'Collections',ic:'<circle cx="12" cy="12" r="9"/><path d="M12 7v8M8 11l4 4 4-4"/>'},
+  {id:'payments',label:'Payments',ic:'<circle cx="12" cy="12" r="9"/><path d="M12 17V9M8 13l4-4 4 4"/>'},
+  {id:'statements',label:'Account statements',ic:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>'},
+  {id:'approvals',label:'Approvals',ic:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M8.5 11l2 2 3.5-3.5"/>'},
+  {id:'multi',label:'Multi-account Features',ic:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17.5" cy="9" r="2.6"/><path d="M16 15c3 .3 5 1.9 5 5"/>'}
+];
+const ico=(p,s,sw)=>'<svg width="'+(s||22)+'" height="'+(s||22)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+(sw||1.8)+'" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
+const ICONS={gift:'<rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18M12 8v13M12 8C9 8 7 4 12 4c5 0 3 4 0 4z"/>',bell:'<path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6M10 20a2 2 0 0 0 4 0"/>',chev:'<path d="M6 9l6 6 6-6"/>',eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>',plus:'<path d="M12 5v14M5 12h14"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',swap:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',dl:'<path d="M12 3v12M8 11l4 4 4-4M5 21h14"/>',wd:'<path d="M4 7h16v10H4z" /><path d="M12 7v-3M9 4h6"/>',conv:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',chevr:'<path d="M9 6l6 6-6 6"/>',caret:'<path d="M6 9l6 6 6-6"/>'};
+function I(id,s,sw){return ico(ICONS[id]||'',s,sw);}
+const flagUrl=c=>'assets/flags/'+c+'.svg';
+const spark=(pts,w,h)=>{w=w||64;h=h||24;var mx=Math.max.apply(0,pts),mn=Math.min.apply(0,pts),sx=w/(pts.length-1),sc=v=>h-2-((v-mn)/(mx-mn||1))*(h-4);return '<svg width="'+w+'" height="'+h+'"><path d="'+pts.map((v,i)=>(i?'L':'M')+(i*sx).toFixed(1)+' '+sc(v).toFixed(1)).join(' ')+'" fill="none" stroke="#0072E0" stroke-width="1.6"/></svg>';};
+
+/* ---- hide amount ---- */
+const MASK='∗∗∗∗∗∗';let amtHidden=true;
+function amt(v){return '<span class="amtv" data-v="'+v+'">'+(amtHidden?MASK:v)+'</span>';}
+function toggleAmt(){amtHidden=!amtHidden;document.querySelectorAll('.amtv').forEach(e=>e.textContent=amtHidden?MASK:e.getAttribute('data-v'));var t=document.getElementById('eyetxt');if(t)t.textContent=amtHidden?'Show':'Hide';}
+
+/* ---- live rates ticker ---- */
+function cdRing(){return '<svg class="cd-ring" viewBox="0 0 28 28"><circle cx="14" cy="14" r="11" fill="none" stroke="#ECECEF" stroke-width="2.5"/><circle id="cd-arc" cx="14" cy="14" r="11" fill="none" stroke="#0072E0" stroke-width="2.5" stroke-linecap="round" transform="rotate(-90 14 14)" stroke-dasharray="69.12" stroke-dashoffset="0"/><text id="cd-num" x="14" y="17.6" text-anchor="middle" font-size="11" font-weight="600" fill="#9a9aa2">3</text></svg>';}
+let TICK=null,cdRem=3;
+function startTick(){if(TICK)return;cdRem=3;TICK=setInterval(onTick,1000);}
+function onTick(){cdRem--;if(cdRem<=0){cdRem=3;fluctuate();}var a=document.getElementById('cd-arc');if(a)a.setAttribute('stroke-dashoffset',(69.12*(3-cdRem)/3).toFixed(2));var n=document.getElementById('cd-num');if(n)n.textContent=cdRem;}
+function flash(el,up){if(!el)return;el.style.color=up?'#00B578':'#E0004a';setTimeout(()=>el.style.color='',700);}
+function fluctuate(){
+  var list=document.querySelectorAll('.rateval');
+  for(var i=0;i<list.length;i++){var el=list[i],cur=parseFloat(el.getAttribute('data-cur')),base=parseFloat(el.getAttribute('data-base')),u=Math.random()>0.48,nv=cur*(1+(Math.random()*0.0016+0.0002)*(u?1:-1));nv=Math.max(base*0.985,Math.min(base*1.015,nv));el.setAttribute('data-cur',nv.toFixed(4));el.textContent=nv.toFixed(4);flash(el,u);}
+  ['EUR','GBP','CAD','AUD','SGD'].forEach(function(k){var u=Math.random()>0.5;FX_PERUSD[k]=+(FX_PERUSD[k]*(1+(Math.random()*0.0012+0.0001)*(u?1:-1))).toFixed(4);});
+  if(document.getElementById('cv-from'))cvRender();
+  var up=document.getElementById('rate-upd');if(up)up.textContent=nowClock();
+}
+function nowClock(){var d=new Date();var p=n=>(n<10?'0':'')+n;return p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}
+
+/* ---- FX converter (Convert) ---- */
+var FX_PERUSD={USD:1,EUR:0.8599,GBP:0.7419,CAD:1.3841,AUD:1.4128,SGD:1.2779,HKD:7.8012,JPY:157.20};
+var FX_CURS=[{c:'USD',f:'us'},{c:'EUR',f:'eu'},{c:'GBP',f:'gb'},{c:'CAD',f:'ca'},{c:'AUD',f:'au'},{c:'SGD',f:'sg'},{c:'HKD',f:'hk'},{c:'JPY',f:'jp'}];
+var cvFrom='USD',cvTo='EUR';
+function cvFlag(c){for(var i=0;i<FX_CURS.length;i++)if(FX_CURS[i].c===c)return FX_CURS[i].f;return 'us';}
+function cvRate(){return FX_PERUSD[cvTo]/FX_PERUSD[cvFrom];}
+function cvDec(c){return c==='JPY'?0:2;}
+function cvNum(n,c){return isNaN(n)?'':n.toLocaleString('en-US',{minimumFractionDigits:cvDec(c),maximumFractionDigits:cvDec(c)});}
+function cvCalc(side){var s=document.getElementById('cv-from'),b=document.getElementById('cv-to');if(!s||!b)return;var r=cvRate();if(side===2){s.value=cvNum(parseFloat(b.value.replace(/,/g,''))/r,cvFrom);}else{b.value=cvNum(parseFloat(s.value.replace(/,/g,''))*r,cvTo);}}
+function cvPick(code){return '<img class="flag" src="'+flagUrl(cvFlag(code))+'"/>'+code+' '+I('caret',12);}
+function cvRender(){var cf=document.getElementById('cv-cur-from'),ct=document.getElementById('cv-cur-to');if(!cf||!ct)return;cf.innerHTML=cvPick(cvFrom);ct.innerHTML=cvPick(cvTo);var t=document.getElementById('cv-rate');if(t)t.textContent='1 '+cvFrom+' = '+cvRate().toFixed(4)+' '+cvTo;cvCalc(1);}
+function cvOpen(which){var dd=document.getElementById('cv-dd-'+which);if(!dd)return;var was=dd.classList.contains('open');document.querySelectorAll('.dd').forEach(x=>{x.classList.remove('open');x.innerHTML='';});if(was)return;var sel=which==='from'?cvFrom:cvTo;dd.innerHTML=FX_CURS.map(o=>'<div class="dd-item'+(sel===o.c?' sel':'')+'" onclick="cvSet(\''+which+'\',\''+o.c+'\')"><img class="flag" style="width:20px;height:20px;border-radius:50%" src="'+flagUrl(o.f)+'"/>'+o.c+'</div>').join('');dd.classList.add('open');}
+function cvSet(which,code){if(which==='from'){if(code===cvTo)cvTo=cvFrom;cvFrom=code;}else{if(code===cvFrom)cvFrom=cvTo;cvTo=code;}document.querySelectorAll('.dd').forEach(x=>{x.classList.remove('open');x.innerHTML='';});cvRender();}
+function cvSwap(){var t=cvFrom;cvFrom=cvTo;cvTo=t;cvRender();}
+
+/* ---- views ---- */
+let route='home';
+function txnRow(x){return '<div class="row"><div class="ar">'+(x.d==='in'?'&#8595;':'&#8593;')+'</div><div><div class="who">'+x.w+'</div><div class="meta"><span class="ok">Success</span>'+x.t+'</div></div><div class="amt">'+x.a+' <small>'+x.c+'</small></div></div>';}
+
+const VIEWS={
+  home(){return ''+
+    '<div class="colwrap"><div class="colmain">'+
+      '<h1 class="pt">TO DO</h1>'+
+      '<div class="card todo"><div class="row"><img class="ti" src="assets/todo.png"/><div><div class="who">Set Authentication Method (Optional)</div><div class="meta">Please set the verification method to ensure account security.</div></div><a onclick="toast(\'Demo environment\')">Set up now ›</a></div></div>'+
+      '<div class="sec-h">Shortcuts</div>'+
+      '<div class="shortcuts"><div class="sc primary" onclick="go(\'payments\')">'+I('conv',18)+'Payment</div><div class="sc" onclick="go(\'collections\')">'+I('plus',18)+'Create new receiving acc.</div><div class="sc more" onclick="toast(\'Demo environment\')">···</div></div>'+
+      '<div class="sec-h">My accounts <span style="margin-left:auto;display:flex;gap:18px;font-size:14px;font-weight:500"><a onclick="toggleAmt()" style="color:var(--ink-2);display:flex;align-items:center;gap:6px">'+I('eye',16)+'<span id="eyetxt">Show</span></a><a onclick="toast(\'Demo environment\')" style="color:var(--ink-2)">Edit accounts</a></span></div>'+
+      '<div class="assets-bar"><span class="assets-total">Estimated total assets '+I('info',14)+' &#8776; <b>'+amt(TOTAL)+'</b> USD '+I('caret',14)+'</span></div>'+
+      '<div class="acct-row">'+ASSETS.map(a=>'<div class="acct" onclick="toast(\'Demo environment\')"><div class="ah"><img class="flag" src="'+flagUrl(a.flag)+'"/>'+a.cur+'<span class="chev">'+I('chevr',16)+'</span></div><div class="abal">'+amt(a.bal)+'</div><div class="aln"><span>Available balance</span><b>'+amt(a.bal)+'</b></div><div class="aln"><span>Pending '+I('info',12)+'</span><b>'+amt(a.pending)+'</b></div></div>').join('')+'</div>'+
+      '<div class="sec-h">Recent Transactions</div>'+
+      '<div class="card txn" style="padding:8px 18px">'+TXNS.map(txnRow).join('')+'</div>'+
+      '<div style="margin-top:18px"><a onclick="go(\'statements\')">View all transactions ›</a></div>'+
+    '</div><div class="colside">'+
+      '<div class="rail-h">Financial calendar</div>'+
+      '<div class="cal-card">There is no currency holiday today and your transactions will proceed as normal. <a onclick="toast(\'Demo environment\')">View details</a></div>'+
+      '<div class="rail-h" style="margin-top:30px">Live Rates <span class="upd">Updated <span id="rate-upd">'+nowClock()+'</span> '+cdRing()+'</span></div>'+
+      '<div style="margin:6px 0 12px"><a onclick="go(\'payments\')">'+I('conv',15)+' All currencies ›</a></div>'+
+      '<div class="rates">'+RATES.map(r=>'<div class="rate"><div class="rr"><b>'+r[0]+'</b> = <span class="rateval" data-base="'+r[1]+'" data-cur="'+r[1]+'">'+r[1]+'</span> '+r[2]+'</div>'+spark(r[3])+'</div>').join('')+'</div>'+
+    '</div></div>';
+  },
+  collections(){return ''+
+    '<table class="tbl"><thead><tr><th>Time</th><th>Description</th><th>Receiving Account</th><th class="right">Amount</th><th>Status</th><th>Action</th></tr></thead><tbody>'+
+    COLLECT.map(r=>'<tr><td style="white-space:nowrap;color:var(--ink-2)">'+r.t+'</td><td style="white-space:pre-line;max-width:340px">'+r.d+'</td><td>'+r.acc+'</td><td class="right" style="font-weight:700;white-space:nowrap">'+r.a+' <span style="color:var(--ink-3);font-weight:500;font-size:12px">'+r.c+'</span></td><td><span class="status"><span class="dot"></span>Success</span></td><td><a onclick="toast(\'Demo environment\')">View</a></td></tr>').join('')+
+    '</tbody></table><div class="pager"><span class="pg">‹</span><span class="pg on">1</span><span class="pg">›</span></div>';
+  },
+  payments(){return ''+
+    '<div class="colwrap"><div class="colmain">'+
+    '<h1 class="pt">Payments and FX</h1><div class="pt-sub">Move money out, pay suppliers and convert between currencies.</div>'+
+    feat('wd','Withdraw','Withdrawal to registrant, registered company or company legal representative / director bank account.','payments')+
+    feat('conv','Transfer','Pay to other individuals, bank account, or Zyla account.','payments')+
+    featImg('assets/kjb-1688.svg','World Pay','Pay for your 1688.com orders with your Zyla balance.','payments')+
+    feat('conv','Convert','Exchange between your currencies at competitive live rates.','convert')+
+    '</div><div class="colside"><div class="payee-h">Payee</div><a class="payee-l" onclick="toast(\'Demo environment\')">Add a new payee</a><a class="payee-l" onclick="toast(\'Demo environment\')">View all payees</a></div></div>';
+  },
+  convert(){return ''+
+    '<div style="margin-bottom:18px"><a onclick="go(\'payments\')">‹ Payments and FX</a></div>'+
+    '<h1 class="pt">Convert</h1><div class="pt-sub">Exchange between your currencies at competitive live rates.</div>'+
+    '<div class="card" style="max-width:760px">'+
+      '<div class="conv">'+
+        '<div class="leg"><label>You sell</label><div class="box"><div class="cur" id="cv-cur-from" onclick="cvOpen(\'from\')"></div><input id="cv-from" value="10,000.00" oninput="cvCalc(1)"/></div><div class="dd" id="cv-dd-from"></div></div>'+
+        '<button class="swapb" onclick="cvSwap()">'+ico('<path d="M8 7h11l-3-3M16 17H5l3 3"/>',18)+'</button>'+
+        '<div class="leg"><label>You get</label><div class="box"><div class="cur" id="cv-cur-to" onclick="cvOpen(\'to\')"></div><input id="cv-to" oninput="cvCalc(2)"/></div><div class="dd" id="cv-dd-to"></div></div>'+
+      '</div>'+
+      '<div class="rate-line">'+I('conv',18)+'<b id="cv-rate">1 USD = 0.8599 EUR</b><span style="color:var(--ink-3)">Live rate, updates every few seconds</span></div>'+
+      '<div style="margin-top:22px"><button class="btn-pill" onclick="toast(\'Demo environment\')">Convert now</button></div>'+
+    '</div>';
+  },
+  statements(){return ''+
+    '<h1 class="pt">Account statements</h1>'+
+    '<div class="filters"><div class="fil">All currencies '+I('caret',14)+'</div><div class="fil">All types '+I('caret',14)+'</div><div class="fil">Last 30 days '+I('caret',14)+'</div><div style="margin-left:auto"><button class="btn-pill ghost" onclick="toast(\'Demo environment\')">'+I('dl',16)+'Download</button></div></div>'+
+    '<div class="card txn" style="padding:8px 18px;margin-top:8px">'+TXNS.map(txnRow).join('')+'</div>'+
+    '<div class="pager"><span class="pg">‹</span><span class="pg on">1</span><span class="pg">2</span><span class="pg">›</span></div>';
+  },
+  approvals(){return ''+
+    '<h1 class="pt">Approvals</h1>'+
+    '<div class="filters"><div class="fil" style="border-color:var(--blue);color:var(--blue)">Pending</div><div class="fil">Processed</div></div>'+
+    '<div class="card"><div class="empty"><img src="assets/empty.png"/>No approval requests right now.</div></div>';
+  },
+  multi(){return ''+
+    '<h1 class="pt">Multi-account Management</h1><div class="pt-sub">Multi-account fund management lets you easily manage business funds across several Zyla accounts. <a onclick="toast(\'Demo environment\')">View the detailed guide</a></div>'+
+    '<div class="card">'+
+      '<div style="font-weight:700;font-size:17px;margin-bottom:6px">Master account</div>'+
+      '<div style="color:var(--ink-3);font-size:14px;margin-bottom:24px">You can set this account as the master account and manage the funds in your linked sub-accounts.</div>'+
+      '<div style="font-weight:700;margin-bottom:18px">How it works</div>'+
+      '<div class="step"><span class="n">1</span><div><div class="st">Set this account as the master account.</div></div></div>'+
+      '<div class="step"><span class="n">2</span><div><div class="st">Link your sub-accounts.</div><div class="ss"><a onclick="toast(\'Demo environment\')">See example</a></div></div></div>'+
+      '<div class="step"><span class="n">3</span><div><div class="st">Manage funds.</div><div class="ss"><a onclick="toast(\'Demo environment\')">See example</a></div></div></div>'+
+      '<button class="btn-pill" onclick="toast(\'Demo environment\')">Set as master account</button>'+
+    '</div>';
+  }
+};
+function feat(icon,title,desc,r){var act=r==='convert'?"go('convert')":"toast('Demo environment')";return '<div class="feat" onclick="'+act+'"><div class="fi">'+I(icon,24)+'</div><div><div class="ft">'+title+'</div><div class="fd">'+desc+'</div></div></div>';}
+function featImg(src,title,desc){return '<div class="feat" onclick="toast(\'Demo environment\')"><img class="fi-img" src="'+src+'"/><div><div class="ft">'+title+'</div><div class="fd">'+desc+'</div></div></div>';}
+
+function buildNav(){document.getElementById('nav').innerHTML=NAV.map(n=>'<div class="nav-item" data-id="'+n.id+'" onclick="go(\''+n.id+'\')"><span class="ic">'+ico(n.ic,22)+'</span>'+n.label+'</div>').join('');}
+function markNav(){document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('on',e.getAttribute('data-id')===(route==='convert'?'payments':route)));}
+function render(){document.getElementById('content').innerHTML=(VIEWS[route]||VIEWS.home)();if(route==='convert')cvRender();markNav();}
+function go(id,e){if(e)e.stopPropagation();if(route!==id){try{history.pushState({r:id},'');}catch(_){}}route=id;render();window.scrollTo(0,0);}
+window.addEventListener('popstate',ev=>{route=(ev.state&&ev.state.r)||'home';render();window.scrollTo(0,0);});
+
+let tT;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),1700);}
+
+function showApp(){document.getElementById('login').classList.add('hide');document.getElementById('app').classList.add('show');document.getElementById('avatar').textContent=((COMPANY||NAME).trim()[0]||'Z').toUpperCase();document.getElementById('uname').textContent='hello, '+(COMPANY||NAME);buildNav();route=P.get('view')||'home';render();startTick();}
+let loggingIn=false;
+function doLogin(){if(loggingIn)return;loggingIn=true;var b=document.getElementById('lg-btn');b.innerHTML='<span class="spin"></span><span>Logging in…</span>';setTimeout(showApp,800);}
+function typeInto(el,text,done){let i=0;(function t(){el.value=text.slice(0,i++);if(i<=text.length)setTimeout(t,45);else if(done)done();})();}
+window.addEventListener('DOMContentLoaded',function(){
+  if(P.get('skiplogin')==='1'||window.WF_VARIANT){showApp();return;}
+  var em=document.getElementById('lg-email'),pw=document.getElementById('lg-pass');
+  setTimeout(()=>typeInto(em,'demo@'+(NAME||'zyla').toLowerCase().replace(/[^a-z]/g,'')+'.com',()=>setTimeout(()=>typeInto(pw,'••••••••',()=>setTimeout(doLogin,400)),300)),600);
+});
+</script>
+</body>
+</html>
