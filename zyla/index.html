@@ -13,7 +13,6 @@
   a{color:var(--blue);text-decoration:none;cursor:pointer}
   img{display:block}
   .hide{display:none!important}
-  /* ---------- login ---------- */
   #login{position:fixed;inset:0;display:flex;background:#fff;z-index:100}
   #login .lg-left{width:46%;background:linear-gradient(150deg,#3A1FB8 0%,#0072E0 55%,#00B3E6 100%);color:#fff;padding:80px 64px;display:flex;flex-direction:column;justify-content:center}
   #login .lg-logo{font-size:44px;font-weight:800;margin-bottom:36px}
@@ -28,7 +27,6 @@
   #login .lg-btn{height:50px;width:100%;border:none;border-radius:999px;background:var(--blue);color:#fff;font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
   .spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
   @keyframes sp{to{transform:rotate(360deg)}}
-  /* ---------- shell ---------- */
   #app{display:none}
   #app.show{display:block}
   .layout{display:flex;min-height:100vh}
@@ -40,9 +38,11 @@
   .nav-item.on{background:rgba(0,16,100,.07);color:var(--ink);font-weight:600}
   .nav-item .ic{width:22px;height:22px;flex:none;color:inherit;display:flex;align-items:center;justify-content:center}
   .main{flex:1;min-width:0;display:flex;flex-direction:column}
-  .topbar{height:88px;display:flex;align-items:center;padding:0 40px;justify-content:flex-end;gap:18px}
+  .topbar{height:88px;display:flex;align-items:center;padding:0 40px;justify-content:flex-end;gap:16px}
+  .tb-lang{height:34px;padding:0 14px;border:1px solid var(--line);border-radius:999px;display:flex;align-items:center;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer}
+  .tb-lang:hover{border-color:var(--blue);color:var(--blue)}
   .tb-ic{width:38px;height:38px;border-radius:50%;background:var(--line-2);display:flex;align-items:center;justify-content:center;color:var(--ink-2);cursor:pointer}
-  .tb-user{display:flex;align-items:center;gap:8px;cursor:pointer;max-width:200px}
+  .tb-user{display:flex;align-items:center;gap:8px;cursor:pointer;max-width:220px}
   .tb-user .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#0072E0,#00B3E6);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex:none}
   .tb-user .un{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .content{flex:1;padding:8px 40px 60px;max-width:1480px;width:100%}
@@ -56,18 +56,15 @@
   .btn-pill{height:42px;padding:0 22px;border-radius:999px;background:var(--blue);color:#fff;border:none;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
   .btn-pill.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
   .btn-pill:hover{filter:brightness(.97)}
-  /* todo */
   .todo .row{display:flex;align-items:center;gap:16px;padding:18px 4px}
   .todo .ti{width:48px;height:48px;border-radius:12px;flex:none}
   .todo .who{font-weight:600;font-size:15px}
   .todo .meta{color:var(--ink-3);font-size:13px;margin-top:3px}
   .todo a{margin-left:auto;font-weight:600}
-  /* shortcuts */
   .shortcuts{display:flex;gap:14px;align-items:center}
   .sc{height:48px;padding:0 20px;border:1px solid var(--line);border-radius:999px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;cursor:pointer;background:#fff}
   .sc.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
   .sc.more{width:48px;padding:0;justify-content:center;color:var(--ink-3)}
-  /* assets */
   .assets-bar{display:flex;align-items:center;margin:6px 0 18px;color:var(--ink-2);font-size:14px}
   .assets-total{display:flex;align-items:center;gap:6px}
   .assets-total b{font-size:18px;color:var(--ink)}
@@ -80,7 +77,6 @@
   .acct .abal{font-size:26px;font-weight:700;margin:14px 0 16px}
   .acct .aln{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-3);margin-top:7px}
   .acct .aln b{color:var(--ink);font-weight:600}
-  /* txn list */
   .txn .row{display:flex;align-items:center;gap:14px;padding:14px 6px;border-bottom:1px solid var(--line-2)}
   .txn .row:last-child{border-bottom:none}
   .txn .ar{width:34px;height:34px;border-radius:50%;background:#F2F2F5;color:var(--ink-2);display:flex;align-items:center;justify-content:center;font-size:16px;flex:none}
@@ -91,7 +87,6 @@
   .txn .amt small{font-size:12px;color:var(--ink-3);font-weight:500;margin-left:4px}
   .empty{display:flex;flex-direction:column;align-items:center;padding:54px 0;color:var(--ink-3);font-size:14px}
   .empty img{width:120px;margin-bottom:6px;opacity:.9}
-  /* right rail */
   .rail-h{font-size:20px;font-weight:700;margin-bottom:14px;display:flex;align-items:center}
   .rail-h .upd{margin-left:auto;font-size:12px;color:var(--ink-3);font-weight:400;display:flex;align-items:center;gap:7px}
   .cal-card{border:1px solid var(--line);border-radius:14px;padding:18px 20px;color:var(--ink-2);font-size:14px;line-height:1.7}
@@ -101,12 +96,14 @@
   .rate .rr{flex:1;font-size:14px;color:var(--ink-2)}
   .rate .rr b{font-weight:700;color:var(--ink)}
   .rate .rateval{font-weight:700}
-  /* table */
   .tbl{width:100%;border-collapse:collapse}
   .tbl th{text-align:left;font-size:13px;color:var(--ink-3);font-weight:500;padding:16px 12px;border-bottom:1px solid var(--line)}
   .tbl td{padding:18px 12px;border-bottom:1px solid var(--line-2);font-size:14px;vertical-align:top}
   .tbl tr:last-child td{border-bottom:none}
   .tbl .right{text-align:right}
+  .ttabs{display:flex;gap:28px;border-bottom:1px solid var(--line);margin:18px 0 22px}
+  .ttab{padding:0 2px 14px;font-size:15px;font-weight:600;color:var(--ink-3);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
+  .ttab.on{color:var(--blue);border-bottom-color:var(--blue)}
   .status{display:inline-flex;align-items:center;gap:6px}
   .status .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
   .pager{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:22px}
@@ -114,7 +111,6 @@
   .pager .pg.on{background:#fff;border-color:var(--blue);color:var(--blue);font-weight:600}
   .filters{display:flex;gap:12px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
   .fil{height:40px;border:1px solid var(--line);border-radius:8px;padding:0 14px;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-2);background:#fff;cursor:pointer}
-  /* feature grid (payments) */
   .feat{border:1px solid var(--line);border-radius:14px;padding:22px 24px;display:flex;align-items:center;gap:18px;cursor:pointer;margin-bottom:18px;transition:box-shadow .15s,border-color .15s}
   .feat:hover{box-shadow:0 6px 22px rgba(0,0,0,.06);border-color:#dfe3ea}
   .feat .fi{width:46px;height:46px;border-radius:12px;background:#EAF3FF;color:var(--blue);display:flex;align-items:center;justify-content:center;flex:none}
@@ -123,12 +119,10 @@
   .feat img.fi-img{width:46px;height:46px;border-radius:12px;object-fit:contain;background:#fff;border:1px solid var(--line);padding:6px}
   .payee-h{font-size:20px;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:14px}
   .payee-l{display:block;padding:8px 0;font-weight:600}
-  /* steps (multi) */
   .step{display:flex;gap:14px;margin-bottom:22px}
   .step .n{width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
   .step .st{font-weight:600;font-size:15px}
   .step .ss{color:var(--blue);font-size:13px;margin-top:4px}
-  /* convert / fx */
   .conv{display:grid;grid-template-columns:1fr 44px 1fr;gap:14px;align-items:end;margin-top:8px}
   .leg label{display:block;color:var(--ink-2);font-size:14px;margin-bottom:10px}
   .leg{position:relative}
@@ -157,16 +151,16 @@
 <div id="login">
   <div class="lg-left">
     <div class="lg-logo">zyla</div>
-    <div class="lg-h">One account,<br>global business.</div>
-    <div class="lg-sub">Send and receive cross-border payments like a local. Collect from 100+ marketplaces, hold multiple currencies, and convert at competitive rates.</div>
+    <div class="lg-h" id="lg-h"></div>
+    <div class="lg-sub" id="lg-sub"></div>
   </div>
   <div class="lg-right">
     <div class="lg-card">
-      <h2>Log in</h2>
-      <p>Welcome back to your Zyla account.</p>
-      <div class="lg-field"><input id="lg-email" placeholder="Email"/></div>
-      <div class="lg-field"><input id="lg-pass" type="password" placeholder="Password"/></div>
-      <button class="lg-btn" id="lg-btn" onclick="doLogin()">Log in</button>
+      <h2 id="lg-title"></h2>
+      <p id="lg-welcome"></p>
+      <div class="lg-field"><input id="lg-email"/></div>
+      <div class="lg-field"><input id="lg-pass" type="password"/></div>
+      <button class="lg-btn" id="lg-btn" onclick="doLogin()"></button>
     </div>
   </div>
 </div>
@@ -179,9 +173,10 @@
     </aside>
     <div class="main">
       <div class="topbar">
+        <div class="tb-lang" id="langtog" onclick="setLang(lang==='en'?'zh':'en')">中文</div>
         <div class="tb-ic" title="Rewards"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18M12 8v13M12 8C9 8 7 4 12 4c5 0 3 4 0 4z"/></svg></div>
         <div class="tb-ic" title="Notifications"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6M10 20a2 2 0 0 0 4 0"/></svg></div>
-        <div class="tb-user"><span class="av" id="avatar">B</span><span class="un" id="uname">hello,</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9aa2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="tb-user"><span class="av" id="avatar">B</span><span class="un" id="uname"></span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9a9aa2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
       </div>
       <div class="content" id="content"></div>
       <div class="foot">
@@ -198,10 +193,47 @@
 /*__VARIANT_SHIM__*/
 function V(k){return (window.WF_VARIANT&&window.WF_VARIANT[k])||null;}
 const P=new URLSearchParams(location.search);
+let lang=(P.get('lang')==='zh'||V('lang')==='zh')?'zh':'en';
+
+const STR={
+ en:{login_h:'One account,<br>global business.',login_sub:'Send and receive cross-border payments like a local. Collect from 100+ marketplaces, hold multiple currencies, and convert at competitive rates.',login_title:'Log in',login_welcome:'Welcome back to your Zyla account.',login_email:'Email',login_pass:'Password',login_btn:'Log in',
+  hello:'hello, ',nav_home:'Home',nav_collections:'Collections',nav_payments:'Payments',nav_statements:'Account statements',nav_approvals:'Approvals',nav_multi:'Multi-account Features',
+  todo:'TO DO',auth_t:'Set Authentication Method (Optional)',auth_d:'Please set the verification method to ensure account security.',setup:'Set up now',
+  shortcuts:'Shortcuts',payment:'Payment',newacc:'Create new receiving acc.',
+  myacc:'My accounts',hide:'Hide',show:'Show',edit:'Edit accounts',total:'Estimated total assets',avail:'Available balance',pending:'Pending',
+  recent:'Recent Transactions',viewall:'View all transactions',
+  cal:'Financial calendar',cal_body:'There is no currency holiday today and your transactions will proceed as normal.',details:'View details',
+  rates:'Live Rates',allcur:'All currencies',updated:'Updated',
+  c_title:'Collections',c_tab1:'Collection list',c_tab2:'Store management',c_tab3:'Funding source',c_manage:'Manage receiving accounts',c_status:'Status',c_search:'Search receiving account',c_cur:'Currency',c_time_r:'Time range',
+  th_time:'Time',th_desc:'Description',th_acct:'Receiving Account',th_amount:'Amount',th_status:'Status',th_action:'Action',success:'Success',view:'View',
+  p_title:'Payments and FX',p_withdraw:'Withdraw',p_withdraw_d:'Withdrawal to registrant, registered company or company legal representative / director bank account.',p_transfer:'Transfer',p_transfer_d:'Pay to other individuals, bank account, or Zyla account.',p_worldpay:'World Pay',p_worldpay_d:'Pay for your 1688.com orders with your Zyla balance.',p_convert:'Convert',p_convert_d:'Exchange between your currencies at competitive live rates.',payee:'Payee',addpayee:'Add a new payee',viewpayee:'View all payees',
+  cv_back:'Payments and FX',cv_title:'Convert',cv_sub:'Exchange between your currencies at competitive live rates.',cv_sell:'You sell',cv_get:'You get',cv_live:'Live rate, updates every few seconds',cv_btn:'Convert now',
+  s_title:'Account statements',f_allcur:'All currencies',f_alltypes:'All types',f_last30:'Last 30 days',download:'Download',
+  a_title:'Approvals',a_pending:'Pending',a_processed:'Processed',a_empty:'No approval requests right now.',
+  m_title:'Multi-account Management',m_sub:'Multi-account fund management lets you easily manage business funds across several Zyla accounts.',m_guide:'View the detailed guide',m_master:'Master account',m_master_d:'You can set this account as the master account and manage the funds in your linked sub-accounts.',m_how:'How it works',m_s1:'Set this account as the master account.',m_s2:'Link your sub-accounts.',m_s3:'Manage funds.',m_example:'See example',m_setbtn:'Set as master account',
+  demo:'Demo environment'},
+ zh:{login_h:'一个账户，<br>连接全球生意。',login_sub:'像本地人一样收付全球款项。对接 100+ 海外平台收款，多币种持有，按实时汇率低成本兑换。',login_title:'登录',login_welcome:'欢迎回到您的 Zyla 账户。',login_email:'邮箱',login_pass:'密码',login_btn:'登录',
+  hello:'您好，',nav_home:'首页',nav_collections:'收款管理',nav_payments:'资金管理',nav_statements:'账单管理中心',nav_approvals:'审批单管理',nav_multi:'多账号管理',
+  todo:'待办事项',auth_t:'设置验证方式（可选）',auth_d:'请设置验证方式以保障账号安全',setup:'去设置',
+  shortcuts:'快捷导航',payment:'付款',newacc:'申请收款账户',
+  myacc:'我的资产',hide:'隐藏',show:'显示',edit:'编辑账户',total:'预估总资产',avail:'可用余额',pending:'待入账金额',
+  recent:'账户近期交易',viewall:'查看全部交易',
+  cal:'金融日历',cal_body:'今天无币种假期，您的交易不受任何影响',details:'查看详情',
+  rates:'实时汇率',allcur:'币种和汇率趋势',updated:'最后更新于',
+  c_title:'收款管理',c_tab1:'收款列表',c_tab2:'店铺管理',c_tab3:'收款资金来源',c_manage:'管理收款账户',c_status:'收款状态',c_search:'搜索收款账号',c_cur:'币种',c_time_r:'时间范围',
+  th_time:'收款时间',th_desc:'收款详情',th_acct:'收款账号',th_amount:'金额',th_status:'收款状态',th_action:'操作',success:'入账成功',view:'查看详情',
+  p_title:'资金管理',p_withdraw:'提现',p_withdraw_d:'提款到注册人、注册企业或企业法人/董事的银行卡账户',p_transfer:'转账',p_transfer_d:'支付至其他个人、银行卡账户、Zyla账户',p_worldpay:'跨境宝',p_worldpay_d:'使用跨境宝直接支付1688采购款',p_convert:'货币兑换',p_convert_d:'使用实时汇率在您的币种之间兑换',payee:'收款人',addpayee:'添加新的收款人',viewpayee:'查看所有收款人',
+  cv_back:'资金管理',cv_title:'货币兑换',cv_sub:'使用实时汇率在您的币种之间兑换。',cv_sell:'您卖出',cv_get:'您获得',cv_live:'实时汇率，每几秒更新一次',cv_btn:'立即兑换',
+  s_title:'账单管理中心',f_allcur:'全部币种',f_alltypes:'全部类型',f_last30:'近 30 天',download:'下载',
+  a_title:'审批单管理',a_pending:'待处理',a_processed:'已处理',a_empty:'暂无待审批的申请',
+  m_title:'多账号管理',m_sub:'多账户资金管理可让您轻松管理多个 Zyla 账户之间的业务资金。',m_guide:'查看详细操作指南',m_master:'主账号',m_master_d:'您可以将此账户设置为主账户，并管理您关联的子账户中的资金。',m_how:'操作流程',m_s1:'将此账户设置为主账户。',m_s2:'链接子账户',m_s3:'管理资金',m_example:'查看示例',m_setbtn:'设置为主账户',
+  demo:'演示环境'}
+};
+function t(k){return STR[lang][k]!=null?STR[lang][k]:STR.en[k];}
+
 const COMPANY=P.get('company')||V('company')||'BRIGHTLEAF GOODS LLC';
 const NAME=P.get('name')||V('name')||'Brightleaf';
 const TOTAL=V('total')||'186,402.55';
-const MONTH=V('month')||'42,310.00';
 const ASSETS=V('assets')||[
   {cur:'USD',flag:'us',bal:'160,420.50',pending:'7,000.00'},
   {cur:'EUR',flag:'eu',bal:'9,240.00',pending:'0.00'},
@@ -209,48 +241,47 @@ const ASSETS=V('assets')||[
   {cur:'CAD',flag:'ca',bal:'2,100.00',pending:'0.00'}
 ];
 const TXNS=V('txns')||[
-  {d:'in', w:'Received from Amazon.com Services', t:'2026/06/08, 08:42:17', a:'+18,420.00', c:'USD'},
-  {d:'in', w:'Received from TikTok Shop US', t:'2026/06/07, 21:15:09', a:'+9,640.00', c:'USD'},
-  {d:'out',w:'World Pay to Yiwu Charm Trading', t:'2026/06/07, 16:30:44', a:'-12,800.00', c:'USD'},
-  {d:'in', w:'Received from Shopify Payments', t:'2026/06/06, 19:50:31', a:'+6,210.55', c:'USD'},
-  {d:'out',w:'Withdrawal to Chase Bank ****7720', t:'2026/06/06, 14:02:55', a:'-25,000.00', c:'USD'},
-  {d:'in', w:'Received from Walmart Marketplace', t:'2026/06/05, 10:08:30', a:'+4,742.10', c:'USD'},
-  {d:'in', w:'Received from eBay Commerce Inc.', t:'2026/06/04, 17:33:48', a:'+3,905.20', c:'USD'}
+  {d:'in', k:'recv', p:'Amazon.com Services', t:'2026/06/08, 08:42:17', a:'+18,420.00', c:'USD'},
+  {d:'in', k:'recv', p:'TikTok Shop US', t:'2026/06/07, 21:15:09', a:'+9,640.00', c:'USD'},
+  {d:'out',k:'worldpay', p:'Yiwu Charm Trading', t:'2026/06/07, 16:30:44', a:'-12,800.00', c:'USD'},
+  {d:'in', k:'recv', p:'Shopify Payments', t:'2026/06/06, 19:50:31', a:'+6,210.55', c:'USD'},
+  {d:'out',k:'withdraw', p:'Chase Bank ****7720', t:'2026/06/06, 14:02:55', a:'-25,000.00', c:'USD'},
+  {d:'in', k:'recv', p:'Walmart Marketplace', t:'2026/06/05, 10:08:30', a:'+4,742.10', c:'USD'},
+  {d:'in', k:'recv', p:'eBay Commerce Inc.', t:'2026/06/04, 17:33:48', a:'+3,905.20', c:'USD'}
 ];
+const TXV={en:{recv:'Received from',withdraw:'Withdrawal to',worldpay:'World Pay to',transfer:'Transfer to'},zh:{recv:'收款 来自',withdraw:'提现 到',worldpay:'跨境宝付款 给',transfer:'转账 给'}};
+function txnDesc(x){return (TXV[lang][x.k]||'')+' '+x.p;}
 const COLLECT=V('collect')||[
-  {t:'2026/06/08, 08:42:17', d:'Amazon.com Services LLC\nAMZN Marketplace payout', acc:'20000043750614', a:'18,420.00', c:'USD'},
+  {t:'2026/06/08, 08:42:17', d:'Amazon.com Services LLC\nMarketplace payout', acc:'20000043750614', a:'18,420.00', c:'USD'},
   {t:'2026/06/07, 21:15:09', d:'TikTok Shop US\nCreator marketplace settlement', acc:'20000043750614', a:'9,640.00', c:'USD'},
   {t:'2026/06/06, 19:50:31', d:'Shopify Payments\nStore payout', acc:'20000043750614', a:'6,210.55', c:'USD'},
   {t:'2026/06/05, 10:08:30', d:'Walmart Marketplace\nSeller payout', acc:'20000043750614', a:'4,742.10', c:'USD'}
 ];
 const RATES=V('rates')||[
-  ['1 USD','0.8599','EUR',[12,13,11,14,12,15,13]],
-  ['1 USD','0.7419','GBP',[9,8,10,9,11,10,12]],
-  ['1 USD','1.3841','CAD',[14,13,15,12,14,13,15]],
-  ['1 USD','1.4128','AUD',[11,12,10,13,11,14,12]],
-  ['1 USD','1.2779','SGD',[10,11,9,12,10,13,11]]
+  ['1 USD','0.8593','EUR',[12,13,11,14,12,15,13]],
+  ['1 USD','0.7414','GBP',[9,8,10,9,11,10,12]],
+  ['1 USD','1.3839','CAD',[14,13,15,12,14,13,15]],
+  ['1 USD','1.4122','AUD',[11,12,10,13,11,14,12]],
+  ['1 USD','1.2773','SGD',[10,11,9,12,10,13,11]]
 ];
-
 const NAV=[
-  {id:'home',label:'Home',ic:'<path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>'},
-  {id:'collections',label:'Collections',ic:'<circle cx="12" cy="12" r="9"/><path d="M12 7v8M8 11l4 4 4-4"/>'},
-  {id:'payments',label:'Payments',ic:'<circle cx="12" cy="12" r="9"/><path d="M12 17V9M8 13l4-4 4 4"/>'},
-  {id:'statements',label:'Account statements',ic:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>'},
-  {id:'approvals',label:'Approvals',ic:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M8.5 11l2 2 3.5-3.5"/>'},
-  {id:'multi',label:'Multi-account Features',ic:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17.5" cy="9" r="2.6"/><path d="M16 15c3 .3 5 1.9 5 5"/>'}
+  {id:'home',k:'nav_home',ic:'<path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>'},
+  {id:'collections',k:'nav_collections',ic:'<circle cx="12" cy="12" r="9"/><path d="M12 7v8M8 11l4 4 4-4"/>'},
+  {id:'payments',k:'nav_payments',ic:'<circle cx="12" cy="12" r="9"/><path d="M12 17V9M8 13l4-4 4 4"/>'},
+  {id:'statements',k:'nav_statements',ic:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>'},
+  {id:'approvals',k:'nav_approvals',ic:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M8.5 11l2 2 3.5-3.5"/>'},
+  {id:'multi',k:'nav_multi',ic:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17.5" cy="9" r="2.6"/><path d="M16 15c3 .3 5 1.9 5 5"/>'}
 ];
 const ico=(p,s,sw)=>'<svg width="'+(s||22)+'" height="'+(s||22)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+(sw||1.8)+'" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
-const ICONS={gift:'<rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18M12 8v13M12 8C9 8 7 4 12 4c5 0 3 4 0 4z"/>',bell:'<path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6M10 20a2 2 0 0 0 4 0"/>',chev:'<path d="M6 9l6 6 6-6"/>',eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>',plus:'<path d="M12 5v14M5 12h14"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',swap:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',dl:'<path d="M12 3v12M8 11l4 4 4-4M5 21h14"/>',wd:'<path d="M4 7h16v10H4z" /><path d="M12 7v-3M9 4h6"/>',conv:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',chevr:'<path d="M9 6l6 6-6 6"/>',caret:'<path d="M6 9l6 6 6-6"/>'};
+const ICONS={eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>',plus:'<path d="M12 5v14M5 12h14"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',dl:'<path d="M12 3v12M8 11l4 4 4-4M5 21h14"/>',wd:'<path d="M5 9V5h14v4M5 9h14v10H5z"/><path d="M12 16V11M9.5 13.5L12 11l2.5 2.5"/>',conv:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',caret:'<path d="M6 9l6 6 6-6"/>',chevr:'<path d="M9 6l6 6-6 6"/>'};
 function I(id,s,sw){return ico(ICONS[id]||'',s,sw);}
 const flagUrl=c=>'assets/flags/'+c+'.svg';
 const spark=(pts,w,h)=>{w=w||64;h=h||24;var mx=Math.max.apply(0,pts),mn=Math.min.apply(0,pts),sx=w/(pts.length-1),sc=v=>h-2-((v-mn)/(mx-mn||1))*(h-4);return '<svg width="'+w+'" height="'+h+'"><path d="'+pts.map((v,i)=>(i?'L':'M')+(i*sx).toFixed(1)+' '+sc(v).toFixed(1)).join(' ')+'" fill="none" stroke="#0072E0" stroke-width="1.6"/></svg>';};
 
-/* ---- hide amount ---- */
 const MASK='∗∗∗∗∗∗';let amtHidden=true;
 function amt(v){return '<span class="amtv" data-v="'+v+'">'+(amtHidden?MASK:v)+'</span>';}
-function toggleAmt(){amtHidden=!amtHidden;document.querySelectorAll('.amtv').forEach(e=>e.textContent=amtHidden?MASK:e.getAttribute('data-v'));var t=document.getElementById('eyetxt');if(t)t.textContent=amtHidden?'Show':'Hide';}
+function toggleAmt(){amtHidden=!amtHidden;document.querySelectorAll('.amtv').forEach(e=>e.textContent=amtHidden?MASK:e.getAttribute('data-v'));var t2=document.getElementById('eyetxt');if(t2)t2.textContent=amtHidden?t('show'):t('hide');}
 
-/* ---- live rates ticker ---- */
 function cdRing(){return '<svg class="cd-ring" viewBox="0 0 28 28"><circle cx="14" cy="14" r="11" fill="none" stroke="#ECECEF" stroke-width="2.5"/><circle id="cd-arc" cx="14" cy="14" r="11" fill="none" stroke="#0072E0" stroke-width="2.5" stroke-linecap="round" transform="rotate(-90 14 14)" stroke-dasharray="69.12" stroke-dashoffset="0"/><text id="cd-num" x="14" y="17.6" text-anchor="middle" font-size="11" font-weight="600" fill="#9a9aa2">3</text></svg>';}
 let TICK=null,cdRem=3;
 function startTick(){if(TICK)return;cdRem=3;TICK=setInterval(onTick,1000);}
@@ -263,10 +294,9 @@ function fluctuate(){
   if(document.getElementById('cv-from'))cvRender();
   var up=document.getElementById('rate-upd');if(up)up.textContent=nowClock();
 }
-function nowClock(){var d=new Date();var p=n=>(n<10?'0':'')+n;return p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}
+function nowClock(){var d=new Date(),p=n=>(n<10?'0':'')+n;return p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}
 
-/* ---- FX converter (Convert) ---- */
-var FX_PERUSD={USD:1,EUR:0.8599,GBP:0.7419,CAD:1.3841,AUD:1.4128,SGD:1.2779,HKD:7.8012,JPY:157.20};
+var FX_PERUSD={USD:1,EUR:0.8593,GBP:0.7414,CAD:1.3839,AUD:1.4122,SGD:1.2773,HKD:7.8012,JPY:157.20};
 var FX_CURS=[{c:'USD',f:'us'},{c:'EUR',f:'eu'},{c:'GBP',f:'gb'},{c:'CAD',f:'ca'},{c:'AUD',f:'au'},{c:'SGD',f:'sg'},{c:'HKD',f:'hk'},{c:'JPY',f:'jp'}];
 var cvFrom='USD',cvTo='EUR';
 function cvFlag(c){for(var i=0;i<FX_CURS.length;i++)if(FX_CURS[i].c===c)return FX_CURS[i].f;return 'us';}
@@ -275,103 +305,109 @@ function cvDec(c){return c==='JPY'?0:2;}
 function cvNum(n,c){return isNaN(n)?'':n.toLocaleString('en-US',{minimumFractionDigits:cvDec(c),maximumFractionDigits:cvDec(c)});}
 function cvCalc(side){var s=document.getElementById('cv-from'),b=document.getElementById('cv-to');if(!s||!b)return;var r=cvRate();if(side===2){s.value=cvNum(parseFloat(b.value.replace(/,/g,''))/r,cvFrom);}else{b.value=cvNum(parseFloat(s.value.replace(/,/g,''))*r,cvTo);}}
 function cvPick(code){return '<img class="flag" src="'+flagUrl(cvFlag(code))+'"/>'+code+' '+I('caret',12);}
-function cvRender(){var cf=document.getElementById('cv-cur-from'),ct=document.getElementById('cv-cur-to');if(!cf||!ct)return;cf.innerHTML=cvPick(cvFrom);ct.innerHTML=cvPick(cvTo);var t=document.getElementById('cv-rate');if(t)t.textContent='1 '+cvFrom+' = '+cvRate().toFixed(4)+' '+cvTo;cvCalc(1);}
+function cvRender(){var cf=document.getElementById('cv-cur-from'),ct=document.getElementById('cv-cur-to');if(!cf||!ct)return;cf.innerHTML=cvPick(cvFrom);ct.innerHTML=cvPick(cvTo);var x=document.getElementById('cv-rate');if(x)x.textContent='1 '+cvFrom+' = '+cvRate().toFixed(4)+' '+cvTo;cvCalc(1);}
 function cvOpen(which){var dd=document.getElementById('cv-dd-'+which);if(!dd)return;var was=dd.classList.contains('open');document.querySelectorAll('.dd').forEach(x=>{x.classList.remove('open');x.innerHTML='';});if(was)return;var sel=which==='from'?cvFrom:cvTo;dd.innerHTML=FX_CURS.map(o=>'<div class="dd-item'+(sel===o.c?' sel':'')+'" onclick="cvSet(\''+which+'\',\''+o.c+'\')"><img class="flag" style="width:20px;height:20px;border-radius:50%" src="'+flagUrl(o.f)+'"/>'+o.c+'</div>').join('');dd.classList.add('open');}
 function cvSet(which,code){if(which==='from'){if(code===cvTo)cvTo=cvFrom;cvFrom=code;}else{if(code===cvFrom)cvFrom=cvTo;cvTo=code;}document.querySelectorAll('.dd').forEach(x=>{x.classList.remove('open');x.innerHTML='';});cvRender();}
-function cvSwap(){var t=cvFrom;cvFrom=cvTo;cvTo=t;cvRender();}
+function cvSwap(){var x=cvFrom;cvFrom=cvTo;cvTo=x;cvRender();}
 
-/* ---- views ---- */
 let route='home';
-function txnRow(x){return '<div class="row"><div class="ar">'+(x.d==='in'?'&#8595;':'&#8593;')+'</div><div><div class="who">'+x.w+'</div><div class="meta"><span class="ok">Success</span>'+x.t+'</div></div><div class="amt">'+x.a+' <small>'+x.c+'</small></div></div>';}
+function txnRow(x){return '<div class="row"><div class="ar">'+(x.d==='in'?'&#8595;':'&#8593;')+'</div><div><div class="who">'+txnDesc(x)+'</div><div class="meta"><span class="ok">'+t('success')+'</span>'+x.t+'</div></div><div class="amt">'+x.a+' <small>'+x.c+'</small></div></div>';}
+function feat(icon,titleK,descK,r){var act=r==='convert'?"go('convert')":"toast(t('demo'))";return '<div class="feat" onclick="'+act+'"><div class="fi">'+I(icon,24)+'</div><div><div class="ft">'+t(titleK)+'</div><div class="fd">'+t(descK)+'</div></div></div>';}
+function featImg(src,titleK,descK){return '<div class="feat" onclick="toast(t(\'demo\'))"><img class="fi-img" src="'+src+'"/><div><div class="ft">'+t(titleK)+'</div><div class="fd">'+t(descK)+'</div></div></div>';}
 
 const VIEWS={
   home(){return ''+
     '<div class="colwrap"><div class="colmain">'+
-      '<h1 class="pt">TO DO</h1>'+
-      '<div class="card todo"><div class="row"><img class="ti" src="assets/todo.png"/><div><div class="who">Set Authentication Method (Optional)</div><div class="meta">Please set the verification method to ensure account security.</div></div><a onclick="toast(\'Demo environment\')">Set up now ›</a></div></div>'+
-      '<div class="sec-h">Shortcuts</div>'+
-      '<div class="shortcuts"><div class="sc primary" onclick="go(\'payments\')">'+I('conv',18)+'Payment</div><div class="sc" onclick="go(\'collections\')">'+I('plus',18)+'Create new receiving acc.</div><div class="sc more" onclick="toast(\'Demo environment\')">···</div></div>'+
-      '<div class="sec-h">My accounts <span style="margin-left:auto;display:flex;gap:18px;font-size:14px;font-weight:500"><a onclick="toggleAmt()" style="color:var(--ink-2);display:flex;align-items:center;gap:6px">'+I('eye',16)+'<span id="eyetxt">Show</span></a><a onclick="toast(\'Demo environment\')" style="color:var(--ink-2)">Edit accounts</a></span></div>'+
-      '<div class="assets-bar"><span class="assets-total">Estimated total assets '+I('info',14)+' &#8776; <b>'+amt(TOTAL)+'</b> USD '+I('caret',14)+'</span></div>'+
-      '<div class="acct-row">'+ASSETS.map(a=>'<div class="acct" onclick="toast(\'Demo environment\')"><div class="ah"><img class="flag" src="'+flagUrl(a.flag)+'"/>'+a.cur+'<span class="chev">'+I('chevr',16)+'</span></div><div class="abal">'+amt(a.bal)+'</div><div class="aln"><span>Available balance</span><b>'+amt(a.bal)+'</b></div><div class="aln"><span>Pending '+I('info',12)+'</span><b>'+amt(a.pending)+'</b></div></div>').join('')+'</div>'+
-      '<div class="sec-h">Recent Transactions</div>'+
+      '<h1 class="pt">'+t('todo')+'</h1>'+
+      '<div class="card todo"><div class="row"><img class="ti" src="assets/todo.png"/><div><div class="who">'+t('auth_t')+'</div><div class="meta">'+t('auth_d')+'</div></div><a onclick="toast(t(\'demo\'))">'+t('setup')+' ›</a></div></div>'+
+      '<div class="sec-h">'+t('shortcuts')+'</div>'+
+      '<div class="shortcuts"><div class="sc primary" onclick="go(\'payments\')">'+I('conv',18)+t('payment')+'</div><div class="sc" onclick="go(\'collections\')">'+I('plus',18)+t('newacc')+'</div><div class="sc more" onclick="toast(t(\'demo\'))">···</div></div>'+
+      '<div class="sec-h">'+t('myacc')+' <span style="margin-left:auto;display:flex;gap:18px;font-size:14px;font-weight:500"><a onclick="toggleAmt()" style="color:var(--ink-2);display:flex;align-items:center;gap:6px">'+I('eye',16)+'<span id="eyetxt">'+t('show')+'</span></a><a onclick="toast(t(\'demo\'))" style="color:var(--ink-2)">'+t('edit')+'</a></span></div>'+
+      '<div class="assets-bar"><span class="assets-total">'+t('total')+' '+I('info',14)+' &#8776; <b>'+amt(TOTAL)+'</b> USD '+I('caret',14)+'</span></div>'+
+      '<div class="acct-row">'+ASSETS.map(a=>'<div class="acct" onclick="toast(t(\'demo\'))"><div class="ah"><img class="flag" src="'+flagUrl(a.flag)+'"/>'+a.cur+'<span class="chev">'+I('chevr',16)+'</span></div><div class="abal">'+amt(a.bal)+'</div><div class="aln"><span>'+t('avail')+'</span><b>'+amt(a.bal)+'</b></div><div class="aln"><span>'+t('pending')+' '+I('info',12)+'</span><b>'+amt(a.pending)+'</b></div></div>').join('')+'</div>'+
+      '<div class="sec-h">'+t('recent')+'</div>'+
       '<div class="card txn" style="padding:8px 18px">'+TXNS.map(txnRow).join('')+'</div>'+
-      '<div style="margin-top:18px"><a onclick="go(\'statements\')">View all transactions ›</a></div>'+
+      '<div style="margin-top:18px"><a onclick="go(\'statements\')">'+t('viewall')+' ›</a></div>'+
     '</div><div class="colside">'+
-      '<div class="rail-h">Financial calendar</div>'+
-      '<div class="cal-card">There is no currency holiday today and your transactions will proceed as normal. <a onclick="toast(\'Demo environment\')">View details</a></div>'+
-      '<div class="rail-h" style="margin-top:30px">Live Rates <span class="upd">Updated <span id="rate-upd">'+nowClock()+'</span> '+cdRing()+'</span></div>'+
-      '<div style="margin:6px 0 12px"><a onclick="go(\'payments\')">'+I('conv',15)+' All currencies ›</a></div>'+
+      '<div class="rail-h">'+t('cal')+'</div>'+
+      '<div class="cal-card">'+t('cal_body')+' <a onclick="toast(t(\'demo\'))">'+t('details')+'</a></div>'+
+      '<div class="rail-h" style="margin-top:30px">'+t('rates')+' <span class="upd">'+t('updated')+' <span id="rate-upd">'+nowClock()+'</span> '+cdRing()+'</span></div>'+
+      '<div style="margin:6px 0 12px"><a onclick="go(\'payments\')">'+I('conv',15)+' '+t('allcur')+' ›</a></div>'+
       '<div class="rates">'+RATES.map(r=>'<div class="rate"><div class="rr"><b>'+r[0]+'</b> = <span class="rateval" data-base="'+r[1]+'" data-cur="'+r[1]+'">'+r[1]+'</span> '+r[2]+'</div>'+spark(r[3])+'</div>').join('')+'</div>'+
     '</div></div>';
   },
   collections(){return ''+
-    '<table class="tbl"><thead><tr><th>Time</th><th>Description</th><th>Receiving Account</th><th class="right">Amount</th><th>Status</th><th>Action</th></tr></thead><tbody>'+
-    COLLECT.map(r=>'<tr><td style="white-space:nowrap;color:var(--ink-2)">'+r.t+'</td><td style="white-space:pre-line;max-width:340px">'+r.d+'</td><td>'+r.acc+'</td><td class="right" style="font-weight:700;white-space:nowrap">'+r.a+' <span style="color:var(--ink-3);font-weight:500;font-size:12px">'+r.c+'</span></td><td><span class="status"><span class="dot"></span>Success</span></td><td><a onclick="toast(\'Demo environment\')">View</a></td></tr>').join('')+
+    '<div style="display:flex;align-items:center;margin-bottom:6px"><h1 class="pt">'+t('c_title')+'</h1><button class="btn-pill ghost" style="margin-left:auto" onclick="toast(t(\'demo\'))">'+t('c_manage')+'</button></div>'+
+    '<div class="ttabs"><div class="ttab on">'+t('c_tab1')+'</div><div class="ttab">'+t('c_tab2')+'</div><div class="ttab">'+t('c_tab3')+'</div></div>'+
+    '<div class="filters"><div class="fil">'+t('c_status')+' '+I('caret',14)+'</div><div class="fil" style="min-width:220px">'+t('c_search')+'</div><div class="fil">'+t('c_cur')+' '+I('caret',14)+'</div><div class="fil">'+t('c_time_r')+' '+I('caret',14)+'</div></div>'+
+    '<table class="tbl" style="margin-top:10px"><thead><tr><th>'+t('th_time')+'</th><th>'+t('th_desc')+'</th><th>'+t('th_acct')+'</th><th class="right">'+t('th_amount')+'</th><th>'+t('th_status')+'</th><th>'+t('th_action')+'</th></tr></thead><tbody>'+
+    COLLECT.map(r=>'<tr><td style="white-space:nowrap;color:var(--ink-2)">'+r.t+'</td><td style="white-space:pre-line;max-width:340px">'+r.d+'</td><td>'+r.acc+'</td><td class="right" style="font-weight:700;white-space:nowrap">'+r.a+' <span style="color:var(--ink-3);font-weight:500;font-size:12px">'+r.c+'</span></td><td><span class="status"><span class="dot"></span>'+t('success')+'</span></td><td><a onclick="toast(t(\'demo\'))">'+t('view')+'</a></td></tr>').join('')+
     '</tbody></table><div class="pager"><span class="pg">‹</span><span class="pg on">1</span><span class="pg">›</span></div>';
   },
   payments(){return ''+
     '<div class="colwrap"><div class="colmain">'+
-    '<h1 class="pt">Payments and FX</h1><div class="pt-sub">Move money out, pay suppliers and convert between currencies.</div>'+
-    feat('wd','Withdraw','Withdrawal to registrant, registered company or company legal representative / director bank account.','payments')+
-    feat('conv','Transfer','Pay to other individuals, bank account, or Zyla account.','payments')+
-    featImg('assets/kjb-1688.svg','World Pay','Pay for your 1688.com orders with your Zyla balance.','payments')+
-    feat('conv','Convert','Exchange between your currencies at competitive live rates.','convert')+
-    '</div><div class="colside"><div class="payee-h">Payee</div><a class="payee-l" onclick="toast(\'Demo environment\')">Add a new payee</a><a class="payee-l" onclick="toast(\'Demo environment\')">View all payees</a></div></div>';
+    '<h1 class="pt">'+t('p_title')+'</h1><div style="height:8px"></div>'+
+    feat('wd','p_withdraw','p_withdraw_d')+
+    feat('conv','p_transfer','p_transfer_d')+
+    featImg('assets/kjb-1688.svg','p_worldpay','p_worldpay_d')+
+    feat('conv','p_convert','p_convert_d','convert')+
+    '</div><div class="colside"><div class="payee-h">'+t('payee')+'</div><a class="payee-l" onclick="toast(t(\'demo\'))">'+t('addpayee')+'</a><a class="payee-l" onclick="toast(t(\'demo\'))">'+t('viewpayee')+'</a></div></div>';
   },
   convert(){return ''+
-    '<div style="margin-bottom:18px"><a onclick="go(\'payments\')">‹ Payments and FX</a></div>'+
-    '<h1 class="pt">Convert</h1><div class="pt-sub">Exchange between your currencies at competitive live rates.</div>'+
+    '<div style="margin-bottom:18px"><a onclick="go(\'payments\')">‹ '+t('cv_back')+'</a></div>'+
+    '<h1 class="pt">'+t('cv_title')+'</h1><div class="pt-sub">'+t('cv_sub')+'</div>'+
     '<div class="card" style="max-width:760px">'+
       '<div class="conv">'+
-        '<div class="leg"><label>You sell</label><div class="box"><div class="cur" id="cv-cur-from" onclick="cvOpen(\'from\')"></div><input id="cv-from" value="10,000.00" oninput="cvCalc(1)"/></div><div class="dd" id="cv-dd-from"></div></div>'+
+        '<div class="leg"><label>'+t('cv_sell')+'</label><div class="box"><div class="cur" id="cv-cur-from" onclick="cvOpen(\'from\')"></div><input id="cv-from" value="10,000.00" oninput="cvCalc(1)"/></div><div class="dd" id="cv-dd-from"></div></div>'+
         '<button class="swapb" onclick="cvSwap()">'+ico('<path d="M8 7h11l-3-3M16 17H5l3 3"/>',18)+'</button>'+
-        '<div class="leg"><label>You get</label><div class="box"><div class="cur" id="cv-cur-to" onclick="cvOpen(\'to\')"></div><input id="cv-to" oninput="cvCalc(2)"/></div><div class="dd" id="cv-dd-to"></div></div>'+
+        '<div class="leg"><label>'+t('cv_get')+'</label><div class="box"><div class="cur" id="cv-cur-to" onclick="cvOpen(\'to\')"></div><input id="cv-to" oninput="cvCalc(2)"/></div><div class="dd" id="cv-dd-to"></div></div>'+
       '</div>'+
-      '<div class="rate-line">'+I('conv',18)+'<b id="cv-rate">1 USD = 0.8599 EUR</b><span style="color:var(--ink-3)">Live rate, updates every few seconds</span></div>'+
-      '<div style="margin-top:22px"><button class="btn-pill" onclick="toast(\'Demo environment\')">Convert now</button></div>'+
+      '<div class="rate-line">'+I('conv',18)+'<b id="cv-rate">1 USD = 0.8593 EUR</b><span style="color:var(--ink-3)">'+t('cv_live')+'</span></div>'+
+      '<div style="margin-top:22px"><button class="btn-pill" onclick="toast(t(\'demo\'))">'+t('cv_btn')+'</button></div>'+
     '</div>';
   },
   statements(){return ''+
-    '<h1 class="pt">Account statements</h1>'+
-    '<div class="filters"><div class="fil">All currencies '+I('caret',14)+'</div><div class="fil">All types '+I('caret',14)+'</div><div class="fil">Last 30 days '+I('caret',14)+'</div><div style="margin-left:auto"><button class="btn-pill ghost" onclick="toast(\'Demo environment\')">'+I('dl',16)+'Download</button></div></div>'+
+    '<h1 class="pt">'+t('s_title')+'</h1>'+
+    '<div class="filters"><div class="fil">'+t('f_allcur')+' '+I('caret',14)+'</div><div class="fil">'+t('f_alltypes')+' '+I('caret',14)+'</div><div class="fil">'+t('f_last30')+' '+I('caret',14)+'</div><div style="margin-left:auto"><button class="btn-pill ghost" onclick="toast(t(\'demo\'))">'+I('dl',16)+t('download')+'</button></div></div>'+
     '<div class="card txn" style="padding:8px 18px;margin-top:8px">'+TXNS.map(txnRow).join('')+'</div>'+
     '<div class="pager"><span class="pg">‹</span><span class="pg on">1</span><span class="pg">2</span><span class="pg">›</span></div>';
   },
   approvals(){return ''+
-    '<h1 class="pt">Approvals</h1>'+
-    '<div class="filters"><div class="fil" style="border-color:var(--blue);color:var(--blue)">Pending</div><div class="fil">Processed</div></div>'+
-    '<div class="card"><div class="empty"><img src="assets/empty.png"/>No approval requests right now.</div></div>';
+    '<h1 class="pt">'+t('a_title')+'</h1>'+
+    '<div class="filters"><div class="fil" style="border-color:var(--blue);color:var(--blue)">'+t('a_pending')+'</div><div class="fil">'+t('a_processed')+'</div></div>'+
+    '<div class="card"><div class="empty"><img src="assets/empty.png"/>'+t('a_empty')+'</div></div>';
   },
   multi(){return ''+
-    '<h1 class="pt">Multi-account Management</h1><div class="pt-sub">Multi-account fund management lets you easily manage business funds across several Zyla accounts. <a onclick="toast(\'Demo environment\')">View the detailed guide</a></div>'+
+    '<h1 class="pt">'+t('m_title')+'</h1><div class="pt-sub">'+t('m_sub')+' <a onclick="toast(t(\'demo\'))">'+t('m_guide')+'</a></div>'+
     '<div class="card">'+
-      '<div style="font-weight:700;font-size:17px;margin-bottom:6px">Master account</div>'+
-      '<div style="color:var(--ink-3);font-size:14px;margin-bottom:24px">You can set this account as the master account and manage the funds in your linked sub-accounts.</div>'+
-      '<div style="font-weight:700;margin-bottom:18px">How it works</div>'+
-      '<div class="step"><span class="n">1</span><div><div class="st">Set this account as the master account.</div></div></div>'+
-      '<div class="step"><span class="n">2</span><div><div class="st">Link your sub-accounts.</div><div class="ss"><a onclick="toast(\'Demo environment\')">See example</a></div></div></div>'+
-      '<div class="step"><span class="n">3</span><div><div class="st">Manage funds.</div><div class="ss"><a onclick="toast(\'Demo environment\')">See example</a></div></div></div>'+
-      '<button class="btn-pill" onclick="toast(\'Demo environment\')">Set as master account</button>'+
+      '<div style="font-weight:700;font-size:17px;margin-bottom:6px">'+t('m_master')+'</div>'+
+      '<div style="color:var(--ink-3);font-size:14px;margin-bottom:24px">'+t('m_master_d')+'</div>'+
+      '<div style="font-weight:700;margin-bottom:18px">'+t('m_how')+'</div>'+
+      '<div class="step"><span class="n">1</span><div><div class="st">'+t('m_s1')+'</div></div></div>'+
+      '<div class="step"><span class="n">2</span><div><div class="st">'+t('m_s2')+'</div><div class="ss"><a onclick="toast(t(\'demo\'))">'+t('m_example')+'</a></div></div></div>'+
+      '<div class="step"><span class="n">3</span><div><div class="st">'+t('m_s3')+'</div><div class="ss"><a onclick="toast(t(\'demo\'))">'+t('m_example')+'</a></div></div></div>'+
+      '<button class="btn-pill" onclick="toast(t(\'demo\'))">'+t('m_setbtn')+'</button>'+
     '</div>';
   }
 };
-function feat(icon,title,desc,r){var act=r==='convert'?"go('convert')":"toast('Demo environment')";return '<div class="feat" onclick="'+act+'"><div class="fi">'+I(icon,24)+'</div><div><div class="ft">'+title+'</div><div class="fd">'+desc+'</div></div></div>';}
-function featImg(src,title,desc){return '<div class="feat" onclick="toast(\'Demo environment\')"><img class="fi-img" src="'+src+'"/><div><div class="ft">'+title+'</div><div class="fd">'+desc+'</div></div></div>';}
 
-function buildNav(){document.getElementById('nav').innerHTML=NAV.map(n=>'<div class="nav-item" data-id="'+n.id+'" onclick="go(\''+n.id+'\')"><span class="ic">'+ico(n.ic,22)+'</span>'+n.label+'</div>').join('');}
+function buildNav(){document.getElementById('nav').innerHTML=NAV.map(n=>'<div class="nav-item" data-id="'+n.id+'" onclick="go(\''+n.id+'\')"><span class="ic">'+ico(n.ic,22)+'</span>'+t(n.k)+'</div>').join('');markNav();}
 function markNav(){document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('on',e.getAttribute('data-id')===(route==='convert'?'payments':route)));}
+function paintTop(){document.getElementById('uname').textContent=t('hello')+(COMPANY||NAME);document.getElementById('avatar').textContent=((COMPANY||NAME).trim()[0]||'Z').toUpperCase();document.getElementById('langtog').textContent=(lang==='en'?'中文':'EN');}
 function render(){document.getElementById('content').innerHTML=(VIEWS[route]||VIEWS.home)();if(route==='convert')cvRender();markNav();}
+function setLang(l){lang=l;document.documentElement.lang=(l==='zh'?'zh-CN':'en');try{var u=new URL(location.href);u.searchParams.set('lang',l);history.replaceState(history.state,'',u);}catch(_){}paintTop();buildNav();render();}
 function go(id,e){if(e)e.stopPropagation();if(route!==id){try{history.pushState({r:id},'');}catch(_){}}route=id;render();window.scrollTo(0,0);}
 window.addEventListener('popstate',ev=>{route=(ev.state&&ev.state.r)||'home';render();window.scrollTo(0,0);});
 
-let tT;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),1700);}
+let tT;function toast(m){var el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>el.classList.remove('show'),1700);}
 
-function showApp(){document.getElementById('login').classList.add('hide');document.getElementById('app').classList.add('show');document.getElementById('avatar').textContent=((COMPANY||NAME).trim()[0]||'Z').toUpperCase();document.getElementById('uname').textContent='hello, '+(COMPANY||NAME);buildNav();route=P.get('view')||'home';render();startTick();}
+function showApp(){document.getElementById('login').classList.add('hide');document.getElementById('app').classList.add('show');document.documentElement.lang=(lang==='zh'?'zh-CN':'en');paintTop();buildNav();route=P.get('view')||'home';render();startTick();}
 let loggingIn=false;
-function doLogin(){if(loggingIn)return;loggingIn=true;var b=document.getElementById('lg-btn');b.innerHTML='<span class="spin"></span><span>Logging in…</span>';setTimeout(showApp,800);}
-function typeInto(el,text,done){let i=0;(function t(){el.value=text.slice(0,i++);if(i<=text.length)setTimeout(t,45);else if(done)done();})();}
+function doLogin(){if(loggingIn)return;loggingIn=true;var b=document.getElementById('lg-btn');b.innerHTML='<span class="spin"></span><span>'+(lang==='zh'?'登录中…':'Logging in…')+'</span>';setTimeout(showApp,800);}
+function typeInto(el,text,done){let i=0;(function tk(){el.value=text.slice(0,i++);if(i<=text.length)setTimeout(tk,45);else if(done)done();})();}
+function paintLogin(){document.getElementById('lg-h').innerHTML=t('login_h');document.getElementById('lg-sub').textContent=t('login_sub');document.getElementById('lg-title').textContent=t('login_title');document.getElementById('lg-welcome').textContent=t('login_welcome');document.getElementById('lg-email').placeholder=t('login_email');document.getElementById('lg-pass').placeholder=t('login_pass');document.getElementById('lg-btn').textContent=t('login_btn');}
 window.addEventListener('DOMContentLoaded',function(){
+  paintLogin();
   if(P.get('skiplogin')==='1'||window.WF_VARIANT){showApp();return;}
   var em=document.getElementById('lg-email'),pw=document.getElementById('lg-pass');
   setTimeout(()=>typeInto(em,'demo@'+(NAME||'zyla').toLowerCase().replace(/[^a-z]/g,'')+'.com',()=>setTimeout(()=>typeInto(pw,'••••••••',()=>setTimeout(doLogin,400)),300)),600);
