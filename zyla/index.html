@@ -390,10 +390,15 @@ function resultStep(){return '<div class="wz-succ"><div class="ck">'+ico('<path 
 const VIEWS={
   home(){return ''+
     '<div class="colwrap"><div class="colmain">'+
-      '<h1 class="pt">'+t('todo')+'</h1>'+
-      '<div class="card todo"><div class="row"><img class="ti" src="assets/todo.png"/><div><div class="who">'+t('auth_t')+'</div><div class="meta">'+t('auth_d')+'</div></div><a onclick="toast(t(\'demo\'))">'+t('setup')+' ›</a></div></div>'+
-      '<div class="sec-h">'+t('shortcuts')+'</div>'+
-      '<div class="shortcuts"><div class="sc primary" onclick="go(\'payments\')">'+I('conv',18)+t('payment')+'</div><div class="sc" onclick="go(\'collections\')">'+I('plus',18)+t('newacc')+'</div><div class="sc more" onclick="toast(t(\'demo\'))">···</div></div>'+
+      '<h1 class="pt" style="margin-bottom:18px">'+t('shortcuts')+'</h1>'+
+      '<div class="shortcuts" style="flex-wrap:wrap;gap:12px">'+
+        '<div class="sc primary" onclick="go(\'payments\')">'+I('conv',18)+t('payment')+'</div>'+
+        '<div class="sc" onclick="go(\'collections\')">'+I('plus',18)+t('newacc')+'</div>'+
+        '<div class="sc" onclick="go(\'pay-withdraw\')">'+I('wd',18)+t('p_withdraw')+'</div>'+
+        '<div class="sc" onclick="go(\'pay-transfer\')">'+I('conv',18)+t('p_transfer')+'</div>'+
+        '<div class="sc" onclick="go(\'convert\')">'+I('conv',18)+t('p_convert')+'</div>'+
+        '<div class="sc" onclick="go(\'pay-kjb\')"><img src="assets/kjb-1688.svg" style="width:20px;height:20px;object-fit:contain"/>'+t('p_worldpay')+'</div>'+
+      '</div>'+
       '<div class="sec-h">'+t('myacc')+' <span style="margin-left:auto;display:flex;gap:18px;font-size:14px;font-weight:500"><a onclick="toggleAmt()" style="color:var(--ink-2);display:flex;align-items:center;gap:6px">'+I('eye',16)+'<span id="eyetxt">'+t('show')+'</span></a><a onclick="toast(t(\'demo\'))" style="color:var(--ink-2)">'+t('edit')+'</a></span></div>'+
       '<div class="assets-bar"><span class="assets-total">'+t('total')+' '+I('info',14)+' &#8776; <b>'+amt(TOTAL)+'</b> USD '+I('caret',14)+'</span></div>'+
       '<div class="acct-row">'+ASSETS.map(a=>'<div class="acct" onclick="toast(t(\'demo\'))"><div class="ah"><img class="flag" src="'+flagUrl(a.flag)+'"/>'+a.cur+'<span class="chev">'+I('chevr',16)+'</span></div><div class="abal">'+amt(a.bal)+'</div><div class="aln"><span>'+t('avail')+'</span><b>'+amt(a.bal)+'</b></div><div class="aln"><span>'+t('pending')+' '+I('info',12)+'</span><b>'+amt(a.pending)+'</b></div></div>').join('')+'</div>'+
