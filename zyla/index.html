@@ -141,6 +141,56 @@
   .cd-ring{width:26px;height:26px}
   .foot{padding:30px 40px 40px;color:var(--ink-3);font-size:12px;line-height:1.7;text-align:center;border-top:1px solid var(--line);margin-top:20px}
   .foot a{color:var(--blue)}
+  .subtabs{display:flex;gap:12px;margin-bottom:20px}
+  .subtab{height:34px;padding:0 18px;border:1px solid var(--line);border-radius:999px;display:flex;align-items:center;font-size:14px;font-weight:600;color:var(--ink-2);cursor:pointer;background:#fff}
+  .subtab.on{border-color:var(--blue);color:var(--blue);background:#EAF3FF}
+  .wz{position:fixed;inset:0;background:#fff;z-index:90;overflow-y:auto;display:flex;flex-direction:column}
+  .wz-top{height:64px;display:flex;align-items:center;padding:0 32px;flex:none}
+  .wz-top img{height:28px}
+  .wz-x{width:34px;height:34px;border-radius:50%;background:var(--line-2);display:flex;align-items:center;justify-content:center;color:var(--ink-2);cursor:pointer}
+  .wz-steps{position:relative;display:flex;justify-content:space-between;padding:24px 9% 22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);flex:none}
+  .wz-line{position:absolute;top:31px;left:13%;right:13%;height:2px;background:var(--line)}
+  .wz-node{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:13px;font-size:14px;color:var(--ink-3);background:#fff;padding:0 10px}
+  .wz-node .dot{width:13px;height:13px;border-radius:50%;background:#D7D9E0}
+  .wz-node.on{color:var(--ink);font-weight:600}.wz-node.on .dot,.wz-node.done .dot{background:var(--blue)}
+  .wz-body{max-width:920px;margin:0 auto;width:100%;padding:38px 24px 50px;flex:1}
+  .wz-h{font-size:24px;font-weight:700;margin-bottom:24px}
+  .wz-add{border:1px dashed #C7CCD6;border-radius:12px;padding:30px;text-align:center;color:var(--ink-3);font-size:13px;max-width:680px}
+  .wz-add a{display:block;font-weight:600;margin-bottom:8px}
+  .wz-acts{display:flex;gap:14px;align-items:center;margin-top:34px}
+  .radio{display:flex;align-items:center;gap:10px;margin:12px 0;font-size:15px;cursor:pointer}
+  .radio .rb{width:18px;height:18px;border-radius:50%;border:2px solid #C7CCD6;flex:none}
+  .radio.on .rb{border:5px solid var(--blue)}
+  .lbl-sec{font-size:14px;color:var(--ink-2);margin:20px 0 6px}
+  .acct-types{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap}
+  .at{flex:1;min-width:240px;border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer}
+  .at.on{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+  .at .ati{width:34px;height:34px;flex:none;display:flex;align-items:center;justify-content:center;color:var(--blue)}
+  .at .att{font-weight:600;font-size:14px}
+  .at .atf{display:inline-block;margin-top:6px;font-size:11px;color:#C2410C;background:#FFF1E8;border-radius:4px;padding:2px 7px}
+  .sumrow{display:flex;justify-content:space-between;padding:16px 2px;border-bottom:1px solid var(--line-2);font-size:15px;max-width:560px}
+  .sumrow span{color:var(--ink-3)}.sumrow b{font-weight:600}
+  .wz-succ{text-align:center;padding:40px 0}
+  .wz-succ .ck{width:64px;height:64px;border-radius:50%;background:#E6F9F1;color:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+  .amtfield{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;height:56px;max-width:440px;overflow:hidden}
+  .amtfield .cc{display:flex;align-items:center;gap:8px;padding:0 14px;border-right:1px solid var(--line);height:100%;font-weight:600}
+  .amtfield .cc img{width:22px;height:22px;border-radius:50%}
+  .amtfield input{border:none;outline:none;flex:1;height:100%;padding:0 14px;font-size:18px;font-weight:600;text-align:right}
+  .kjb-hero{display:flex;align-items:flex-start;gap:48px;padding:24px 0}
+  .kjb-hero .kl{flex:1;padding-top:30px}
+  .kjb-hero h2{font-size:36px;font-weight:800;margin-bottom:14px}
+  .kjb-hero .ks{color:var(--ink-2);font-size:15px;margin-bottom:28px}
+  .kjb-cashier{width:500px;border:1px solid #FBD9C4;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(193,65,12,.08)}
+  .kjb-cashier .kc-top{background:#FFF6F0;padding:14px 18px;display:flex;align-items:center;gap:10px;font-weight:700}
+  .kjb-cashier .kc-top img{height:20px}
+  .kjb-cashier .kc-row{display:flex;align-items:center;padding:20px 18px;gap:12px}
+  .kjb-cashier .kc-ph{width:46px;height:46px;border-radius:8px;background:#F2F2F5;flex:none}
+  .kjb-cashier .kc-amt{margin-left:auto;text-align:right}
+  .kjb-cashier .kc-amt b{color:#C2410C;font-size:24px}
+  .kjb-cashier .kc-amt div{color:var(--ink-3);font-size:12px;margin-top:2px}
+  .kjb-cashier .kc-sel{margin:0 18px 18px;border:1px solid #F5C9B0;border-radius:10px;background:#FFF6F0;padding:14px;display:flex;align-items:center;gap:10px;color:#C2410C;font-weight:600;font-size:14px}
+  .kjb-cashier .kc-sel .od{width:10px;height:10px;border-radius:50%;background:#C2410C}
+  .bc{display:flex;align-items:center;gap:8px;color:var(--ink-3);font-size:14px;padding:14px 0}
   #toast{position:fixed;left:50%;bottom:46px;transform:translateX(-50%);background:rgba(0,0,0,.82);color:#fff;padding:11px 20px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:200}
   #toast.show{opacity:1}
 </style>
@@ -211,6 +261,9 @@ const STR={
   s_title:'Account statements',f_allcur:'All currencies',f_alltypes:'All types',f_last30:'Last 30 days',download:'Download',
   a_title:'Approvals',a_pending:'Pending',a_processed:'Processed',a_empty:'No approval requests right now.',
   m_title:'Multi-account Management',m_sub:'Multi-account fund management lets you easily manage business funds across several Zyla accounts.',m_guide:'View the detailed guide',m_master:'Master account',m_master_d:'You can set this account as the master account and manage the funds in your linked sub-accounts.',m_how:'How it works',m_s1:'Set this account as the master account.',m_s2:'Link your sub-accounts.',m_s3:'Manage funds.',m_example:'See example',m_setbtn:'Set as master account',
+  c_store_empty_t:'No stores created yet',c_store_empty_d:'Create a store and provide more store details to speed up the crediting review.',c_store_hide:'Hide stores',c_store_create:'Create store',c_addpayer:'Add payer',c_src1:'Same-name payer',c_src2:'E-commerce platform',c_f_state:'Status',c_f_start:'Start date',c_f_end:'End date',c_th_ctime:'Created',c_th_type:'Collection type',c_th_bacc:'Bank account no.',c_th_bname:'Bank name',c_th_mod:'Last modified',c_nodata:'No data',
+  w_s1:'Select payee',w_s2:'Enter amount',w_s3:'Confirm details',w_s4:'Result',w_next:'Next',w_back:'Back',w_cancel:'Cancel',wd_title:'Withdraw',w_addpayee:'Add a payee',w_nopayee:"You haven't added any payee yet.",tr_title:'Transfer',tr_type:'Transaction type',tr_single:'Single payee',tr_multi:'Multiple payees',tr_acct:'Receiving account type',tr_bank:'Transfer to bank account',tr_wf:'Transfer to WorldFirst account',tr_zyla:'Transfer to Zyla account',tr_free:'Fund pooling · 0 fee on supplier payments',kjb_title:'World Pay',kjb_h:'Pay 1688 directly in foreign currency',kjb_sub:'No need to settle funds into a domestic account. Compliant and low-cost.',kjb_bind:'Bind your 1688 account',kjb_cashier:'Checkout',kjb_orderamt:'Order amount',kjb_pay:'World Pay (Zyla offshore RMB account)',
+  w_amount:'Amount',w_avail:'Available balance',w_confirm_h:'Please confirm the transaction',w_payee:'Payee',w_fee:'Fee',w_arrival:'Estimated arrival',w_submit:'Confirm & submit',w_succ:'Transaction submitted',w_succ_d:'Your transaction is being processed. You can track it in Account statements.',w_done:'Done',w_1day:'1 business day',
   demo:'Demo environment'},
  zh:{login_h:'一个账户，<br>连接全球生意。',login_sub:'像本地人一样收付全球款项。对接 100+ 海外平台收款，多币种持有，按实时汇率低成本兑换。',login_title:'登录',login_welcome:'欢迎回到您的 Zyla 账户。',login_email:'邮箱',login_pass:'密码',login_btn:'登录',
   hello:'您好，',nav_home:'首页',nav_collections:'收款管理',nav_payments:'资金管理',nav_statements:'账单管理中心',nav_approvals:'审批单管理',nav_multi:'多账号管理',
@@ -227,18 +280,21 @@ const STR={
   s_title:'账单管理中心',f_allcur:'全部币种',f_alltypes:'全部类型',f_last30:'近 30 天',download:'下载',
   a_title:'审批单管理',a_pending:'待处理',a_processed:'已处理',a_empty:'暂无待审批的申请',
   m_title:'多账号管理',m_sub:'多账户资金管理可让您轻松管理多个 Zyla 账户之间的业务资金。',m_guide:'查看详细操作指南',m_master:'主账号',m_master_d:'您可以将此账户设置为主账户，并管理您关联的子账户中的资金。',m_how:'操作流程',m_s1:'将此账户设置为主账户。',m_s2:'链接子账户',m_s3:'管理资金',m_example:'查看示例',m_setbtn:'设置为主账户',
+  c_store_empty_t:'暂未创建任何店铺',c_store_empty_d:'创建店铺并提供更多店铺信息，可以加快入账审核流程',c_store_hide:'店铺隐藏',c_store_create:'创建店铺',c_addpayer:'添加付款人',c_src1:'同名付款人',c_src2:'电商平台',c_f_state:'状态',c_f_start:'开始日期',c_f_end:'结束日期',c_th_ctime:'创建时间',c_th_type:'收款类型',c_th_bacc:'银行账户号',c_th_bname:'银行名称',c_th_mod:'最后修改时间',c_nodata:'暂无数据',
+  w_s1:'选择收款人',w_s2:'输入金额',w_s3:'确认交易信息',w_s4:'交易结果',w_next:'下一步',w_back:'上一步',w_cancel:'取消',wd_title:'提款',w_addpayee:'添加收款人',w_nopayee:'您尚未添加任何收款人',tr_title:'转账',tr_type:'交易类型',tr_single:'单个收款人',tr_multi:'多个收款人',tr_acct:'收款账户类型',tr_bank:'转账至银行账户',tr_wf:'转账至万里汇账户',tr_zyla:'转账至Zyla账号',tr_free:'资金归集·支付货款 0 手续费',kjb_title:'跨境宝',kjb_h:'Zyla 外币直采 1688',kjb_sub:'无需结汇至境内账户，阳光合规成本低',kjb_bind:'立即绑定 1688 账号',kjb_cashier:'收银台',kjb_orderamt:'订单金额',kjb_pay:'跨境宝（Zyla 离岸人民币账户支付）',
+  w_amount:'金额',w_avail:'可用余额',w_confirm_h:'请确认交易信息',w_payee:'收款人',w_fee:'手续费',w_arrival:'预计到账',w_submit:'确认提交',w_succ:'交易提交成功',w_succ_d:'您的交易正在处理中，可在账单管理中心查看进度。',w_done:'完成',w_1day:'1 个工作日',
   demo:'演示环境'}
 };
 function t(k){return STR[lang][k]!=null?STR[lang][k]:STR.en[k];}
 
 const COMPANY=P.get('company')||V('company')||'BRIGHTLEAF GOODS LLC';
 const NAME=P.get('name')||V('name')||'Brightleaf';
-const TOTAL=V('total')||'186,402.55';
+const TOTAL=V('total')||'19,521.40';
 const ASSETS=V('assets')||[
-  {cur:'USD',flag:'us',bal:'160,420.50',pending:'7,000.00'},
-  {cur:'EUR',flag:'eu',bal:'9,240.00',pending:'0.00'},
-  {cur:'GBP',flag:'gb',bal:'4,180.00',pending:'0.00'},
-  {cur:'CAD',flag:'ca',bal:'2,100.00',pending:'0.00'}
+  {cur:'USD',flag:'us',bal:'12,840.50',pending:'1,200.00'},
+  {cur:'EUR',flag:'eu',bal:'3,210.00',pending:'0.00'},
+  {cur:'CNH',flag:'cn',bal:'18,600.00',pending:'0.00'},
+  {cur:'HKD',flag:'hk',bal:'2,400.00',pending:'0.00'}
 ];
 const TXNS=V('txns')||[
   {d:'in', k:'recv', p:'Amazon.com Services', t:'2026/06/08, 08:42:17', a:'+18,420.00', c:'USD'},
@@ -258,10 +314,10 @@ const COLLECT=V('collect')||[
   {t:'2026/06/05, 10:08:30', d:'Walmart Marketplace\nSeller payout', acc:'20000043750614', a:'4,742.10', c:'USD'}
 ];
 const RATES=V('rates')||[
-  ['1 USD','0.8593','EUR',[12,13,11,14,12,15,13]],
-  ['1 USD','0.7414','GBP',[9,8,10,9,11,10,12]],
-  ['1 USD','1.3839','CAD',[14,13,15,12,14,13,15]],
-  ['1 USD','1.4122','AUD',[11,12,10,13,11,14,12]],
+  ['1 USD','0.8596','EUR',[12,13,11,14,12,15,13]],
+  ['1 USD','0.7415','GBP',[9,8,10,9,11,10,12]],
+  ['1 USD','1.3842','CAD',[14,13,15,12,14,13,15]],
+  ['1 USD','1.4130','AUD',[11,12,10,13,11,14,12]],
   ['1 USD','1.2773','SGD',[10,11,9,12,10,13,11]]
 ];
 const NAV=[
@@ -296,9 +352,9 @@ function fluctuate(){
 }
 function nowClock(){var d=new Date(),p=n=>(n<10?'0':'')+n;return p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}
 
-var FX_PERUSD={USD:1,EUR:0.8593,GBP:0.7414,CAD:1.3839,AUD:1.4122,SGD:1.2773,HKD:7.8012,JPY:157.20};
-var FX_CURS=[{c:'USD',f:'us'},{c:'EUR',f:'eu'},{c:'GBP',f:'gb'},{c:'CAD',f:'ca'},{c:'AUD',f:'au'},{c:'SGD',f:'sg'},{c:'HKD',f:'hk'},{c:'JPY',f:'jp'}];
-var cvFrom='USD',cvTo='EUR';
+var FX_PERUSD={USD:1,EUR:0.8596,GBP:0.7415,CAD:1.3842,AUD:1.4130,SGD:1.2773,CNH:7.0530,HKD:7.8012,JPY:157.20};
+var FX_CURS=[{c:'USD',f:'us'},{c:'EUR',f:'eu'},{c:'CNH',f:'cn'},{c:'HKD',f:'hk'},{c:'GBP',f:'gb'},{c:'CAD',f:'ca'},{c:'AUD',f:'au'},{c:'SGD',f:'sg'},{c:'JPY',f:'jp'}];
+var cvFrom='USD',cvTo='CNH';
 function cvFlag(c){for(var i=0;i<FX_CURS.length;i++)if(FX_CURS[i].c===c)return FX_CURS[i].f;return 'us';}
 function cvRate(){return FX_PERUSD[cvTo]/FX_PERUSD[cvFrom];}
 function cvDec(c){return c==='JPY'?0:2;}
@@ -310,11 +366,27 @@ function cvOpen(which){var dd=document.getElementById('cv-dd-'+which);if(!dd)ret
 function cvSet(which,code){if(which==='from'){if(code===cvTo)cvTo=cvFrom;cvFrom=code;}else{if(code===cvFrom)cvFrom=cvTo;cvTo=code;}document.querySelectorAll('.dd').forEach(x=>{x.classList.remove('open');x.innerHTML='';});cvRender();}
 function cvSwap(){var x=cvFrom;cvFrom=cvTo;cvTo=x;cvRender();}
 
-let route='home';
+let route='home', collTab=0, wizStep=0;
+function setCollTab(i){collTab=i;render();}
+function wizNext(){wizStep++;render();window.scrollTo(0,0);}
+function wizPrev(){wizStep--;render();window.scrollTo(0,0);}
 function txnRow(x){return '<div class="row"><div class="ar">'+(x.d==='in'?'&#8595;':'&#8593;')+'</div><div><div class="who">'+txnDesc(x)+'</div><div class="meta"><span class="ok">'+t('success')+'</span>'+x.t+'</div></div><div class="amt">'+x.a+' <small>'+x.c+'</small></div></div>';}
-function feat(icon,titleK,descK,r){var act=r==='convert'?"go('convert')":"toast(t('demo'))";return '<div class="feat" onclick="'+act+'"><div class="fi">'+I(icon,24)+'</div><div><div class="ft">'+t(titleK)+'</div><div class="fd">'+t(descK)+'</div></div></div>';}
-function featImg(src,titleK,descK){return '<div class="feat" onclick="toast(t(\'demo\'))"><img class="fi-img" src="'+src+'"/><div><div class="ft">'+t(titleK)+'</div><div class="fd">'+t(descK)+'</div></div></div>';}
+function feat(icon,titleK,descK,r){var act=r?"go('"+r+"')":"toast(t('demo'))";return '<div class="feat" onclick="'+act+'"><div class="fi">'+I(icon,24)+'</div><div><div class="ft">'+t(titleK)+'</div><div class="fd">'+t(descK)+'</div></div></div>';}
+function featImg(src,titleK,descK,r){var act=r?"go('"+r+"')":"toast(t('demo'))";return '<div class="feat" onclick="'+act+'"><img class="fi-img" src="'+src+'"/><div><div class="ft">'+t(titleK)+'</div><div class="fd">'+t(descK)+'</div></div></div>';}
 
+function wzTop(){return '<div class="wz-top"><img src="assets/logo.png" alt="zyla"/><div style="margin-left:auto;display:flex;gap:12px;align-items:center"><div class="wz-x" title="Rewards"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18M12 8v13"/></svg></div><div class="wz-x" onclick="go(\'payments\')">'+ico('<path d="M6 6l12 12M18 6L6 18"/>',16)+'</div></div></div>';}
+function wzStepper(idx){var ks=['w_s1','w_s2','w_s3','w_s4'];return '<div class="wz-steps"><div class="wz-line"></div>'+ks.map(function(k,i){return '<div class="wz-node'+(i===idx?' on':'')+(i<idx?' done':'')+'"><span class="dot"></span><span>'+t(k)+'</span></div>';}).join('')+'</div>';}
+function wzActs(prim,primFn,sec,secFn){var h='<div class="wz-acts"><button class="btn-pill" onclick="'+primFn+'">'+prim+'</button>';if(sec)h+='<button class="btn-pill ghost" onclick="'+secFn+'">'+sec+'</button>';return h+'</div>';}
+function wdBody(){return '<div class="wz-add"><a onclick="toast(t(\'demo\'))">+ '+t('w_addpayee')+'</a>'+t('w_nopayee')+'</div>'+wzActs(t('w_next'),'wizNext()',t('w_cancel'),"go('payments')");}
+function trBody(){return '<div class="lbl-sec">'+t('tr_type')+'</div><div class="radio on"><span class="rb"></span>'+t('tr_single')+'</div><div class="radio"><span class="rb"></span>'+t('tr_multi')+'</div>'+
+  '<div class="lbl-sec">'+t('tr_acct')+'</div><div class="acct-types">'+
+  '<div class="at on"><span class="ati">'+I('wd',24)+'</span><div><div class="att">'+t('tr_bank')+'</div></div></div>'+
+  '<div class="at"><span style="width:30px;height:30px;border-radius:7px;background:#FF2D55;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex:none">W</span><div><div class="att">'+t('tr_wf')+'</div><span class="atf">'+t('tr_free')+'</span></div></div>'+
+  '<div class="at"><span style="width:30px;height:30px;border-radius:7px;background:linear-gradient(135deg,#3A1FB8,#00B3E6);flex:none"></span><div><div class="att">'+t('tr_zyla')+'</div><span class="atf">'+t('tr_free')+'</span></div></div>'+
+  '</div>'+wzActs(t('w_next'),'wizNext()',t('w_cancel'),"go('payments')");}
+function amountStep(){return '<div class="lbl-sec">'+t('w_amount')+'</div><div class="amtfield"><div class="cc"><img src="'+flagUrl('us')+'"/>USD</div><input value="5,000.00"/></div><div style="color:var(--ink-3);font-size:13px;margin-top:12px">'+t('w_avail')+'：<b style="color:var(--ink)">12,840.50</b> USD</div>'+wzActs(t('w_next'),'wizNext()',t('w_back'),'wizPrev()');}
+function confirmStep(payee){return '<div style="font-weight:700;margin-bottom:8px">'+t('w_confirm_h')+'</div><div class="sumrow"><span>'+t('w_payee')+'</span><b>'+(payee||'Yiwu Charm Trading')+'</b></div><div class="sumrow"><span>'+t('w_amount')+'</span><b>5,000.00 USD</b></div><div class="sumrow"><span>'+t('w_fee')+'</span><b>0.00 USD</b></div><div class="sumrow"><span>'+t('w_arrival')+'</span><b>'+t('w_1day')+'</b></div>'+wzActs(t('w_submit'),'wizNext()',t('w_back'),'wizPrev()');}
+function resultStep(){return '<div class="wz-succ"><div class="ck">'+ico('<path d="M5 13l4 4 10-10"/>',30,2.4)+'</div><div style="font-size:20px;font-weight:700;margin-bottom:8px">'+t('w_succ')+'</div><div style="color:var(--ink-3);font-size:14px;max-width:420px;margin:0 auto">'+t('w_succ_d')+'</div><div style="margin-top:26px"><button class="btn-pill" onclick="go(\'statements\')">'+t('w_done')+'</button></div></div>';}
 const VIEWS={
   home(){return ''+
     '<div class="colwrap"><div class="colmain">'+
@@ -336,36 +408,54 @@ const VIEWS={
       '<div class="rates">'+RATES.map(r=>'<div class="rate"><div class="rr"><b>'+r[0]+'</b> = <span class="rateval" data-base="'+r[1]+'" data-cur="'+r[1]+'">'+r[1]+'</span> '+r[2]+'</div>'+spark(r[3])+'</div>').join('')+'</div>'+
     '</div></div>';
   },
-  collections(){return ''+
-    '<div style="display:flex;align-items:center;margin-bottom:6px"><h1 class="pt">'+t('c_title')+'</h1><button class="btn-pill ghost" style="margin-left:auto" onclick="toast(t(\'demo\'))">'+t('c_manage')+'</button></div>'+
-    '<div class="ttabs"><div class="ttab on">'+t('c_tab1')+'</div><div class="ttab">'+t('c_tab2')+'</div><div class="ttab">'+t('c_tab3')+'</div></div>'+
-    '<div class="filters"><div class="fil">'+t('c_status')+' '+I('caret',14)+'</div><div class="fil" style="min-width:220px">'+t('c_search')+'</div><div class="fil">'+t('c_cur')+' '+I('caret',14)+'</div><div class="fil">'+t('c_time_r')+' '+I('caret',14)+'</div></div>'+
-    '<table class="tbl" style="margin-top:10px"><thead><tr><th>'+t('th_time')+'</th><th>'+t('th_desc')+'</th><th>'+t('th_acct')+'</th><th class="right">'+t('th_amount')+'</th><th>'+t('th_status')+'</th><th>'+t('th_action')+'</th></tr></thead><tbody>'+
-    COLLECT.map(r=>'<tr><td style="white-space:nowrap;color:var(--ink-2)">'+r.t+'</td><td style="white-space:pre-line;max-width:340px">'+r.d+'</td><td>'+r.acc+'</td><td class="right" style="font-weight:700;white-space:nowrap">'+r.a+' <span style="color:var(--ink-3);font-weight:500;font-size:12px">'+r.c+'</span></td><td><span class="status"><span class="dot"></span>'+t('success')+'</span></td><td><a onclick="toast(t(\'demo\'))">'+t('view')+'</a></td></tr>').join('')+
-    '</tbody></table><div class="pager"><span class="pg">‹</span><span class="pg on">1</span><span class="pg">›</span></div>';
+  collections(){
+    var top='<div style="display:flex;align-items:center;margin-bottom:6px"><h1 class="pt">'+t('c_title')+'</h1><button class="btn-pill" style="margin-left:auto" onclick="toast(t(\'demo\'))">'+(collTab===2?I('plus',16):'')+(collTab===2?t('c_addpayer'):t('c_manage'))+'</button></div>';
+    var tabs='<div class="ttabs">'+['c_tab1','c_tab2','c_tab3'].map(function(k,i){return '<div class="ttab'+(collTab===i?' on':'')+'" onclick="setCollTab('+i+')">'+t(k)+'</div>';}).join('')+'</div>';
+    var body;
+    if(collTab===0){
+      body='<div class="filters"><div class="fil">'+t('c_status')+' '+I('caret',14)+'</div><div class="fil" style="min-width:220px">'+t('c_search')+'</div><div class="fil">'+t('c_cur')+' '+I('caret',14)+'</div><div class="fil">'+t('c_time_r')+' '+I('caret',14)+'</div></div>'+
+      '<table class="tbl" style="margin-top:10px"><thead><tr><th>'+t('th_time')+'</th><th>'+t('th_desc')+'</th><th>'+t('th_acct')+'</th><th class="right">'+t('th_amount')+'</th><th>'+t('th_status')+'</th><th>'+t('th_action')+'</th></tr></thead><tbody>'+
+      COLLECT.map(r=>'<tr><td style="white-space:nowrap;color:var(--ink-2)">'+r.t+'</td><td style="white-space:pre-line;max-width:340px">'+r.d+'</td><td>'+r.acc+'</td><td class="right" style="font-weight:700;white-space:nowrap">'+r.a+' <span style="color:var(--ink-3);font-weight:500;font-size:12px">'+r.c+'</span></td><td><span class="status"><span class="dot"></span>'+t('success')+'</span></td><td><a onclick="toast(t(\'demo\'))">'+t('view')+'</a></td></tr>').join('')+
+      '</tbody></table><div class="pager"><span class="pg">‹</span><span class="pg on">1</span><span class="pg">›</span></div>';
+    } else if(collTab===1){
+      body='<div class="card"><div class="empty"><img src="assets/empty.png"/><div style="font-weight:700;font-size:16px;color:var(--ink);margin:6px 0 4px">'+t('c_store_empty_t')+'</div>'+t('c_store_empty_d')+'<div style="margin-top:24px;display:flex;gap:12px"><button class="btn-pill ghost" onclick="toast(t(\'demo\'))">'+t('c_store_hide')+'</button><button class="btn-pill" onclick="toast(t(\'demo\'))">'+I('plus',16)+t('c_store_create')+'</button></div></div></div>';
+    } else {
+      body='<div class="subtabs"><div class="subtab on">'+t('c_src1')+'</div><div class="subtab">'+t('c_src2')+'</div></div>'+
+      '<div class="filters"><div class="fil">'+t('c_f_state')+' '+I('caret',14)+'</div><div class="fil" style="min-width:260px">'+t('c_f_start')+'  ~  '+t('c_f_end')+'</div></div>'+
+      '<table class="tbl" style="margin-top:10px"><thead><tr><th>'+t('c_th_ctime')+'</th><th>'+t('c_th_type')+'</th><th>'+t('c_th_bacc')+'</th><th>'+t('c_th_bname')+'</th><th>'+t('c_f_state')+'</th><th>'+t('c_th_mod')+'</th><th>'+t('th_action')+'</th></tr></thead></table>'+
+      '<div class="empty"><img src="assets/empty.png"/>'+t('c_nodata')+'</div>';
+    }
+    return top+tabs+body;
   },
   payments(){return ''+
     '<div class="colwrap"><div class="colmain">'+
     '<h1 class="pt">'+t('p_title')+'</h1><div style="height:8px"></div>'+
-    feat('wd','p_withdraw','p_withdraw_d')+
-    feat('conv','p_transfer','p_transfer_d')+
-    featImg('assets/kjb-1688.svg','p_worldpay','p_worldpay_d')+
+    feat('wd','p_withdraw','p_withdraw_d','pay-withdraw')+
+    feat('conv','p_transfer','p_transfer_d','pay-transfer')+
+    featImg('assets/kjb-1688.svg','p_worldpay','p_worldpay_d','pay-kjb')+
     feat('conv','p_convert','p_convert_d','convert')+
     '</div><div class="colside"><div class="payee-h">'+t('payee')+'</div><a class="payee-l" onclick="toast(t(\'demo\'))">'+t('addpayee')+'</a><a class="payee-l" onclick="toast(t(\'demo\'))">'+t('viewpayee')+'</a></div></div>';
   },
-  convert(){return ''+
-    '<div style="margin-bottom:18px"><a onclick="go(\'payments\')">‹ '+t('cv_back')+'</a></div>'+
-    '<h1 class="pt">'+t('cv_title')+'</h1><div class="pt-sub">'+t('cv_sub')+'</div>'+
+  convert(){return '<div class="wz">'+wzTop()+'<div class="wz-body">'+
+    '<div class="bc"><a onclick="go(\'payments\')">'+t('cv_back')+'</a> '+I('chevr',12)+' '+t('cv_title')+'</div>'+
+    '<div class="wz-h">'+t('cv_title')+'</div><div class="pt-sub">'+t('cv_sub')+'</div>'+
     '<div class="card" style="max-width:760px">'+
       '<div class="conv">'+
         '<div class="leg"><label>'+t('cv_sell')+'</label><div class="box"><div class="cur" id="cv-cur-from" onclick="cvOpen(\'from\')"></div><input id="cv-from" value="10,000.00" oninput="cvCalc(1)"/></div><div class="dd" id="cv-dd-from"></div></div>'+
         '<button class="swapb" onclick="cvSwap()">'+ico('<path d="M8 7h11l-3-3M16 17H5l3 3"/>',18)+'</button>'+
         '<div class="leg"><label>'+t('cv_get')+'</label><div class="box"><div class="cur" id="cv-cur-to" onclick="cvOpen(\'to\')"></div><input id="cv-to" oninput="cvCalc(2)"/></div><div class="dd" id="cv-dd-to"></div></div>'+
       '</div>'+
-      '<div class="rate-line">'+I('conv',18)+'<b id="cv-rate">1 USD = 0.8593 EUR</b><span style="color:var(--ink-3)">'+t('cv_live')+'</span></div>'+
+      '<div class="rate-line">'+I('conv',18)+'<b id="cv-rate">1 USD = 7.0530 CNH</b><span style="color:var(--ink-3)">'+t('cv_live')+'</span></div>'+
       '<div style="margin-top:22px"><button class="btn-pill" onclick="toast(t(\'demo\'))">'+t('cv_btn')+'</button></div>'+
-    '</div>';
+    '</div></div></div>';
   },
+  'pay-withdraw'(){var s=wizStep;var b=s===0?wdBody():s===1?amountStep():s===2?confirmStep('Chase Bank ****7720'):resultStep();return '<div class="wz">'+wzTop()+wzStepper(s)+'<div class="wz-body"><div class="wz-h">'+t('wd_title')+'</div>'+b+'</div></div>';},
+  'pay-transfer'(){var s=wizStep;var b=s===0?trBody():s===1?amountStep():s===2?confirmStep():resultStep();return '<div class="wz">'+wzTop()+wzStepper(s)+'<div class="wz-body"><div class="wz-h">'+t('tr_title')+'</div>'+b+'</div></div>';},
+  'pay-kjb'(){return '<div class="wz">'+wzTop()+'<div class="wz-body">'+
+    '<div class="bc"><a onclick="go(\'payments\')">'+t('p_title')+'</a> '+I('chevr',12)+' '+t('kjb_title')+'</div>'+
+    '<div class="kjb-hero"><div class="kl"><h2>'+t('kjb_h')+'</h2><div class="ks">'+t('kjb_sub')+'</div><button class="btn-pill" style="height:50px;padding:0 32px;font-size:15px" onclick="toast(t(\'demo\'))">'+t('kjb_bind')+'</button></div>'+
+    '<div class="kjb-cashier"><div class="kc-top"><img src="assets/kjb-1688.svg"/>'+t('kjb_cashier')+'</div><div class="kc-row"><span class="kc-ph"></span><div style="flex:1"><div style="height:10px;background:#EDEDED;border-radius:4px;width:62%;margin-bottom:9px"></div><div style="height:8px;background:#F4F4F4;border-radius:4px;width:42%"></div></div><div class="kc-amt"><b>¥ 8,799.63</b><div>'+t('kjb_orderamt')+'</div></div></div><div class="kc-sel"><span class="od"></span>'+t('kjb_pay')+'</div></div>'+
+    '</div></div></div>';},
   statements(){return ''+
     '<h1 class="pt">'+t('s_title')+'</h1>'+
     '<div class="filters"><div class="fil">'+t('f_allcur')+' '+I('caret',14)+'</div><div class="fil">'+t('f_alltypes')+' '+I('caret',14)+'</div><div class="fil">'+t('f_last30')+' '+I('caret',14)+'</div><div style="margin-left:auto"><button class="btn-pill ghost" onclick="toast(t(\'demo\'))">'+I('dl',16)+t('download')+'</button></div></div>'+
@@ -396,7 +486,7 @@ function markNav(){document.querySelectorAll('.nav-item').forEach(e=>e.classList
 function paintTop(){document.getElementById('uname').textContent=t('hello')+(COMPANY||NAME);document.getElementById('avatar').textContent=((COMPANY||NAME).trim()[0]||'Z').toUpperCase();document.getElementById('langtog').textContent=(lang==='en'?'中文':'EN');}
 function render(){document.getElementById('content').innerHTML=(VIEWS[route]||VIEWS.home)();if(route==='convert')cvRender();markNav();}
 function setLang(l){lang=l;document.documentElement.lang=(l==='zh'?'zh-CN':'en');try{var u=new URL(location.href);u.searchParams.set('lang',l);history.replaceState(history.state,'',u);}catch(_){}paintTop();buildNav();render();}
-function go(id,e){if(e)e.stopPropagation();if(route!==id){try{history.pushState({r:id},'');}catch(_){}}route=id;render();window.scrollTo(0,0);}
+function go(id,e){if(e)e.stopPropagation();if(id&&id.indexOf('pay-')===0)wizStep=0;if(route!==id){try{history.pushState({r:id},'');}catch(_){}}route=id;render();window.scrollTo(0,0);}
 window.addEventListener('popstate',ev=>{route=(ev.state&&ev.state.r)||'home';render();window.scrollTo(0,0);});
 
 let tT;function toast(m){var el=document.getElementById('toast');el.textContent=m;el.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>el.classList.remove('show'),1700);}
