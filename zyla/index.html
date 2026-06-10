@@ -378,6 +378,7 @@ function fluctuate(){
 function nowClock(){var d=new Date(),p=n=>(n<10?'0':'')+n;return p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}
 
 var FX_PERUSD={USD:1,EUR:0.8596,GBP:0.7415,CAD:1.3842,AUD:1.4130,SGD:1.2773,CNH:7.0530,HKD:7.8012,JPY:157.20};
+function totalUSD(){var s=0;for(var i=0;i<ASSETS.length;i++){var n=parseFloat(String(ASSETS[i].bal).replace(/,/g,''))||0;s+=n/(FX_PERUSD[ASSETS[i].cur]||1);}return s.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
 var FX_CURS=[{c:'USD',f:'us'},{c:'EUR',f:'eu'},{c:'CNH',f:'cn'},{c:'HKD',f:'hk'},{c:'GBP',f:'gb'},{c:'CAD',f:'ca'},{c:'AUD',f:'au'},{c:'SGD',f:'sg'},{c:'JPY',f:'jp'}];
 var cvFrom='USD',cvTo='CNH';
 function cvFlag(c){for(var i=0;i<FX_CURS.length;i++)if(FX_CURS[i].c===c)return FX_CURS[i].f;return 'us';}
@@ -423,7 +424,7 @@ const VIEWS={
         '<div class="sc" onclick="go(\'convert\')">'+I('conv',18)+t('p_convert')+'</div>'+
       '</div>'+
       '<div class="sec-h">'+t('myacc')+' <span style="margin-left:auto;display:flex;gap:18px;font-size:14px;font-weight:500"><a onclick="toggleAmt()" style="color:var(--ink-2);display:flex;align-items:center;gap:6px">'+I('eye',16)+'<span id="eyetxt">'+t('show')+'</span></a><a onclick="toast(t(\'demo\'))" style="color:var(--ink-2)">'+t('edit')+'</a></span></div>'+
-      '<div class="assets-bar"><span class="assets-total">'+t('total')+' '+I('info',14)+' &#8776; <b>'+amt(TOTAL)+'</b> USD '+I('caret',14)+'</span></div>'+
+      '<div class="assets-bar"><span class="assets-total">'+t('total')+' '+I('info',14)+' &#8776; <b>'+amt(totalUSD())+'</b> USD '+I('caret',14)+'</span></div>'+
       '<div class="acct-row">'+ASSETS.map(a=>'<div class="acct" onclick="toast(t(\'demo\'))"><div class="ah"><img class="flag" src="'+flagUrl(a.flag)+'"/>'+a.cur+'<span class="chev">'+I('chevr',16)+'</span></div><div class="abal">'+amt(a.bal)+'</div><div class="aln"><span>'+t('avail')+'</span><b>'+amt(a.bal)+'</b></div><div class="aln"><span>'+t('pending')+' '+I('info',12)+'</span><b>'+amt(a.pending)+'</b></div></div>').join('')+'</div>'+
       '<div class="sec-h">'+t('recent')+'</div>'+
       '<div class="card txn" style="padding:8px 18px">'+TXNS.map(txnRow).join('')+'</div>'+
