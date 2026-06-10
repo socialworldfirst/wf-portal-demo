@@ -191,6 +191,31 @@
   .kjb-cashier .kc-sel{margin:0 18px 18px;border:1px solid #F5C9B0;border-radius:10px;background:#FFF6F0;padding:14px;display:flex;align-items:center;gap:10px;color:#C2410C;font-weight:600;font-size:14px}
   .kjb-cashier .kc-sel .od{width:10px;height:10px;border-radius:50%;background:#C2410C}
   .bc{display:flex;align-items:center;gap:8px;color:var(--ink-3);font-size:14px;padding:14px 0}
+  .lockp{max-width:920px;margin:0 auto;text-align:center;padding-bottom:30px}
+  .lk-title{font-size:30px;font-weight:800;margin-top:10px}
+  .lk-sub{color:var(--ink-2);font-size:15px;line-height:1.7;max-width:760px;margin:14px auto 44px}
+  .lk-bens{display:flex;justify-content:center;gap:60px;margin-bottom:50px;flex-wrap:wrap}
+  .lk-ben{width:200px}
+  .lk-bi{width:84px;height:84px;border-radius:50%;background:linear-gradient(150deg,#EEF1FF,#F3ECFF);color:#5B49E0;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+  .lk-bt{font-weight:700;font-size:17px}
+  .lk-bd{color:var(--ink-3);font-size:13px;margin-top:6px}
+  .lk-how{font-size:24px;font-weight:800;margin:10px 0 26px}
+  .lk-steps{max-width:540px;margin:0 auto;text-align:left}
+  .lk-step{display:flex;align-items:center;gap:14px;font-size:15px;font-weight:600;padding:15px 18px;border:1px solid var(--line);border-radius:12px;margin-bottom:14px}
+  .lk-step .n{width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+  .lk-contact{font-size:22px;font-weight:800;margin:40px 0 28px}
+  .lk-cc{display:flex;justify-content:center;gap:80px;text-align:left;flex-wrap:wrap}
+  .lk-c{display:flex;gap:14px;max-width:380px}
+  .lk-ci{width:42px;height:42px;border-radius:10px;background:var(--line-2);color:var(--ink-2);display:flex;align-items:center;justify-content:center;flex:none}
+  .lk-ct{font-weight:700;font-size:15px;margin-bottom:5px}
+  .lk-cd{color:var(--ink-2);font-size:13.5px}
+  .lk-ch{color:var(--ink-3);font-size:12.5px;margin-top:4px}
+  .fxprod-row{display:flex;gap:18px;flex-wrap:wrap;max-width:760px}
+  .fxp{flex:1;min-width:300px;border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:box-shadow .15s,border-color .15s}
+  .fxp:hover{box-shadow:0 6px 22px rgba(0,0,0,.06);border-color:#dfe3ea}
+  .fxp .fi{width:42px;height:42px;border-radius:10px;background:#EAF3FF;color:var(--blue);display:flex;align-items:center;justify-content:center;flex:none}
+  .fxp .ft{font-weight:700;font-size:15px;margin-bottom:4px}
+  .fxp .fd{color:var(--ink-3);font-size:13px;line-height:1.4}
   #toast{position:fixed;left:50%;bottom:46px;transform:translateX(-50%);background:rgba(0,0,0,.82);color:#fff;padding:11px 20px;border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:200}
   #toast.show{opacity:1}
 </style>
@@ -264,7 +289,7 @@ const STR={
   c_store_empty_t:'No stores created yet',c_store_empty_d:'Create a store and provide more store details to speed up the crediting review.',c_store_hide:'Hide stores',c_store_create:'Create store',c_addpayer:'Add payer',c_src1:'Same-name payer',c_src2:'E-commerce platform',c_f_state:'Status',c_f_start:'Start date',c_f_end:'End date',c_th_ctime:'Created',c_th_type:'Collection type',c_th_bacc:'Bank account no.',c_th_bname:'Bank name',c_th_mod:'Last modified',c_nodata:'No data',
   w_s1:'Select payee',w_s2:'Enter amount',w_s3:'Confirm details',w_s4:'Result',w_next:'Next',w_back:'Back',w_cancel:'Cancel',wd_title:'Withdraw',w_addpayee:'Add a payee',w_nopayee:"You haven't added any payee yet.",tr_title:'Transfer',tr_type:'Transaction type',tr_single:'Single payee',tr_multi:'Multiple payees',tr_acct:'Receiving account type',tr_bank:'Transfer to bank account',tr_wf:'Transfer to WorldFirst account',tr_zyla:'Transfer to Zyla account',tr_free:'Fund pooling · 0 fee on supplier payments',kjb_title:'World Pay',kjb_h:'Pay 1688 directly in foreign currency',kjb_sub:'No need to settle funds into a domestic account. Compliant and low-cost.',kjb_bind:'Bind your 1688 account',kjb_cashier:'Checkout',kjb_orderamt:'Order amount',kjb_pay:'World Pay (Zyla offshore RMB account)',
   w_amount:'Amount',w_avail:'Available balance',w_confirm_h:'Please confirm the transaction',w_payee:'Payee',w_fee:'Fee',w_arrival:'Estimated arrival',w_submit:'Confirm & submit',w_succ:'Transaction submitted',w_succ_d:'Your transaction is being processed. You can track it in Account statements.',w_done:'Done',w_1day:'1 business day',
-  demo:'Demo environment'},
+  p_shortlock:'Short-term FX lock',p_shortlock_d:'Lock a rate for up to 2 days to hedge currency risk.',p_txnmgmt:'Transaction management',p_txnmgmt_d:'View and manage your transactions.',sl_bc:'Short-term FX lock',sl_title:'Short-term FX lock',sl_sub:'Lock the rate for up to 2 business days and remove the currency risk on your near-term receipts and payments.',fl_bc:'Enable FX lock',fl_title:'Forward FX lock',fl_sub:'Lock the rate and hedge risk. When your future receipts or payments carry currency risk, a forward lock secures your rate and removes the exposure.',lk_b1:'Better pricing',lk_b1d:'Offshore RMB beats onshore',lk_b2:'Low margin',lk_b2d:'From just 3% within 1 month',lk_b2ds:'2-day tenor, no margin',lk_b3:'Flexible settlement',lk_b3d:'Auto-debit and manual settlement',lk_how:'How a forward FX lock works',lk_how_s:'How a short-term FX lock works',lk_s1:'Submit your application to enable FX lock',lk_s2:'Choose the lock currency, amount and tenor',lk_s3:'Confirm the locked rate and the margin',lk_contact:'If you have any other questions, reach us anytime',lk_call:'Call us',lk_call_d:'Reach us anytime at +1 855-797-3366',lk_hours:'Mon-Fri 08:00-18:00',lk_email:'Email us',lk_email_d:'Send your question to support@us.zyla.com',lk_email_dd:'You will hear back within 1-2 business days.',lk_enable:'Enable now',fxprod:'FX products',demo:'Demo environment'},
  zh:{login_h:'一个账户，<br>连接全球生意。',login_sub:'像本地人一样收付全球款项。对接 100+ 海外平台收款，多币种持有，按实时汇率低成本兑换。',login_title:'登录',login_welcome:'欢迎回到您的 Zyla 账户。',login_email:'邮箱',login_pass:'密码',login_btn:'登录',
   hello:'您好，',nav_home:'首页',nav_collections:'收款管理',nav_payments:'资金管理',nav_statements:'账单管理中心',nav_approvals:'审批单管理',nav_multi:'多账号管理',
   todo:'待办事项',auth_t:'设置验证方式（可选）',auth_d:'请设置验证方式以保障账号安全',setup:'去设置',
@@ -283,7 +308,7 @@ const STR={
   c_store_empty_t:'暂未创建任何店铺',c_store_empty_d:'创建店铺并提供更多店铺信息，可以加快入账审核流程',c_store_hide:'店铺隐藏',c_store_create:'创建店铺',c_addpayer:'添加付款人',c_src1:'同名付款人',c_src2:'电商平台',c_f_state:'状态',c_f_start:'开始日期',c_f_end:'结束日期',c_th_ctime:'创建时间',c_th_type:'收款类型',c_th_bacc:'银行账户号',c_th_bname:'银行名称',c_th_mod:'最后修改时间',c_nodata:'暂无数据',
   w_s1:'选择收款人',w_s2:'输入金额',w_s3:'确认交易信息',w_s4:'交易结果',w_next:'下一步',w_back:'上一步',w_cancel:'取消',wd_title:'提款',w_addpayee:'添加收款人',w_nopayee:'您尚未添加任何收款人',tr_title:'转账',tr_type:'交易类型',tr_single:'单个收款人',tr_multi:'多个收款人',tr_acct:'收款账户类型',tr_bank:'转账至银行账户',tr_wf:'转账至万里汇账户',tr_zyla:'转账至Zyla账号',tr_free:'资金归集·支付货款 0 手续费',kjb_title:'跨境宝',kjb_h:'Zyla 外币直采 1688',kjb_sub:'无需结汇至境内账户，阳光合规成本低',kjb_bind:'立即绑定 1688 账号',kjb_cashier:'收银台',kjb_orderamt:'订单金额',kjb_pay:'跨境宝（Zyla 离岸人民币账户支付）',
   w_amount:'金额',w_avail:'可用余额',w_confirm_h:'请确认交易信息',w_payee:'收款人',w_fee:'手续费',w_arrival:'预计到账',w_submit:'确认提交',w_succ:'交易提交成功',w_succ_d:'您的交易正在处理中，可在账单管理中心查看进度。',w_done:'完成',w_1day:'1 个工作日',
-  demo:'演示环境'}
+  p_shortlock:'短期锁汇',p_shortlock_d:'短期锁汇，锁定2天以内的汇率，规避汇率风险',p_txnmgmt:'交易管理',p_txnmgmt_d:'查看并管理您的交易',sl_bc:'开通短期锁汇',sl_title:'短期锁汇',sl_sub:'锁定2个工作日以内的汇率，规避近期收款、付款的汇率风险。',fl_bc:'开通锁汇服务',fl_title:'远期锁汇',fl_sub:'锁定汇率，规避风险。当您未来的收款、付款存在汇率风险时，使用远期锁汇可以帮您实现锁定汇率，规避汇率风险。',lk_b1:'价格优',lk_b1d:'离岸人民币优于在岸',lk_b2:'保证金低',lk_b2d:'最低1个月内仅3%',lk_b2ds:'2天期限，免保证金',lk_b3:'交割灵活',lk_b3d:'支持自动代扣和手动交割',lk_how:'如何进行远期锁汇交易',lk_how_s:'如何进行短期锁汇交易',lk_s1:'提交开通锁汇服务申请',lk_s2:'确定锁汇币种、金额和时间',lk_s3:'确认锁定的汇率以及保证金',lk_contact:'如果您有任何其他问题，请随时通过以下方式联系我们',lk_call:'致电客服',lk_call_d:'请随时通过以下方式联系我们 +1 855-797-3366',lk_hours:'Mon-Fri 08:00-18:00',lk_email:'发送电子邮件',lk_email_d:'请发送您的问题至 support@us.zyla.com',lk_email_dd:'您将在 1-2 个工作日内收到回复。',lk_enable:'立即开通',fxprod:'锁汇与外汇产品',demo:'演示环境'}
 };
 function t(k){return STR[lang][k]!=null?STR[lang][k]:STR.en[k];}
 
@@ -329,7 +354,7 @@ const NAV=[
   {id:'multi',k:'nav_multi',ic:'<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><circle cx="17.5" cy="9" r="2.6"/><path d="M16 15c3 .3 5 1.9 5 5"/>'}
 ];
 const ico=(p,s,sw)=>'<svg width="'+(s||22)+'" height="'+(s||22)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="'+(sw||1.8)+'" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
-const ICONS={eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>',plus:'<path d="M12 5v14M5 12h14"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',dl:'<path d="M12 3v12M8 11l4 4 4-4M5 21h14"/>',wd:'<path d="M5 9V5h14v4M5 9h14v10H5z"/><path d="M12 16V11M9.5 13.5L12 11l2.5 2.5"/>',conv:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',caret:'<path d="M6 9l6 6 6-6"/>',chevr:'<path d="M9 6l6 6-6 6"/>'};
+const ICONS={eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>',plus:'<path d="M12 5v14M5 12h14"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',dl:'<path d="M12 3v12M8 11l4 4 4-4M5 21h14"/>',wd:'<path d="M5 9V5h14v4M5 9h14v10H5z"/><path d="M12 16V11M9.5 13.5L12 11l2.5 2.5"/>',conv:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>',caret:'<path d="M6 9l6 6 6-6"/>',chevr:'<path d="M9 6l6 6-6 6"/>',lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',shield:'<path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/>',phone:'<path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',doc:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/>'};
 function I(id,s,sw){return ico(ICONS[id]||'',s,sw);}
 const flagUrl=c=>'assets/flags/'+c+'.svg';
 const spark=(pts,w,h)=>{w=w||64;h=h||24;var mx=Math.max.apply(0,pts),mn=Math.min.apply(0,pts),sx=w/(pts.length-1),sc=v=>h-2-((v-mn)/(mx-mn||1))*(h-4);return '<svg width="'+w+'" height="'+h+'"><path d="'+pts.map((v,i)=>(i?'L':'M')+(i*sx).toFixed(1)+' '+sc(v).toFixed(1)).join(' ')+'" fill="none" stroke="#0072E0" stroke-width="1.6"/></svg>';};
@@ -393,11 +418,9 @@ const VIEWS={
       '<h1 class="pt" style="margin-bottom:18px">'+t('shortcuts')+'</h1>'+
       '<div class="shortcuts" style="flex-wrap:wrap;gap:12px">'+
         '<div class="sc primary" onclick="go(\'payments\')">'+I('conv',18)+t('payment')+'</div>'+
-        '<div class="sc" onclick="go(\'collections\')">'+I('plus',18)+t('newacc')+'</div>'+
         '<div class="sc" onclick="go(\'pay-withdraw\')">'+I('wd',18)+t('p_withdraw')+'</div>'+
         '<div class="sc" onclick="go(\'pay-transfer\')">'+I('conv',18)+t('p_transfer')+'</div>'+
         '<div class="sc" onclick="go(\'convert\')">'+I('conv',18)+t('p_convert')+'</div>'+
-        '<div class="sc" onclick="go(\'pay-kjb\')"><img src="assets/kjb-1688.svg" style="width:20px;height:20px;object-fit:contain"/>'+t('p_worldpay')+'</div>'+
       '</div>'+
       '<div class="sec-h">'+t('myacc')+' <span style="margin-left:auto;display:flex;gap:18px;font-size:14px;font-weight:500"><a onclick="toggleAmt()" style="color:var(--ink-2);display:flex;align-items:center;gap:6px">'+I('eye',16)+'<span id="eyetxt">'+t('show')+'</span></a><a onclick="toast(t(\'demo\'))" style="color:var(--ink-2)">'+t('edit')+'</a></span></div>'+
       '<div class="assets-bar"><span class="assets-total">'+t('total')+' '+I('info',14)+' &#8776; <b>'+amt(TOTAL)+'</b> USD '+I('caret',14)+'</span></div>'+
@@ -439,6 +462,8 @@ const VIEWS={
     feat('conv','p_transfer','p_transfer_d','pay-transfer')+
     featImg('assets/kjb-1688.svg','p_worldpay','p_worldpay_d','pay-kjb')+
     feat('conv','p_convert','p_convert_d','convert')+
+    feat('shield','p_shortlock','p_shortlock_d','pay-shortlock')+
+    feat('doc','p_txnmgmt','p_txnmgmt_d','statements')+
     '</div><div class="colside"><div class="payee-h">'+t('payee')+'</div><a class="payee-l" onclick="toast(t(\'demo\'))">'+t('addpayee')+'</a><a class="payee-l" onclick="toast(t(\'demo\'))">'+t('viewpayee')+'</a></div></div>';
   },
   convert(){return '<div class="wz">'+wzTop()+'<div class="wz-body">'+
@@ -452,7 +477,13 @@ const VIEWS={
       '</div>'+
       '<div class="rate-line">'+I('conv',18)+'<b id="cv-rate">1 USD = 7.0530 CNH</b><span style="color:var(--ink-3)">'+t('cv_live')+'</span></div>'+
       '<div style="margin-top:22px"><button class="btn-pill" onclick="toast(t(\'demo\'))">'+t('cv_btn')+'</button></div>'+
-    '</div></div></div>';
+    '</div>'+
+    '<div class="sec-h" style="font-size:17px;margin:32px 0 14px;max-width:760px">'+t('fxprod')+'</div>'+
+    '<div class="fxprod-row">'+
+      '<div class="fxp" onclick="go(\'pay-shortlock\')"><div class="fi">'+I('shield',22)+'</div><div><div class="ft">'+t('p_shortlock')+'</div><div class="fd">'+t('p_shortlock_d')+'</div></div></div>'+
+      '<div class="fxp" onclick="go(\'forex-lock\')"><div class="fi">'+I('lock',22)+'</div><div><div class="ft">'+t('fl_title')+'</div><div class="fd">'+t('fl_sub')+'</div></div></div>'+
+    '</div>'+
+    '</div></div>';
   },
   'pay-withdraw'(){var s=wizStep;var b=s===0?wdBody():s===1?amountStep():s===2?confirmStep('Chase Bank ****7720'):resultStep();return '<div class="wz">'+wzTop()+wzStepper(s)+'<div class="wz-body"><div class="wz-h">'+t('wd_title')+'</div>'+b+'</div></div>';},
   'pay-transfer'(){var s=wizStep;var b=s===0?trBody():s===1?amountStep():s===2?confirmStep():resultStep();return '<div class="wz">'+wzTop()+wzStepper(s)+'<div class="wz-body"><div class="wz-h">'+t('tr_title')+'</div>'+b+'</div></div>';},
@@ -486,8 +517,25 @@ const VIEWS={
   }
 };
 
+VIEWS['pay-shortlock']=function(){return lockPage('short');};
+VIEWS['forex-lock']=function(){return lockPage('forward');};
+function lkBen(icon,tk,dk){return '<div class="lk-ben"><div class="lk-bi">'+I(icon,28)+'</div><div class="lk-bt">'+t(tk)+'</div><div class="lk-bd">'+t(dk)+'</div></div>';}
+function lkContact(k){var ic=k==='call'?'phone':'mail',tt=k==='call'?'lk_call':'lk_email',dd=k==='call'?'lk_call_d':'lk_email_d',hh=k==='call'?'lk_hours':'lk_email_dd';return '<div class="lk-c"><span class="lk-ci">'+I(ic,20)+'</span><div><div class="lk-ct">'+t(tt)+'</div><div class="lk-cd">'+t(dd)+'</div><div class="lk-ch">'+t(hh)+'</div></div></div>';}
+function lockPage(kind){var fwd=kind==='forward';return ''+
+  '<div class="bc"><a onclick="go(\'payments\')">'+t('p_title')+'</a> '+I('chevr',12)+' '+t(fwd?'fl_bc':'sl_bc')+'</div>'+
+  '<div class="lockp">'+
+    '<div class="lk-title">'+t(fwd?'fl_title':'sl_title')+'</div>'+
+    '<div class="lk-sub">'+t(fwd?'fl_sub':'sl_sub')+'</div>'+
+    '<div class="lk-bens">'+lkBen('lock','lk_b1','lk_b1d')+lkBen('shield','lk_b2',fwd?'lk_b2d':'lk_b2ds')+lkBen('conv','lk_b3','lk_b3d')+'</div>'+
+    '<div class="lk-how">'+t(fwd?'lk_how':'lk_how_s')+'</div>'+
+    '<div class="lk-steps"><div class="lk-step"><span class="n">1</span>'+t('lk_s1')+'</div><div class="lk-step"><span class="n">2</span>'+t('lk_s2')+'</div><div class="lk-step"><span class="n">3</span>'+t('lk_s3')+'</div></div>'+
+    '<div style="text-align:center;margin:8px 0 44px"><button class="btn-pill" onclick="toast(t(\'demo\'))">'+t('lk_enable')+'</button></div>'+
+    '<div class="lk-contact">'+t('lk_contact')+'</div>'+
+    '<div class="lk-cc">'+lkContact('call')+lkContact('email')+'</div>'+
+  '</div>';
+}
 function buildNav(){document.getElementById('nav').innerHTML=NAV.map(n=>'<div class="nav-item" data-id="'+n.id+'" onclick="go(\''+n.id+'\')"><span class="ic">'+ico(n.ic,22)+'</span>'+t(n.k)+'</div>').join('');markNav();}
-function markNav(){document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('on',e.getAttribute('data-id')===(route==='convert'?'payments':route)));}
+function markNav(){var act=(route==='convert'||route.indexOf('pay-')===0||route==='forex-lock')?'payments':route;document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('on',e.getAttribute('data-id')===act));}
 function paintTop(){document.getElementById('uname').textContent=t('hello')+(COMPANY||NAME);document.getElementById('avatar').textContent=((COMPANY||NAME).trim()[0]||'Z').toUpperCase();document.getElementById('langtog').textContent=(lang==='en'?'中文':'EN');}
 function render(){document.getElementById('content').innerHTML=(VIEWS[route]||VIEWS.home)();if(route==='convert')cvRender();markNav();}
 function setLang(l){lang=l;document.documentElement.lang=(l==='zh'?'zh-CN':'en');try{var u=new URL(location.href);u.searchParams.set('lang',l);history.replaceState(history.state,'',u);}catch(_){}paintTop();buildNav();render();}
