@@ -286,7 +286,7 @@
 /*__VARIANT_SHIM__*/
 function V(k){return (window.WF_VARIANT&&window.WF_VARIANT[k])||null;}
 const P=new URLSearchParams(location.search);
-let lang=(P.get('lang')==='zh'||V('lang')==='zh')?'zh':'en';
+let lang=(P.get('lang')==='en'||V('lang')==='en')?'en':'zh';
 
 const STR={
  en:{login_h:'One account,<br>global business.',login_sub:'Send and receive cross-border payments like a local. Collect from 100+ marketplaces, hold multiple currencies, and convert at competitive rates.',login_title:'Log in',login_welcome:'Welcome back to your Zyla account.',login_email:'Email',login_pass:'Password',login_btn:'Log in',
