@@ -462,7 +462,7 @@ const VIEWS={
       '<div class="rail-h">'+t('cal')+'</div>'+
       '<div class="cal-card">'+t('cal_body')+' <a onclick="toast(t(\'demo\'))">'+t('details')+'</a></div>'+
       '<div class="rail-h" style="margin-top:30px">'+t('rates')+' <span class="upd">'+t('updated')+' <span id="rate-upd">'+nowClock()+'</span> '+cdRing()+'</span></div>'+
-      '<div style="margin:6px 0 12px"><a onclick="go(\'payments\')">'+I('conv',15)+' '+t('allcur')+' ›</a></div>'+
+      '<div style="margin:6px 0 12px"><a onclick="go(\'convert\')">'+I('conv',15)+' '+t('allcur')+' ›</a></div>'+
       '<div class="rates">'+RATES.map(r=>'<div class="rate"><div class="rr"><b>'+r[0]+'</b> = <span class="rateval" data-base="'+r[1]+'" data-cur="'+r[1]+'">'+r[1]+'</span> '+r[2]+'</div>'+spark(r[3])+'</div>').join('')+'</div>'+
     '</div></div>';
   },
